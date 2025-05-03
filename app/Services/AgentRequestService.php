@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Exceptions\AgentRequestNotFoundException;
 use App\Http\Requests\AgentRequestRequest;
 use App\Models\AgentRequest;
 use Illuminate\Http\Request;
@@ -13,8 +14,8 @@ class AgentRequestService
         
         $existingRequest = AgentRequest::where('user_id', $request->user()->id)->where('status','pending')->first();
 
-        if($existingRequest){
-            return response()->json(['message' => 'You already have a pending request'], 409);
+        if ($existingRequest) {
+            throw new AgentRequestNotFoundException('You already have a pending request');
         }
 
         $agentRequest = new AgentRequest();
@@ -29,23 +30,13 @@ class AgentRequestService
         $agentRequest->status            = 'pending';
 
         $agentRequest->save();
-
-        return response()->json([
-            'message' => 'Request created successfully',
-            'data'    => $agentRequest,
-        ],201);
+        return $agentRequest ; 
     }
 
     public function show(Request $request){
         $agentRequest = AgentRequest::where('user_id', $request->user()->id)->first();
 
-        if(!$agentRequest){
-            return response()->json(['message' => 'There is no registered agent request for you'], 409);
-        }
-
-        return response()->json([
-            'data'    => $agentRequest,
-        ],200);
+        return $agentRequest;
     }
 
     
@@ -53,16 +44,7 @@ class AgentRequestService
     {
         $agentRequest = AgentRequest::where('user_id', $request->user()->id)->first();
 
-        if(!$agentRequest){
-            return response()->json(['message' => 'There is no registered agent request for you'], 409);
-        }
-
-        return response()->json([
-            'data'    => [
-                'status'  => $agentRequest-> status,
-                'notes'   =>$agentRequest-> notes,
-            ]
-        ],200);
+        return $agentRequest ;
 
     }
 
@@ -71,8 +53,8 @@ class AgentRequestService
 
         $agentRequest = AgentRequest::where('user_id', $request->user()->id)->where('status','pending')->first();
 
-        if(!$agentRequest){
-            return response()->json(['message' => 'There is no registered agent request for you'], 409);
+        if (!$agentRequest) {
+            throw new AgentRequestNotFoundException();
         }
 
 
@@ -84,10 +66,7 @@ class AgentRequestService
 
         $agentRequest->save();
 
-        return response()->json([
-            'message' => 'Request updated successfully',
-            'data'    => $agentRequest,
-        ], 200);
+        return $agentRequest ;
 
     }
 
@@ -95,15 +74,12 @@ class AgentRequestService
     {
         $agentRequest = AgentRequest::where('user_id', $request->user()->id)->where('status','pending')->first();
 
-        if(!$agentRequest){
-            return response()->json(['message' => 'There is no registered agent request for you'], 409);
+        if (!$agentRequest) {
+            throw new AgentRequestNotFoundException();
         }
 
         $agentRequest->delete();
-
-        return response()->json([
-            'message'    => 'the agent request deleted',
-        ],200);        
+     
     }
 
 }

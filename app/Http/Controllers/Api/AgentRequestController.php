@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Exceptions\AgentRequestNotFoundException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AgentRequestRequest;
 use App\Models\AgentRequest;
@@ -17,19 +18,35 @@ class AgentRequestController extends Controller
     {
         $this->agentrequestService = $agentRequestService;
     }
-    
+
 
     public function store(AgentRequestRequest $request)
     {
-        return $this->agentrequestService->store($request);
+        try{
+            $agentRequest = $this->agentrequestService->store($request);
 
+            return $this->successResponse('Request created successfully', $agentRequest, 201);
+        } 
+        
+        catch (AgentRequestNotFoundException $e) {
+            return $this->errorResponse($e->getMessage(), $e->getCode() ?: 409);
+        } 
+        
+        catch (\Exception $e) {
+            // If an unexpected error occurs
+            return $this->errorResponse('Request not created successfully',500);
+        }
     }
 
-  
+
     public function show(Request $request)
     {
-        return $this->agentrequestService->show($request);
+        $agentRequest =  $this->agentrequestService->show($request);
 
+        if ($agentRequest) {
+            return $this->successResponse($agentRequest);
+        }
+        return $this->errorResponse('There is no registered agent request for you', 409);
     }
 
     public function showStatus(Request $request)
@@ -37,22 +54,30 @@ class AgentRequestController extends Controller
         return $this->agentrequestService->showStatus($request);
     }
 
-
-    public function edit(string $id)
-    {
-        //
-    }
-
     public function update(AgentRequestRequest $request)
     {
-
-        return $this->agentrequestService->update($request);
-
+        try{
+            $sucess = $this->agentrequestService->update($request);
+            return $this->successResponse('Request updated successfully', $sucess, 200);
+        }
+        catch (AgentRequestNotFoundException $e) {
+            return $this->errorResponse($e->getMessage(), $e->getCode() ?: 409);
+        } 
+        
     }
 
     public function destroy(Request $request)
     {
-        return $this->agentrequestService->update($request);    
+        try {
+            $this->agentrequestService->destroy($request->user());
+            return $this->successResponse('The agent request deleted');
+        }
+        catch (AgentRequestNotFoundException $e) {
+            return $this->errorResponse( $e->getMessage(), $e->getCode());
+        }
+        catch (\Exception $e) {
+            // If an unexpected error occurs
+            return $this->errorResponse('Request not updated successfully',500);
+        }
     }
-
 }

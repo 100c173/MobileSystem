@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Contracts\Validation\Validator;
 
 class AgentRequestRequest extends FormRequest
 {
@@ -32,15 +34,26 @@ class AgentRequestRequest extends FormRequest
     }
 
     public function messages(): array
-{
-    return [
-        'business_name.required' => 'The business name is required.',
-        'commercial_number.required' => 'The commercial number is required.',
-        'address.required' => 'The address is required.',
-        'latitude.required' => 'The latitude is required.',
-        'latitude.between' => 'The latitude must be between -90 and 90.',
-        'longitude.required' => 'The longitude is required.',
-        'longitude.between' => 'The longitude must be between -180 and 180.',
-    ];
-}
+    {
+        return [
+            'business_name.required' => 'The business name is required.',
+            'commercial_number.required' => 'The commercial number is required.',
+            'address.required' => 'The address is required.',
+            'latitude.required' => 'The latitude is required.',
+            'latitude.between' => 'The latitude must be between -90 and 90.',
+            'longitude.required' => 'The longitude is required.',
+            'longitude.between' => 'The longitude must be between -180 and 180.',
+        ];
+    }
+
+    public function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json([
+            'success'   => false,
+            'message'   => 'Validation errors',
+            'data'      => $validator->errors()
+        ]));
+    }
+
+    
 }
