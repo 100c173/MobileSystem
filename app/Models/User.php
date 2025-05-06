@@ -4,15 +4,18 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Models\AgentRequest;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable , HasApiTokens;
+    use HasFactory, Notifiable , HasApiTokens,SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -52,5 +55,26 @@ class User extends Authenticatable
     {
         return $this->hasOne(AgentRequest::class);
     }
+
+
+
+public function isBanned(): bool
+{
+    return $this->permanently_banned || ($this->banned_until && now()->lessThan($this->banned_until));
+}
+
+
+
+public function unban()
+{
+    $this->banned_until = null;
+    $this->permanently_banned = false;
+    $this->save();
+}
+
+public function remainingBanHours(): ?int
+{
+    return $this->banned_until ? now()->diffInHours($this->banned_until, false) : null;
+}
     
 }
