@@ -16,14 +16,9 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-<<<<<<< HEAD
-    use HasFactory, Notifiable , HasApiTokens , HasRoles;
- 
-=======
-    use HasFactory, Notifiable , HasApiTokens,SoftDeletes;
 
->>>>>>> origin/MobileSystem_1
-    /**
+    use HasFactory, Notifiable , HasApiTokens,SoftDeletes;
+    /*
      * The attributes that are mass assignable.
      *
      * @var list<string>
