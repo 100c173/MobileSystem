@@ -11,6 +11,10 @@ Route::get('/admin/dashboard', function () {
     return view('dashboard.index');
 })->middleware(['auth', 'verified' , 'role:admin'])->name('dashboard');
 
+Route::get('/agent/dashboard', function () {
+    return view('dashboard-agent.index');
+})->middleware(['auth', 'verified' , 'role:agent'])->name('dashboard');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
