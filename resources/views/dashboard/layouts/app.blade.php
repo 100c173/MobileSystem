@@ -333,7 +333,7 @@
                   </div>
                   <span class="profile-username">
                     <span class="op-7">Hi,</span>
-                    <span class="fw-bold">Hizrian</span>
+                    <span class="fw-bold">{{auth()->user()->name}}</span>
                   </span>
                 </a>
                 <ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -348,7 +348,7 @@
                         </div>
                         <div class="u-text">
                           <h4>Hizrian</h4>
-                          <p class="text-muted">hello@example.com</p>
+                          <p class="text-muted">{{auth()->user()->email}}</p>
                           <a
                             href="profile.html"
                             class="btn btn-xs btn-secondary btn-sm">View Profile</a>
@@ -363,7 +363,12 @@
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="#">Account Setting</a>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Logout</a>
+
+                      <form method="POST" action="{{ route('logout') }}" class="px-3 py-2">
+                        @csrf
+                        <button type="submit" class="btn btn-danger w-100">Logout</button>
+                      </form>
+
                     </li>
                   </div>
                 </ul>
@@ -449,8 +454,8 @@
 
 
 
-<!-- هنا يتم حقن السكربتات الخاصة بكل صفحة -->
-@stack('scripts')
+  <!-- هنا يتم حقن السكربتات الخاصة بكل صفحة -->
+  @stack('scripts')
 </body>
 
 </html>
