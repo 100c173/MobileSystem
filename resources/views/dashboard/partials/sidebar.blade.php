@@ -38,24 +38,19 @@
               <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#base">
                   <i class="icon-user"></i>
-                  <p>Users and Permissions</p>
+                  <p>Users</p>
                   <span class="caret"></span>
                 </a>
                 <div class="collapse" id="base">
                   <ul class="nav nav-collapse">
                     <li>
-                      <a href="#">
-                        <span class="sub-item">User </span>
+                      <a href="{{route('users.index')}}">
+                        <span class="sub-item">User Control panel</span>                           
                       </a>
                     </li>
                     <li>
-                      <a href="#">
-                        <span class="sub-item">Agent </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <span class="sub-item">Permissions</span>
+                      <a href="{{route('users.showdelposts')}}">
+                        <span class="sub-item">Trashed Users </span>                           
                       </a>
                     </li>
                   </ul>

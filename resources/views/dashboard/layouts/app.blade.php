@@ -329,7 +329,11 @@
                   </div>
                   <span class="profile-username">
                     <span class="op-7">Hi,</span>
+<<<<<<< HEAD
                     <span class="fw-bold">{{auth()->user()->name}}</span>
+=======
+                    <span class="fw-bold">Amer</span>
+>>>>>>> origin/MobileSystem_1
                   </span>
                 </a>
                 <ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -344,7 +348,11 @@
                         </div>
                         <div class="u-text">
                           <h4>Hizrian</h4>
+<<<<<<< HEAD
                           <p class="text-muted">{{auth()->user()->email}}</p>
+=======
+                          <p class="text-muted">amer@gmail.com</p>
+>>>>>>> origin/MobileSystem_1
                           <a
                             href="profile.html"
                             class="btn btn-xs btn-secondary btn-sm">View Profile</a>
@@ -360,11 +368,14 @@
                       <a class="dropdown-item" href="#">Account Setting</a>
                       <div class="dropdown-divider"></div>
 
+<<<<<<< HEAD
                       <form method="POST" action="{{ route('logout') }}" class="px-3 py-2">
                         @csrf
                         <button type="submit" class="btn btn-danger w-100">Logout</button>
                       </form>
 
+=======
+>>>>>>> origin/MobileSystem_1
                     </li>
                   </div>
                 </ul>
