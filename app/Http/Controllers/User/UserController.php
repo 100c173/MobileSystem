@@ -5,13 +5,12 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Services\UserService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    protected  $userService;
+    protected $userService;
 
     public function __construct(UserService $userService)
     {
@@ -20,64 +19,120 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = $this->userService->index();
-        return view('dashboard.users.index', compact('users'));
+        try {
+            $users = $this->userService->index();
+            return view('dashboard.users.index', compact('users'));
+        } catch (\Exception $e) {
+            Log::error('Unable to fetch users: ' . $e->getMessage());
+            abort(500);
+        }
     }
 
-
-    /**
-     * Display the specified resource.
-     */
     public function show($id)
     {
         try {
             $user = $this->userService->show($id);
             return view('dashboard.users.show', compact('user'));
         } catch (ModelNotFoundException $e) {
-            abort('404',$e->getMessage());
+            abort(404, $e->getMessage());
+        } catch (\Exception $e) {
+            Log::error('Error showing user: ' . $e->getMessage());
+            abort(500);
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy($id)
     {
-        $user = $this->userService->destroy($id);
-        return redirect()->route('users.index')->with('success','User successfully deleted ');
+        try {
+            $this->userService->destroy($id);
+            return redirect()->route('users.index')->with('success', 'User successfully deleted');
+        } catch (ModelNotFoundException $e) {
+            abort(404, $e->getMessage());
+        } catch (QueryException $e) {
+            Log::error('Unable to delete user due to DB constraint: ' . $e->getMessage());
+            abort(500, 'Unable to delete user due to database constraints.');
+        } catch (\Exception $e) {
+            Log::error('General error while deleting user: ' . $e->getMessage());
+            abort(500);
+        }
     }
+
     public function banFor24Hours($id)
     {
-        $user = $this->userService->banFor24Hours($id);
-        return redirect()->back()->with('success','User banned for 24 hours');
+        try {
+            $this->userService->banFor24Hours($id);
+            return redirect()->back()->with('success', 'User banned for 24 hours');
+        } catch (ModelNotFoundException $e) {
+            abort(404);
+        } catch (\Exception $e) {
+            Log::error('Error banning user for 24 hours: ' . $e->getMessage());
+            abort(500);
+        }
     }
 
     public function block($id)
     {
-        $user = $this->userService->block($id);
-        return redirect()->back()->with('success','User banned permenently');
+        try {
+            $this->userService->block($id);
+            return redirect()->back()->with('success', 'User banned permanently');
+        } catch (ModelNotFoundException $e) {
+            abort(404);
+        } catch (\Exception $e) {
+            Log::error('Error blocking user: ' . $e->getMessage());
+            abort(500);
+        }
     }
 
     public function unBlock($id)
     {
-        $user = $this->userService->unBlock($id);
-        return redirect()->back()->with('success','User Un Blocked');
+        try {
+            $this->userService->unBlock($id);
+            return redirect()->back()->with('success', 'User Unblocked');
+        } catch (ModelNotFoundException $e) {
+            abort(404);
+        } catch (\Exception $e) {
+            Log::error('Error unblocking user: ' . $e->getMessage());
+            abort(500);
+        }
     }
 
     public function showdelusers()
     {
-        $users = $this->userService->showdelusers();
-        return view('dashboard.users.softdel',compact('users'));
+        try {
+            $users = $this->userService->showdelusers();
+            return view('dashboard.users.softdel', compact('users'));
+        } catch (\Exception $e) {
+            Log::error('Error showing soft-deleted users: ' . $e->getMessage());
+            abort(500);
+        }
     }
 
     public function forceDelete($id)
     {
-        $user = $this->userService->forceDelete($id);
-        return redirect()->back()->with('success','User Deleted');
+        try {
+            $this->userService->forceDelete($id);
+            return redirect()->back()->with('success', 'User Deleted');
+        } catch (ModelNotFoundException $e) {
+            abort(404);
+        } catch (QueryException $e) {
+            Log::error('DB constraint error while force deleting: ' . $e->getMessage());
+            abort(500, 'Unable to delete user due to database constraints.');
+        } catch (\Exception $e) {
+            Log::error('General error while force deleting user: ' . $e->getMessage());
+            abort(500);
+        }
     }
-
-    public function restore($id){
-        $user = $this->userService->restore($id);
-        return redirect()->back()->with('success','User Restored');
+    
+    public function restore($id)
+    {
+        try {
+            $this->userService->restore($id);
+            return redirect()->back()->with('success', 'User Restored');
+        } catch (ModelNotFoundException $e) {
+            abort(404);
+        } catch (\Exception $e) {
+            Log::error('Error restoring user: ' . $e->getMessage());
+            abort(500);
+        }
     }
 }

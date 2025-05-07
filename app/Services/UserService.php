@@ -13,6 +13,7 @@ class UserService
         $users = User::all();
         return $users;
     }
+     
 
     public function show($id)
     {
@@ -27,14 +28,14 @@ class UserService
 
     public function destroy($id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         $user->delete();
         return true;
     }
 
     public function banFor24Hours($id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         $user->banned_until = now()->addHours(24);
         $user->save();
         return true;
@@ -42,7 +43,7 @@ class UserService
 
     public function block($id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         $user->is_permanently_banned = true;
         $user->save();
         return true;
@@ -50,7 +51,7 @@ class UserService
 
     public function unBlock($id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         $user->is_permanently_banned = false;
         $user->banned_until = null;
         $user->save();
