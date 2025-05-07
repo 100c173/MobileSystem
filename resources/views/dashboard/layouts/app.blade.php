@@ -7,14 +7,8 @@
   <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
   <link rel="icon" href="{{ asset('assets/img/kaiadmin/favicon.ico') }}" type="image/x-icon" />
 
-  
-  
-
   <!-- Fonts and icons -->
   <script src="{{ asset('assets/js/plugin/webfont/webfont.min.js') }}"></script>
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
   <script>
     WebFont.load({
       google: {
@@ -329,13 +323,13 @@
                   aria-expanded="false">
                   <div class="avatar-sm">
                     <img
-                      src="assets/img/profile.jpg"
+                      src="{{asset('assets/img/profile.jpg')}}"
                       alt="..."
                       class="avatar-img rounded-circle" />
                   </div>
                   <span class="profile-username">
                     <span class="op-7">Hi,</span>
-                    <span class="fw-bold">Hizrian</span>
+                    <span class="fw-bold">Amer</span>
                   </span>
                 </a>
                 <ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -344,13 +338,13 @@
                       <div class="user-box">
                         <div class="avatar-lg">
                           <img
-                            src="assets/img/profile.jpg"
+                            src="{{asset('assets/img/profile.jpg')}}"
                             alt="image profile"
                             class="avatar-img rounded" />
                         </div>
                         <div class="u-text">
                           <h4>Hizrian</h4>
-                          <p class="text-muted">hello@example.com</p>
+                          <p class="text-muted">amer@gmail.com</p>
                           <a
                             href="profile.html"
                             class="btn btn-xs btn-secondary btn-sm">View Profile</a>
@@ -365,7 +359,7 @@
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="#">Account Setting</a>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Logout</a>
+
                     </li>
                   </div>
                 </ul>
@@ -386,38 +380,38 @@
 
   </div>
 
-  <!--   Core JS Files   -->
-  <script src="assets/js/core/jquery-3.7.1.min.js"></script>
-  <script src="assets/js/core/popper.min.js"></script>
-  <script src="assets/js/core/bootstrap.min.js"></script>
+<!-- Core JS Files -->
+<script src="{{ asset('assets/js/core/jquery-3.7.1.min.js') }}"></script>
+<script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
+<script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
 
-  <!-- jQuery Scrollbar -->
-  <script src="assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+<!-- jQuery Scrollbar -->
+<script src="{{ asset('assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
 
-  <!-- Chart JS -->
-  <script src="assets/js/plugin/chart.js/chart.min.js"></script>
+<!-- Chart JS -->
+<script src="{{ asset('assets/js/plugin/chart.js/chart.min.js') }}"></script>
 
-  <!-- jQuery Sparkline -->
-  <script src="assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
+<!-- jQuery Sparkline -->
+<script src="{{ asset('assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js') }}"></script>
 
-  <!-- Chart Circle -->
-  <script src="assets/js/plugin/chart-circle/circles.min.js"></script>
+<!-- Chart Circle -->
+<script src="{{ asset('assets/js/plugin/chart-circle/circles.min.js') }}"></script>
 
-  <!-- Datatables -->
-  <script src="assets/js/plugin/datatables/datatables.min.js"></script>
+<!-- Datatables -->
+<script src="{{ asset('assets/js/plugin/datatables/datatables.min.js') }}"></script>
 
-  <!-- Bootstrap Notify -->
-  <script src="assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+<!-- Bootstrap Notify -->
+<script src="{{ asset('assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
 
-  <!-- jQuery Vector Maps -->
-  <script src="assets/js/plugin/jsvectormap/jsvectormap.min.js"></script>
-  <script src="assets/js/plugin/jsvectormap/world.js"></script>
+<!-- jQuery Vector Maps -->
+<script src="{{ asset('assets/js/plugin/jsvectormap/jsvectormap.min.js') }}"></script>
+<script src="{{ asset('assets/js/plugin/jsvectormap/world.js') }}"></script>
 
-  <!-- Sweet Alert -->
-  <script src="assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+<!-- Sweet Alert -->
+<script src="{{ asset('assets/js/plugin/sweetalert/sweetalert.min.js') }}"></script>
 
-  <!-- Kaiadmin JS -->
-  <script src="assets/js/kaiadmin.min.js"></script>
+<!-- Kaiadmin JS -->
+<script src="{{ asset('assets/js/kaiadmin.min.js') }}"></script>
 
 
   <script>
@@ -451,8 +445,8 @@
 
 
 
-<!-- هنا يتم حقن السكربتات الخاصة بكل صفحة -->
-@stack('scripts')
+  <!-- هنا يتم حقن السكربتات الخاصة بكل صفحة -->
+  @stack('scripts')
 </body>
 
 </html>

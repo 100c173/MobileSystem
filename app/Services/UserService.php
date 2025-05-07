@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Models\User;
-use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UserService 
 {
@@ -14,14 +14,18 @@ class UserService
         return $users;
     }
 
-    public function show( $id)
+    public function show($id)
     {
         $user = User::find($id);
-
+    
+        if (!$user) {
+            throw new ModelNotFoundException("User not found");
+        }
+    
         return $user;
     }
 
-    public function destroy( $id)
+    public function destroy($id)
     {
         $user = User::find($id);
         $user->delete();
