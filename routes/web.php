@@ -22,3 +22,7 @@ Route::controller(UserController::class)->group(function(){
 });
 
 Route::resource('/users', UserController::class);
+
+Route::get('/test', function(){
+    return view('errors.500');
+});

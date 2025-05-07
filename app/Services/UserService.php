@@ -13,6 +13,7 @@ class UserService
         $users = User::all();
         return $users;
     }
+     
 
     public function show($id)
     {
