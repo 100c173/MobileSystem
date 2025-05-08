@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api\Agent;
 use App\Exceptions\AgentRequestNotFoundException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AgentRequestRequest;
-use App\Services\AgentRequestService;
+use App\Services\Agent\AgentRequestService;
 use Illuminate\Http\Request;
 
 class AgentRequestController extends Controller

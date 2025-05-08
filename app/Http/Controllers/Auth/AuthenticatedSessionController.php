@@ -28,7 +28,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-<<<<<<< HEAD
         $user = Auth::user();
         
         if ($user->hasRole('admin')) {
@@ -41,9 +40,6 @@ class AuthenticatedSessionController extends Controller
     
         // fallback
         return redirect()->intended('/');
-=======
-        return redirect()->intended(route('admin/dashboard', absolute: false));
->>>>>>> 171a9f7 (save)
     }
 
     /**
