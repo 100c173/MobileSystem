@@ -1,5 +1,7 @@
 @extends('dashboard.layouts.app')
+@section('title','Agent Requests')
 @section('content')
+@include('dashboard.components.alerts')
 <div class="page-inner">
 
     <div class="col-md-12">

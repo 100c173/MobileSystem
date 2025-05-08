@@ -43,7 +43,7 @@ class AgentRequestController extends Controller
     public function approveAgentRequest($id){
         try{
             $this->agentRequestService->approveAgentRequest($id);
-            return redirect()->route('agent-requests');
+            return redirect()->route('agent-requests')->with('success','The request was successfully approved.');
         }catch(ModelNotFoundException $e){
             abort(404, $e->getMessage());
         }
@@ -52,7 +52,7 @@ class AgentRequestController extends Controller
     public function rejectAgentRequest($id){
         try{
             $this->agentRequestService->rejectAgentRequest($id);
-            return redirect()->route('agent-requests');
+            return redirect()->route('agent-requests')->with('success','The request was successfully rejected.');;
         }catch(ModelNotFoundException $e){
             abort(404, $e->getMessage());
         }
