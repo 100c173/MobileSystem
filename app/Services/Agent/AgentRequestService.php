@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class AgentRequestService 
 {
-
+    
     public function store(AgentRequestRequest $request){
         
         $existingRequest = AgentRequest::where('user_id', $request->user()->id)->where('status','pending')->first();
@@ -83,33 +83,4 @@ class AgentRequestService
         $agentRequest->delete();
      
     }
-
-    public function approveAgentRequest(string $id){
-
-        $agentRequest = AgentRequest::find($id);
-
-        if (!$agentRequest) {
-            throw new ModelNotFoundException("Agent Request not found");
-        }
-
-        $agentRequest->status = 'approved';
-        $agentRequest->save() ; 
-    }
-    public function rejectAgentRequest(string $id){
-
-        $agentRequest = AgentRequest::find($id);
-
-        if (!$agentRequest) {
-            throw new ModelNotFoundException("Agent Request not found");
-        }
-
-        $agentRequest->status = 'rejected';
-        $agentRequest->save() ; 
-    }
-
-    public function getAllPendingRequest(){
-        $agentRequest = AgentRequest::where('status','pending')->get();
-        return $agentRequest ;
-    }
-
 }

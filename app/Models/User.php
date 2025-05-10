@@ -77,5 +77,6 @@ public function remainingBanHours(): ?int
 {
     return $this->banned_until ? now()->diffInHours($this->banned_until, false) : null;
 }
-    
+
+ 
 }

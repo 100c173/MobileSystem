@@ -77,17 +77,17 @@
                             </a>
                           </li>
                           <li>
-                            <a href="#">
-                              <span class="sub-item">Accepted applications</span>
+                            <a href="{{route('agent-requests-accepted')}}">
+                              <span class="sub-item">Accepted requests</span>
                             </a>
                           </li>
                           <li>
-                            <a href="#">
+                            <a href="{{route('agent-requests-rejected')}}">
                               <span class="sub-item">Rejected requests</span>
                             </a>
                           </li>
                           <li>
-                            <a href="#">
+                            <a href="{{route('agent-requests-softDeleted')}}">
                               <span class="sub-item">Deleted requests</span>
                             </a>
                           </li>

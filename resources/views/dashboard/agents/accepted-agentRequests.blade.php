@@ -26,8 +26,8 @@
                                             @endforeach
                                         </select>
                                     </th>
-                                    <!-- <th>
-                                        <select class="form-select form-select-sm" id="filter-status">
+                                    <th>
+                                        <!-- <select class="form-select form-select-sm" id="filter-status">
                                             <option value="">All Status</option>
                                             <option value="rejected">Rejected</option>
                                             <option value="approved">Approved</option>
@@ -55,10 +55,12 @@
                                         <td>{{ $agent_request->business_name }}</td>
                                         <td>{{ $agent_request->address }}</td>
                                         <td> 
-                                                <span class="text-warning">
-                                                    <i class="fas fa-clock"></i>
-                                                    {{$agent_request->status}}
-                                                </span>
+                                           
+                                            <span class="text-success">
+                                                <i class="fas fa-check-circle"></i>
+                                                {{$agent_request->status}}
+                                            </span>
+                                           
                                         </td>
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Action Buttons">
@@ -69,10 +71,11 @@
                                                 <button type="button" class="btn btn-outline-primary btn-sm px-3" data-bs-toggle="modal" data-bs-target="#actionModal-{{ $agent_request->id }}" title="Take Action">
                                                     <i class="fa fa-bolt me-1"></i> Action
                                                 </button>
-                                              
+                                             
                                             </div>
                                             @include('dashboard.modals.agent-request-action')
                                             @include('dashboard.modals.agent-request-info')
+                                         
                                         </td>
                                     </tr>
                                 @endforeach

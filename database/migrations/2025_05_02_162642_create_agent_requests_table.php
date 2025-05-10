@@ -21,6 +21,7 @@ return new class extends Migration
             $table->decimal('longitude', 11, 8);
             $table->text('notes')->nullable();            
             $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
+            $table->SoftDeletes();
             $table->timestamps();
         });
     }

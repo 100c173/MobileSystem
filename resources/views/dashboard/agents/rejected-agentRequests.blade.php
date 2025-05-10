@@ -55,8 +55,8 @@
                                         <td>{{ $agent_request->business_name }}</td>
                                         <td>{{ $agent_request->address }}</td>
                                         <td> 
-                                                <span class="text-warning">
-                                                    <i class="fas fa-clock"></i>
+                                                <span class="text-danger">
+                                                    <i class="fas fa-times-circle"></i>
                                                     {{$agent_request->status}}
                                                 </span>
                                         </td>
@@ -69,10 +69,13 @@
                                                 <button type="button" class="btn btn-outline-primary btn-sm px-3" data-bs-toggle="modal" data-bs-target="#actionModal-{{ $agent_request->id }}" title="Take Action">
                                                     <i class="fa fa-bolt me-1"></i> Action
                                                 </button>
-                                              
+                                                <button type="button" class="btn btn-outline-danger btn-sm px-3" data-bs-toggle="modal" data-bs-target="#actionModal2-{{ $agent_request->id }}" title="Take Action">
+                                                    <i class="fa fa-trash me-1"></i> Delete
+                                                </button>
                                             </div>
                                             @include('dashboard.modals.agent-request-action')
                                             @include('dashboard.modals.agent-request-info')
+                                            @include('dashboard.modals.agent-request-delete')
                                         </td>
                                     </tr>
                                 @endforeach

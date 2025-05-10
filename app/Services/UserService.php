@@ -17,7 +17,7 @@ class UserService
 
     public function show($id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
     
         if (!$user) {
             throw new ModelNotFoundException("User not found");
