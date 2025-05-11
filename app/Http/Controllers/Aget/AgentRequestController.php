@@ -22,57 +22,44 @@ class AgentRequestController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {       
-        try{
-            $data = $this->agentRequestService->index();
-            $agent_requests =$data['agent_requests'];
-            $unique_addresses =$data['unique_addresses'];
-            return view('dashboard.agents.index',compact('agent_requests','unique_addresses')) ;  
-        }catch(\Exception $e){
-            Log::error('Unable to fetch agent requests :'.$e->getMessage());
-            abort(500);
-        }
+    {
+        $data = $this->agentRequestService->index();
+        $agent_requests = $data['agent_requests'];
+        $unique_addresses = $data['unique_addresses'];
+        return view('dashboard.agents.index', compact('agent_requests', 'unique_addresses'));
     }
 
 
     public function agent_requests_accepted()
-    {       
-        try{
+    {
+        try {
             $data = $this->agentRequestService->agent_requests_accepted();
-            $agent_requests =$data['agent_requests'];
-            $unique_addresses =$data['unique_addresses'];
-            return view('dashboard.agents.accepted-agentRequests',compact('agent_requests','unique_addresses')) ;  
-        }catch(\Exception $e){
-            Log::error('Unable to fetch agent requests :'.$e->getMessage());
+            $agent_requests = $data['agent_requests'];
+            $unique_addresses = $data['unique_addresses'];
+            return view('dashboard.agents.accepted-agentRequests', compact('agent_requests', 'unique_addresses'));
+        } catch (\Exception $e) {
+            Log::error('Unable to fetch agent requests :' . $e->getMessage());
             abort(500);
         }
     }
     public function agent_requests_rejected()
-    {       
-        try{
+    {
+        try {
             $data = $this->agentRequestService->agent_requests_rejected();
-            $agent_requests =$data['agent_requests'];
-            $unique_addresses =$data['unique_addresses'];
-            return view('dashboard.agents.rejected-agentRequests',compact('agent_requests','unique_addresses')) ;  
-        }catch(\Exception $e){
-            Log::error('Unable to fetch agent requests :'.$e->getMessage());
+            $agent_requests = $data['agent_requests'];
+            $unique_addresses = $data['unique_addresses'];
+            return view('dashboard.agents.rejected-agentRequests', compact('agent_requests', 'unique_addresses'));
+        } catch (\Exception $e) {
+            Log::error('Unable to fetch agent requests :' . $e->getMessage());
             abort(500);
         }
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-    
-    /**
      * Remove the specified resource from storage.
      */
     public function softDelete(string $id)
-    {    
+    {
         try {
             $this->agentRequestService->softDelete($id);
             return redirect()->back()->with('success', 'Agent request successfully deleted');
@@ -87,25 +74,28 @@ class AgentRequestController extends Controller
         }
     }
 
-    public function approveAgentRequest($id){
-        try{
+    public function approveAgentRequest($id)
+    {
+        try {
             $this->agentRequestService->approveAgentRequest($id);
-            return redirect()->route('agent-requests')->with('success','The request was successfully approved.');
-        }catch(ModelNotFoundException $e){
+            return redirect()->route('agent-requests')->with('success', 'The request was successfully approved.');
+        } catch (ModelNotFoundException $e) {
             abort(404, $e->getMessage());
         }
     }
 
-    public function rejectAgentRequest($id){
-        try{
+    public function rejectAgentRequest($id)
+    {
+        try {
             $this->agentRequestService->rejectAgentRequest($id);
-            return redirect()->route('agent-requests')->with('success','The request was successfully rejected.');;
-        }catch(ModelNotFoundException $e){
+            return redirect()->route('agent-requests')->with('success', 'The request was successfully rejected.');;
+        } catch (ModelNotFoundException $e) {
             abort(404, $e->getMessage());
         }
     }
 
-    public function restore($id){
+    public function restore($id)
+    {
         try {
             $this->agentRequestService->restore($id);
             return redirect()->back()->with('success', 'Agent request successfully restored');
@@ -119,7 +109,7 @@ class AgentRequestController extends Controller
             abort(500);
         }
     }
-    
+
     /**
      * Force delete the rejected agent request.
      */
@@ -141,14 +131,20 @@ class AgentRequestController extends Controller
 
     public function agent_requests_softDeleted()
     {
-        try{
+        try {
             $data = $this->agentRequestService->agent_requests_softDeleted();
-            $agent_requests =$data['agent_requests'];
-            $unique_addresses =$data['unique_addresses'];
-            return view('dashboard.agents.softDeleted-agentRequests',compact('agent_requests','unique_addresses')) ;  
-        }catch(\Exception $e){
-            Log::error('Unable to fetch agent requests :'.$e->getMessage());
+            $agent_requests = $data['agent_requests'];
+            $unique_addresses = $data['unique_addresses'];
+            return view('dashboard.agents.softDeleted-agentRequests', compact('agent_requests', 'unique_addresses'));
+        } catch (\Exception $e) {
+            Log::error('Unable to fetch agent requests :' . $e->getMessage());
             abort(500);
         }
+    }
+
+
+    public function rependingAgentRequest($id){
+            $this->agentRequestService->rependingAgentRequest($id);
+            return redirect()->route('agent-requests')->with('success', 'The request was successfully repending.');
     }
 }

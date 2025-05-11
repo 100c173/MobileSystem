@@ -3,7 +3,7 @@
         <div class="sidebar-logo">
           <!-- Logo Header -->
           <div class="logo-header" data-background-color="dark">
-            <a href="index.html" class="logo">
+            <a href="{{route('admin.dashboard')}}" class="logo">
               <img
                 src="{{asset('assets/img/kaiadmin/logo_light.svg')}}"
                 alt="navbar brand"
@@ -57,7 +57,7 @@
                             </a>
                           </li>
                           <li>
-                            <a href="{{route('users.showdelposts')}}">
+                            <a href="{{route('users.trashed')}}">
                               <span class="sub-item">Trashed Users </span>
                             </a>
                           </li>
