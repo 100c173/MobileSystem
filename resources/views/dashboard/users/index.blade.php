@@ -27,6 +27,7 @@ Users
                             <tr>
                                 <th>ID</th>
                                 <th>Name</th>
+                                <th>Role</th>
                                 <th>Email</th>
                                 <th>Purchase value</th>
                                 <th>Added date</th>
@@ -43,6 +44,7 @@ Users
                                 <th></th>
                                 <th></th>
                                 <th></th>
+                                <th></th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -50,6 +52,7 @@ Users
                             <tr>
                                 <td>{{$user->id}}</td>
                                 <td>{{$user->name}}</td>
+                                <td>{{$user->getRoleNames()->first()}}</td>
                                 <td>{{$user->email}}</td>
                                 <td>$1000</td>
                                 <td>{{$user->created_at->format('Y-m-d')}}</td>
@@ -98,7 +101,7 @@ Users
 <script>
     $(document).ready(function() {
         var table = $('#multi-filter-select').DataTable({
-            pageLength: 5,
+            pageLength: 6,
             initComplete: function() {
                 var api = this.api();
 
@@ -107,7 +110,7 @@ Users
                 $footerRow.clone(true).prependTo('#multi-filter-select thead');
 
                 api.columns().every(function(index) {
-                    if (index === 6) return; // تجاهل عمود Action
+                    if (index === 7) return; // تجاهل عمود Action
 
                     var column = this;
                     var select = $('<select class="form-select"><option value=""></option></select>')
