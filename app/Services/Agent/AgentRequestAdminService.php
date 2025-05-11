@@ -71,6 +71,8 @@ class AgentRequestAdminService
             throw new ModelNotFoundException("Agent Request not found");
         }
 
+        $user = $agentRequest->user;
+        $user->syncRoles(['agent']);
         $agentRequest->status = 'approved';
         $agentRequest->save();
     }

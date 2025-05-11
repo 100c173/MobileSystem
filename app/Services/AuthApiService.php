@@ -14,6 +14,7 @@ class AuthApiService
         $data['password'] = Hash::make($data['password']);
         $user =  User::create($data);
         $token = $user->createToken('auth_token')->plainTextToken;
+        $user->assignRole('custom');
         return [ $user, $token];
     }
 
@@ -28,7 +29,7 @@ class AuthApiService
         }
 
         $token = $user->createToken('auth_token', ['*'], now()->addDay())->plainTextToken;
-
+        
         return [$user, $token];
     }
 
