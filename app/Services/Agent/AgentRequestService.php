@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Agent;
 
 use App\Exceptions\AgentRequestNotFoundException;
 use App\Http\Requests\AgentRequestRequest;
 use App\Models\AgentRequest;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class AgentRequestService 
 {
-
+    
     public function store(AgentRequestRequest $request){
         
         $existingRequest = AgentRequest::where('user_id', $request->user()->id)->where('status','pending')->first();
@@ -26,7 +27,7 @@ class AgentRequestService
         $agentRequest->address           = $request->address;
         $agentRequest->latitude          = $request->latitude;
         $agentRequest->longitude         = $request->longitude;
-        $agentRequest->notes             = null;
+        $agentRequest->notes             = $request->notes;
         $agentRequest->status            = 'pending';
 
         $agentRequest->save();
@@ -63,6 +64,7 @@ class AgentRequestService
         $agentRequest->address             = $request->address;
         $agentRequest->latitude            = $request->latitude;
         $agentRequest->longitude           = $request->longitude;
+        $agentRequest->notes               = $request->notes;
 
         $agentRequest->save();
 
@@ -81,5 +83,4 @@ class AgentRequestService
         $agentRequest->delete();
      
     }
-
 }

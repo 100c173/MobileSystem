@@ -3,9 +3,9 @@
         <div class="sidebar-logo">
           <!-- Logo Header -->
           <div class="logo-header" data-background-color="dark">
-            <a href="index.html" class="logo">
+            <a href="{{route('admin.dashboard')}}" class="logo">
               <img
-                src="assets/img/kaiadmin/logo_light.svg"
+                src="{{asset('assets/img/kaiadmin/logo_light.svg')}}"
                 alt="navbar brand"
                 class="navbar-brand"
                 height="20" />
@@ -35,33 +35,68 @@
                 <h4 class="text-section">Components</h4>
               </li>
 
+
               <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#base">
-                  <i class="icon-user"></i>
-                  <p>Users and Permissions</p>
+                <a data-bs-toggle="collapse" href="#submenu">
+                  <i class="fas fa-address-card"></i>
+                  <p>Customes & Agents</p>
                   <span class="caret"></span>
                 </a>
-                <div class="collapse" id="base">
+                <div class="collapse" id="submenu">
                   <ul class="nav nav-collapse">
                     <li>
-                      <a href="#">
-                        <span class="sub-item">User </span>
+                      <a data-bs-toggle="collapse" href="#subnav1">
+                        <span class="sub-item">Users</span>
+                        <span class="caret"></span>
                       </a>
+                      <div class="collapse" id="subnav1">
+                        <ul class="nav nav-collapse subnav">
+                          <li>
+                            <a href="{{route('users.index')}}">
+                              <span class="sub-item">Users</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="{{route('users.trashed')}}">
+                              <span class="sub-item">Trashed Users </span>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
                     </li>
                     <li>
-                      <a href="#">
-                        <span class="sub-item">Agent </span>
+                      <a data-bs-toggle="collapse" href="#subnav2">
+                        <span class="sub-item">Agets</span>
+                        <span class="caret"></span>
                       </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <span class="sub-item">Permissions</span>
-                      </a>
+                      <div class="collapse" id="subnav2">
+                        <ul class="nav nav-collapse subnav">
+                          <li>
+                            <a href="{{route('agent-requests')}}">
+                              <span class="sub-item">Agents</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="{{route('agent-requests-accepted')}}">
+                              <span class="sub-item">Accepted requests</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="{{route('agent-requests-rejected')}}">
+                              <span class="sub-item">Rejected requests</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="{{route('agent-requests-softDeleted')}}">
+                              <span class="sub-item">Deleted requests</span>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
                     </li>
                   </ul>
                 </div>
               </li>
-
               <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#mobile">
                   <i class="icon-screen-smartphone"></i>
@@ -130,7 +165,7 @@
                   </ul>
                 </div>
               </li>
-              
+
               <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#reviews">
                   <i class="icon-note"></i>
@@ -147,7 +182,7 @@
                   </ul>
                 </div>
               </li>
-              
+
               <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#offers">
                   <i class="icon-handbag"></i>
@@ -188,7 +223,7 @@
               </li>
 
               <li class="nav-item">
-                <a  href="#">
+                <a href="#">
                   <i class="icon-wrench"></i>
                   <p>System Settings</p>
                 </a>

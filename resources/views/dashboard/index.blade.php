@@ -1,16 +1,18 @@
 @extends('dashboard.layouts.app')
 @section('content')
 <div class="page-inner">
-    @include('dashboard.partials.welcome')
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <h3 class="fw-bold mb-3">{!! Breadcrumbs::render('admin.dashboard')  !!}</h3>
+        </ol>
+    </nav>
+
     @include('dashboard.components.card')
 
 
     <div class="row">
-        @include('dashboard.partials.new-customers')
-        @include('dashboard.partials.new-products')
     </div>
 
-    @include('dashboard.tables.datatables')
 </div>
 @endsection
 
