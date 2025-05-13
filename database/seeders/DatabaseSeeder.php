@@ -2,14 +2,13 @@
 
 namespace Database\Seeders;
 
-use App\Models\Mobile;
-use App\Models\MobileDescription;
-use App\Models\MobileImage;
+
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\MobileSpecification;
-use App\Models\User;
+
 use Database\Seeders\AdminSeeder;
 use Database\Seeders\AgentRequestSeeder;
+use Database\Seeders\MobileSeeder;
 use Database\Seeders\CustomSeeder;
 use Database\Seeders\RoleSeeder;
 use Illuminate\Database\Seeder;
@@ -32,15 +31,14 @@ class DatabaseSeeder extends Seeder
         
       
         $this->call([
-            Mobile::class,
             RoleSeeder::class,
             AdminSeeder::class,
             CustomSeeder::class,
             AgentRequestSeeder::class,
-            
-            MobileSpecification::class,
-            MobileDescription::class,
-            MobileImage::class,
+            MobileSeeder::class,
+            MobileSpecificationSeeder::class,
+            MobileDescriptionSeeder::class,
+            MobileImageSeeder::class,
         ]);
     }
 }

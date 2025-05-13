@@ -52,3 +52,9 @@ Breadcrumbs::for('agent-requests-softDeleted', function (BreadcrumbTrail $trail)
     $trail->parent('agent-requests');
     $trail->push('Trashed', route('agent-requests-softDeleted'));
 });
+
+// Admin Dashboard > Mobile
+Breadcrumbs::for('mobiles.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.dashboard');
+    $trail->push('Mobiles', route('mobiles.index'));
+});

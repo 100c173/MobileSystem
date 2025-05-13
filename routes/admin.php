@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\Aget\AgentRequestController;
+use App\Http\Controllers\Mobile\MobileController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
+
 
 
 Route::get('/admin/dashboard', function () {
@@ -38,5 +40,13 @@ Route::controller(UserController::class)->group(function () {
         Route::get('/admin/dashboard/users/forceDelete/{id}', 'forceDelete')->name('users.forceDelete');
     });
 });
+
+//Mobile
+Route::controller(MobileController::class)->group(function () {
+    Route::middleware('auth', 'role:admin')->group(function () {
+        
+    });
+});
+Route::resource('mobiles', MobileController::class)->middleware('auth', 'role:admin');
 
 Route::resource('/admin/dashboard/users', UserController::class);
