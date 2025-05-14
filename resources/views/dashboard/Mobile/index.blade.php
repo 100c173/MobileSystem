@@ -14,6 +14,16 @@ Mobile
     </nav>
     <div class="col-md-12">
         <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h4 class="card-title m-0 d-flex align-items-center">
+                    <i class="fas fa-mobile-alt me-2"></i>
+                     Mobiles control panel
+                </h4>
+
+                <a href="{{ route('mobiles.create') }}" class="btn btn-success" style="border-radius: 25px;">
+                    <i class="fas fa-plus"></i> Add mobile
+                </a>
+            </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table id="multi-filter-select" class="display table table-striped table-hover">
@@ -40,10 +50,13 @@ Mobile
                                 <th style="width: 10%">Action</th>
                             </tr>
                         </thead>
+                        @php
+                            $counter= 1;
+                        @endphp
                         <tbody>
-                            @foreach($mobiles as $index => $mobile)
+                            @foreach($mobiles as $mobile)
                             <tr>
-                                <td> {{ $index + 1 }}</td>
+                                <td> {{$counter++}} </td>
                                 <td> <img src="{{asset('assets/'.$mobile->primaryImage->image_url)}}" alt="{{ $mobile->primaryImage->image_url}}" style="width:100px;height:100px;object-fit:cover;border:1px solid #ccc;padding:4px;"> </td>
                                 <td> {{ $mobile->name }}</td>
                                 <td> {{ $mobile->brand }}</td>
@@ -56,10 +69,16 @@ Mobile
                                         </button>
 
                                         <button type="button" class="btn btn-outline-primary btn-sm px-3" data-bs-toggle="modal" data-bs-target="#actionModal-" title="Take Action">
-                                            <i class="fa fa-bolt me-1"></i> Action
+                                            <i class="fa fa-pen me-1"></i> Update
+                                        </button>
+
+                                        <button type="button" class="btn btn-outline-danger btn-sm px-3" data-bs-toggle="modal" data-bs-target="#actionModalMobileDestroy-{{$mobile->id}}" title="Take Action">
+                                            <i class="fa fa-trash me-1"></i> Delete
                                         </button>
 
                                     </div>
+                                     @include('dashboard.modals.mobile-destroy')
+                                </td>
 
                                 </td>
                             </tr>
