@@ -47,10 +47,13 @@ Users
                                 <th></th>
                             </tr>
                         </tfoot>
+                        @php
+                            $counter= 1;
+                        @endphp
                         <tbody>
                             @foreach ($users as $user)
                             <tr>
-                                <td>{{$user->id}}</td>
+                                <td>{{$counter++}}</td>
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->getRoleNames()->first()}}</td>
                                 <td>{{$user->email}}</td>
@@ -85,8 +88,9 @@ Users
                                     </div>
                                     @endif
                                     <a href="{{ route('users.show', $user->id) }}" class="btn btn-sm btn-info">Show</a>
-                                </td>
+
                             </tr>
+
                             @endforeach
                         </tbody>
                     </table>

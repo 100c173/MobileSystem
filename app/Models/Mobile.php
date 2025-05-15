@@ -18,4 +18,7 @@ class Mobile extends Model
     public function images(){
         return $this->hasMany(MobileImage::class);
     }
+    public function primaryImage(){
+        return $this->hasOne(MobileImage::class)->where('is_primary',true);
+    }
 }

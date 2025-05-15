@@ -5,6 +5,7 @@ namespace Database\Seeders;
 
 use Database\Seeders\AdminSeeder;
 use Database\Seeders\AgentRequestSeeder;
+use Database\Seeders\MobileSeeder;
 use Database\Seeders\CustomSeeder;
 use Database\Seeders\RoleSeeder;
 use Illuminate\Database\Seeder;
@@ -24,15 +25,13 @@ class DatabaseSeeder extends Seeder
         ]);
         */
 
-        
-      
+
+
         $this->call([
-            
             RoleSeeder::class,
             AdminSeeder::class,
             CustomSeeder::class,
             AgentRequestSeeder::class,
-            
             MobileSeeder::class,
             MobileSpecificationSeeder::class,
             MobileDescriptionSeeder::class,

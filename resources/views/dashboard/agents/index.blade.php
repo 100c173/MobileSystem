@@ -51,10 +51,14 @@ Agent Requests
                                 <th style="width: 10%">Action</th>
                             </tr>
                         </thead>
+                         @php
+                            $counter= 1;
+                        @endphp
+
                         <tbody>
-                            @foreach($agent_requests as $index => $agent_request)
+                            @foreach($agent_requests as $agent_request)
                             <tr>
-                                <td>{{ $index + 1 }}</td>
+                                <td>{{ $counter++ }}</td>
                                 <td>{{ $agent_request->user->name }}</td>
                                 <td>{{ $agent_request->business_name }}</td>
                                 <td>{{ $agent_request->address }}</td>

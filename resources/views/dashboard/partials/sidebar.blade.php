@@ -106,7 +106,7 @@
                 <div class="collapse" id="mobile">
                   <ul class="nav nav-collapse">
                     <li>
-                      <a href="#">
+                      <a href="{{route('mobiles.index')}}">
                         <span class="sub-item">Mobiles</span>
                       </a>
                     </li>
