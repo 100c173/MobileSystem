@@ -66,18 +66,46 @@ Agent Requests
                                 </td>
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Action Buttons">
-                                        <button type="button" class="btn btn-outline-info btn-sm px-3" data-bs-toggle="modal" data-bs-target="#detailsModal-{{ $agent_request->id }}" title="View Details">
-                                            <i class="fa fa-eye me-1"></i> View
+                                        {{-- Action Icon --}}
+                                        <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="dropdown" aria-expanded="false" title="Take Action">
+                                            <i class="fa fa-ellipsis-v"></i> <!-- Dropdown icon -->
                                         </button>
 
-                                        <button type="button" class="btn btn-outline-primary btn-sm px-3" data-bs-toggle="modal" data-bs-target="#actionModal-{{ $agent_request->id }}" title="Take Action">
-                                            <i class="fa fa-bolt me-1"></i> Action
-                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="actionButton">
+                                            {{-- View Action --}}
+                                            <li>
+                                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#detailsModal-{{ $agent_request->id }}">
+                                                    <i class="fa fa-eye me-2"></i> View
+                                                </a>
+                                            </li>
 
+                                            {{-- Approve Action --}}
+                                            <li>
+                                                <form method="POST" action="{{ route('agent-requests-accepte', $agent_request->id) }}">
+                                                    @csrf
+                                                    <button type="submit" class="dropdown-item">
+                                                        <i class="fa fa-check me-2"></i> Approve
+                                                    </button>
+                                                </form>
+                                            </li>
+
+                                            {{-- Reject Action --}}
+                                            <li>
+                                                <!-- Reject Button -->
+                                                <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#rejectModal-{{ $agent_request->id }}">
+                                                    <i class="fa fa-times me-2"></i> Reject
+                                                </button>
+                                            </li>
+                                        </ul>
                                     </div>
-                                    @include('dashboard.modals.agent-request-action')
+
+                                    {{-- Modal for View --}}
                                     @include('dashboard.modals.agent-request-info')
+
+                                    {{-- Modal for Rejected --}}
+                                    @include('dashboard.modals.agent-request-rejected')
                                 </td>
+
                             </tr>
                             @endforeach
                         </tbody>

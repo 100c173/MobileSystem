@@ -4,8 +4,11 @@ namespace App\Services\Agent;
 
 
 use App\Models\AgentRequest;
+use App\Notifications\ApprovedRequestNotification;
+use App\Notifications\RejectedRequestNotification;
+use App\Notifications\RependingRequestNotification;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-
+use Illuminate\Http\Request;
 
 class AgentRequestAdminService
 {
@@ -75,12 +78,14 @@ class AgentRequestAdminService
         $user->syncRoles(['agent']);
         $agentRequest->status = 'approved';
         $agentRequest->save();
+
+        $user->notify(new ApprovedRequestNotification());
     }
 
     /**
      * reject agent request.
      */
-    public function rejectAgentRequest(string $id)
+    public function rejectAgentRequest(Request $request , string $id)
     {
 
         $agentRequest = AgentRequest::find($id);
@@ -90,7 +95,11 @@ class AgentRequestAdminService
         }
 
         $agentRequest->status = 'rejected';
+        $rejectionReason   = $request->reject_reason;
         $agentRequest->save();
+
+        $user = $agentRequest->user ;
+        $user->notify(new RejectedRequestNotification($rejectionReason));
     }
 
     /**
@@ -105,6 +114,9 @@ class AgentRequestAdminService
 
         $agentRequest->status = 'pending';
         $agentRequest->save();
+        
+        $user = $agentRequest->user ;
+        $user->notify(new RependingRequestNotification());
     }
 
     /**

@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Database\QueryException;
 use App\Services\Agent\AgentRequestAdminService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-
+use Illuminate\Http\Request;
 
 class AgentRequestController extends Controller
 {
@@ -84,10 +84,10 @@ class AgentRequestController extends Controller
         }
     }
 
-    public function rejectAgentRequest($id)
+    public function rejectAgentRequest(Request $request , $id)
     {
         try {
-            $this->agentRequestService->rejectAgentRequest($id);
+            $this->agentRequestService->rejectAgentRequest($request , $id);
             return redirect()->route('agent-requests')->with('success', 'The request was successfully rejected.');;
         } catch (ModelNotFoundException $e) {
             abort(404, $e->getMessage());

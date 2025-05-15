@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\User;
+use App\Notifications\WelcomeNotification;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
@@ -15,6 +16,9 @@ class AuthApiService
         $user =  User::create($data);
         $token = $user->createToken('auth_token')->plainTextToken;
         $user->assignRole('custom');
+        
+        $user->notify(new WelcomeNotification());
+
         return [ $user, $token];
     }
 
