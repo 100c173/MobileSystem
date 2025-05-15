@@ -49,7 +49,8 @@ Route::controller(UserController::class)->prefix('/admin/dashboard/')->group(fun
 Route::controller(MobileController::class)->group(function () {
     Route::middleware('auth', 'role:admin')->group(function () {
         
+        Route::resource('mobiles', MobileController::class);
     });
 });
-Route::resource('mobiles', MobileController::class)->middleware('auth', 'role:admin');
+
 
