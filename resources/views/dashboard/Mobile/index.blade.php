@@ -20,7 +20,7 @@ Mobile
                      Mobiles control panel
                 </h4>
 
-                <a href="{{ route('mobiles.create') }}" class="btn btn-success" style="border-radius: 25px;">
+                <a href="{{ route('mobiles.create') }}" class="fancy-btn btn-success" style="border-radius: 25px;">
                     <i class="fas fa-plus"></i> Add mobile
                 </a>
             </div>
@@ -57,22 +57,47 @@ Mobile
                             @foreach($mobiles as $mobile)
                             <tr>
                                 <td> {{$counter++}} </td>
-                                <td> <img src="{{asset('assets/'.$mobile->primaryImage->image_url)}}" alt="{{ $mobile->primaryImage->image_url}}" style="width:100px;height:100px;object-fit:cover;border:1px solid #ccc;padding:4px;"> </td>
+                                @if($mobile->primaryImage)
+                                    <td> <img src="{{asset($mobile->primaryImage->image_url)}}" alt="{{ $mobile->primaryImage->image_url}}" style="width:100px;height:100px;object-fit:cover;border:1px solid #ccc;padding:4px;"> </td>
+                                @else
+                                    <td><img style="max-height: 350px; max-width:100%" class="card-img-top w-100" src="{{asset('uploads/defaultImages/default_mobile.webp')}}"  ></td>
+                                @endif
+                                
+
                                 <td> {{ $mobile->name }}</td>
                                 <td> {{ $mobile->brand }}</td>
                                 <td> {{ $mobile->os }}</td>
                                 <td> {{ $mobile->release_date}}</td>
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Action Buttons">
-                                        <button type="button" class="btn btn-outline-info btn-sm px-3" data-bs-toggle="modal" data-bs-target="#detailsModal-" title="View Details">
-                                            <i class="fa fa-eye me-1"></i> View
-                                        </button>
+                                        <div class="btn-group">
+                                            <button type="button" class="fancy-btn btn-view dropdown-toggle" data-bs-toggle="dropdown">
+                                                <i class="fa fa-eye me-1"></i>
+                                                view
+                                            </button>
+                                            <div class="dropdown-menu p-2 text-center" style="min-width: 180px; height:150px">
+                                                <a href="{{route('specification',$mobile->id)}}" >
+                                                    <button  class="fancy-btn btn-view" style="width: 180px;"><i class="fa fa-eye me-1"></i>Mobile Specification</button>
+                                                </a>
+                                                <div style="height: 10px;"></div>
+                                                <a href="{{route('description',$mobile->id)}}" >
+                                                    <button  class="fancy-btn btn-view" style="width: 180px;"><i class="fa fa-eye me-1"></i>Mobile description </button>
+                                                </a>
+                                                <div style="height: 10px;"></div>
+                                                <a href="{{route('images',$mobile->id)}}" >
+                                                    <button  class="fancy-btn btn-view" style="width: 180px;"> <i class="fa fa-eye me-1"></i> Mobile images</button>
+                                                </a>
+                                            </div>
+                                        </div>
 
-                                        <button type="button" class="btn btn-outline-primary btn-sm px-3" data-bs-toggle="modal" data-bs-target="#actionModal-" title="Take Action">
-                                            <i class="fa fa-pen me-1"></i> Update
-                                        </button>
+                                        <a href="{{route('mobiles.edit',$mobile->id)}}">
+                                            <button type="button" class="fancy-btn btn-update" >
+                                                <i class="fa fa-pen me-1"></i> Update
+                                            </button>
+                                        </a>
+                                      
 
-                                        <button type="button" class="btn btn-outline-danger btn-sm px-3" data-bs-toggle="modal" data-bs-target="#actionModalMobileDestroy-{{$mobile->id}}" title="Take Action">
+                                        <button type="button" class="fancy-btn btn-delete " data-bs-toggle="modal" data-bs-target="#actionModalMobileDestroy-{{$mobile->id}}" title="Take Action">
                                             <i class="fa fa-trash me-1"></i> Delete
                                         </button>
 

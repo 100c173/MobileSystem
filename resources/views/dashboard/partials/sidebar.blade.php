@@ -111,20 +111,12 @@
                       </a>
                     </li>
                     <li>
-                      <a href="#">
-                        <span class="sub-item">Technical specifications</span>
+                      <a href="{{ route('mobiles.create') }}">
+                        <span class="sub-item">Add Mobile</span>
                       </a>
                     </li>
-                    <li>
-                      <a href="#">
-                        <span class="sub-item">Detailed description</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <span class="sub-item">Device images</span>
-                      </a>
-                    </li>
+                  
+                   
                   </ul>
                 </div>
               </li>
