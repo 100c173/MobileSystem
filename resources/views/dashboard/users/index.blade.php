@@ -70,24 +70,35 @@ Users
                                 </td>
                                 <td>
                                     @if($user->is_permanently_banned || $user->banned_until)
-                                    <a href="{{ route('users.unBlock', $user->id) }}" class="btn btn-sm btn-success">UnBlock</a>
+                                    <a href="{{ route('users.unBlock', $user->id) }}">
+                                         <button  class="fancy-btn btn-success">UnBlock</button>
+                                    </a>
+
                                     <form action="{{route('users.destroy',$user->id)}}" method="post" style="display: inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger"> SoftDelete</button>
+                                        <button type="submit" class="fancy-btn btn-delete">Delete</button>
                                     </form>
                                     @else
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-danger btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+                                        <button type="button" class="fancy-btn btn-delete dropdown-toggle" data-bs-toggle="dropdown">
                                             Block
                                         </button>
-                                        <div class="dropdown-menu p-2 text-center" style="min-width: 180px;">
-                                            <a href="{{ route('users.banFor24Hours', $user->id) }}" class="btn btn-warning btn-sm w-100 mb-1">Block 24 hours</a>
-                                            <a href="{{ route('users.blockPermenently', $user->id) }}" class="btn btn-danger btn-sm w-100">Block Permanently</a>
+                                        <div class="dropdown-menu p-2 text-center" style="min-width: 180px; height:110px">
+                                            <a href="{{ route('users.banFor24Hours', $user->id) }}" >
+                                                 <button  class="fancy-btn btn-update" style="width: 170px;">Block 24 hours</button>
+                                            </a>
+                                            <div style="height: 10px;"></div>
+                                            <a href="{{ route('users.blockPermenently', $user->id) }}" >
+                                                 <button  class="fancy-btn btn-delete " style="width: 170px;"> Block Permanently</button>
+                                                </a>
                                         </div>
                                     </div>
                                     @endif
-                                    <a href="{{ route('users.show', $user->id) }}" class="btn btn-sm btn-info">Show</a>
+                                    <a href="{{ route('users.show', $user->id) }}">
+                                         <button  class="fancy-btn btn-view ">Show</button>
+                                    </a>
+
 
                             </tr>
 
