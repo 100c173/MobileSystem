@@ -6,11 +6,13 @@ Users
 @section('content')
 @include('dashboard.components.alerts')
 <div class="page-inner">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            {!! Breadcrumbs::render('users.index')!!}
+    <nav aria-label="breadcrumb" class="bg-white py-3 px-4 rounded shadow-sm border d-flex align-items-center mb-4">
+        <ol class="breadcrumb mb-0 d-flex flex-wrap align-items-center" style="--bs-breadcrumb-divider: '›';">
+            {!! Breadcrumbs::render('users.index') !!}
         </ol>
     </nav>
+
+
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
@@ -48,7 +50,7 @@ Users
                             </tr>
                         </tfoot>
                         @php
-                            $counter= 1;
+                        $counter= 1;
                         @endphp
                         <tbody>
                             @foreach ($users as $user)
@@ -71,7 +73,7 @@ Users
                                 <td>
                                     @if($user->is_permanently_banned || $user->banned_until)
                                     <a href="{{ route('users.unBlock', $user->id) }}">
-                                         <button  class="fancy-btn btn-success">UnBlock</button>
+                                        <button class="fancy-btn btn-success">UnBlock</button>
                                     </a>
 
                                     <form action="{{route('users.destroy',$user->id)}}" method="post" style="display: inline;">
@@ -85,18 +87,18 @@ Users
                                             Block
                                         </button>
                                         <div class="dropdown-menu p-2 text-center" style="min-width: 180px; height:110px">
-                                            <a href="{{ route('users.banFor24Hours', $user->id) }}" >
-                                                 <button  class="fancy-btn btn-update" style="width: 170px;">Block 24 hours</button>
+                                            <a href="{{ route('users.banFor24Hours', $user->id) }}">
+                                                <button class="fancy-btn btn-update" style="width: 170px;">Block 24 hours</button>
                                             </a>
                                             <div style="height: 10px;"></div>
-                                            <a href="{{ route('users.blockPermenently', $user->id) }}" >
-                                                 <button  class="fancy-btn btn-delete " style="width: 170px;"> Block Permanently</button>
-                                                </a>
+                                            <a href="{{ route('users.blockPermenently', $user->id) }}">
+                                                <button class="fancy-btn btn-delete " style="width: 170px;"> Block Permanently</button>
+                                            </a>
                                         </div>
                                     </div>
                                     @endif
                                     <a href="{{ route('users.show', $user->id) }}">
-                                         <button  class="fancy-btn btn-view ">Show</button>
+                                        <button class="fancy-btn btn-view ">Show</button>
                                     </a>
 
 
@@ -145,4 +147,5 @@ Users
         });
     });
 </script>
+
 @endpush

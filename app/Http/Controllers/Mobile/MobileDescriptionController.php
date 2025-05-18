@@ -52,8 +52,8 @@ class MobileDescriptionController extends Controller
     public function store(MobileDescriptionRequest $request)
     {
         $mobile = $this->mobileDescriptionService->store($request);
-        $mobiles =Mobile::get();
-        return redirect()->route('dashboard.mobile.index',compact('mobiles'))->with('success','The Mobile & Specification & Description were successfully added.');
+
+        return redirect()->route('mobiles.index')->with('success','The Mobile & Specification & Description were successfully added.');
     }
 
     /**

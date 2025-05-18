@@ -45,10 +45,18 @@
 @endif
 <style>
 .alert-container {
-    margin: 20px auto;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1050; /* تأكد أنه أعلى من العناصر الأخرى */
     max-width: 800px;
+    width: 90%;
+    pointer-events: none; /* حتى لا تعيق النقرات */
 }
-.alert i {
-    vertical-align: middle;
+
+.alert-container .alert {
+    pointer-events: auto; /* فقط التنبيهات نفسها تستقبل النقرات (مثلاً زر الإغلاق) */
 }
+
 </style>

@@ -50,7 +50,7 @@ Route::controller(UserController::class)->prefix('/admin/dashboard/')->group(fun
 });
 
 //Mobile
-Route::controller(MobileController::class)->group(function () {
+Route::controller(MobileController::class)->prefix('/admin/dashboard/')->group(function () {
     Route::middleware('auth', 'role:admin')->group(function () {
 
         Route::resource('mobiles', MobileController::class);
@@ -59,7 +59,7 @@ Route::controller(MobileController::class)->group(function () {
 });
 
 //Mobile Specification
-Route::controller(MobileSpecificationController::class)->group(function () {
+Route::controller(MobileSpecificationController::class)->prefix('/admin/dashboard/')->group(function () {
     Route::middleware('auth', 'role:admin')->group(function () {
         route::get('specification/{id}','specification')->name('specification');     
         Route::resource('mobileSpcifications', MobileSpecificationController::class);
@@ -67,7 +67,7 @@ Route::controller(MobileSpecificationController::class)->group(function () {
 });
 
 //Mobile Description
-Route::controller(MobileDescriptionController::class)->group(function () {
+Route::controller(MobileDescriptionController::class)->prefix('/admin/dashboard/')->group(function () {
     Route::middleware('auth', 'role:admin')->group(function () {
         route::get('description/{id}','description')->name('description');     
         Route::resource('mobileDescriptions', MobileDescriptionController::class);
@@ -75,7 +75,7 @@ Route::controller(MobileDescriptionController::class)->group(function () {
 });
 
 //Mobile Images
-Route::controller(MobileImageController::class)->group(function () {
+Route::controller(MobileImageController::class)->prefix('/admin/dashboard/')->group(function () {
     Route::middleware('auth', 'role:admin')->group(function () {
         route::get('images/{id}','images')->name('images');     
         route::get('unEssential/{id}','make_image_unEssential')->name('make_image_unEssential');     
