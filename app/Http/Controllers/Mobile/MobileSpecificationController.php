@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Mobile;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Mobile\MobileSpecificationRequest;
+use App\Models\Mobile;
 use App\Models\MobileSpecification;
 use App\Services\Mobile\MobileSpecificationService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -18,9 +19,7 @@ class MobileSpecificationController extends Controller
     {
         $this->mobileSpecificationService = $mobileSpecificationService;
     }
-    public function index(){
-        
-    }
+    public function index() {}
     /**
      * Display a listing of the mobile specification.
      */
@@ -30,7 +29,7 @@ class MobileSpecificationController extends Controller
             $data = $this->mobileSpecificationService->specification($id);
             $specification = $data['specification'];
             $mobile = $data['mobile'];
-            return view('dashboard.mobile.mobile_specification', compact('specification','mobile'));
+            return view('dashboard.mobile.mobile_specification', compact('specification', 'mobile'));
         } catch (ModelNotFoundException $e) {
             abort(404, $e->getMessage());
         } catch (\Exception $e) {
@@ -45,8 +44,9 @@ class MobileSpecificationController extends Controller
      */
     public function store(MobileSpecificationRequest $request)
     {
-        $mobile = $this->mobileSpecificationService->store($request);
-        return view('dashboard.mobile.createDescription',compact('mobile'))->with('success','The mobile Specification was successful added.');
+        $this->mobileSpecificationService->store($request);
+        $mobile = Mobile::find($request->mobile_id);
+        return view('dashboard.mobile.createDescription', compact('mobile'))->with('success', 'The mobile Specification was successful added.');
     }
 
 
@@ -56,7 +56,7 @@ class MobileSpecificationController extends Controller
     public function edit($id)
     {
         $specification = MobileSpecification::findOrFail($id);
-        return view('dashboard.mobile.update.updateSpecification',compact('specification'));
+        return view('dashboard.mobile.update.updateSpecification', compact('specification'));
     }
 
     /**
@@ -64,8 +64,8 @@ class MobileSpecificationController extends Controller
      */
     public function update(MobileSpecificationRequest $request,  $id)
     {
-        $this->mobileSpecificationService-> update( $request,$id);       
-        return redirect()->route('mobiles.index')->with('success','Mobile specification updated ');
+        $this->mobileSpecificationService->update($request, $id);
+        return redirect()->route('mobiles.index')->with('success', 'Mobile specification updated ');
     }
 
     /**
