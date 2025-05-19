@@ -27,8 +27,7 @@ Mobile
 
 
                         <div class="form-group"  >
-                            <label for="exampleInputEmail" >Mobile Id</label>
-                            <input type="text" class="form-control" id="mobile_id" name="mobile_id" value="{{ $mobile->id }}" required>
+                            <input type="hidden" class="form-control" id="mobile_id" name="mobile_id" value="{{ $mobile->id }}" required>
                         </div>
 
                         <div class="form-group">

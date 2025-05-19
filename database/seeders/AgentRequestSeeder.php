@@ -29,7 +29,7 @@ class AgentRequestSeeder extends Seeder
             'address' => 'jableh',
             'latitude' => 31.33456,
             'longitude' => 29.34567,
-            'status' => 'approved',
+            'status' => 'pending',
         ]);
         AgentRequest::create([
             'user_id'     => 4 ,
@@ -38,7 +38,7 @@ class AgentRequestSeeder extends Seeder
             'address' => 'jableh',
             'latitude' => 31.33456,
             'longitude' => 29.34567,
-            'status' => 'rejected',
+            'status' => 'pending',
         ]);
     }
 }
