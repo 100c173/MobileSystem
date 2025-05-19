@@ -3,9 +3,9 @@
         <div class="sidebar-logo">
           <!-- Logo Header -->
           <div class="logo-header" data-background-color="dark">
-            <a href="index.html" class="logo">
+            <a href="{{route('admin.dashboard')}}" class="logo">
               <img
-                src="assets/img/kaiadmin/logo_light.svg"
+                src="{{asset('assets/img/kaiadmin/logo_light.svg')}}"
                 alt="navbar brand"
                 class="navbar-brand"
                 height="20" />
@@ -35,32 +35,6 @@
                 <h4 class="text-section">Components</h4>
               </li>
 
-              <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#base">
-                  <i class="icon-user"></i>
-                  <p>Users and Permissions</p>
-                  <span class="caret"></span>
-                </a>
-                <div class="collapse" id="base">
-                  <ul class="nav nav-collapse">
-                    <li>
-                      <a href="#">
-                        <span class="sub-item">User </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <span class="sub-item">Agent </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <span class="sub-item">Permissions</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
 
               <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#mobile">
@@ -71,23 +45,8 @@
                 <div class="collapse" id="mobile">
                   <ul class="nav nav-collapse">
                     <li>
-                      <a href="#">
-                        <span class="sub-item">Mobiles</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <span class="sub-item">Technical specifications</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <span class="sub-item">Detailed description</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <span class="sub-item">Device images</span>
+                      <a href="">
+                        <span class="sub-item">Add to my products</span>
                       </a>
                     </li>
                   </ul>
@@ -130,7 +89,7 @@
                   </ul>
                 </div>
               </li>
-              
+
               <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#reviews">
                   <i class="icon-note"></i>
@@ -147,7 +106,7 @@
                   </ul>
                 </div>
               </li>
-              
+
               <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#offers">
                   <i class="icon-handbag"></i>
@@ -188,7 +147,7 @@
               </li>
 
               <li class="nav-item">
-                <a  href="#">
+                <a href="#">
                   <i class="icon-wrench"></i>
                   <p>System Settings</p>
                 </a>

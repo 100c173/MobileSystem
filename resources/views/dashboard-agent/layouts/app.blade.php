@@ -3,17 +3,18 @@
 
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Kaiadmin - Bootstrap 5 Admin Dashboard</title>
-  <meta
-    content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
-    name="viewport" />
-  <link
-    rel="icon"
-    href="assets/img/kaiadmin/favicon.ico"
-    type="image/x-icon" />
+  <title>@yield('title')</title>
+  <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+  <link rel="icon" href="{{ asset('assets/img/kaiadmin/favicon.ico') }}" type="image/x-icon" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <!-- Boxicons -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
 
   <!-- Fonts and icons -->
-  <script src="assets/js/plugin/webfont/webfont.min.js"></script>
+  <script src="{{ asset('assets/js/plugin/webfont/webfont.min.js') }}"></script>
   <script>
     WebFont.load({
       google: {
@@ -26,24 +27,26 @@
           "Font Awesome 5 Brands",
           "simple-line-icons",
         ],
-        urls: ["assets/css/fonts.min.css"],
+        urls: ["{{ asset('assets/css/fonts.min.css') }}"],
       },
-      active: function() {
+      active: function () {
         sessionStorage.fonts = true;
       },
     });
   </script>
 
   <!-- CSS Files -->
-  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="assets/css/plugins.min.css" />
-  <link rel="stylesheet" href="assets/css/kaiadmin.min.css" />
+  <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" />
+  <link rel="stylesheet" href="{{ asset('assets/css/plugins.min.css') }}" />
+  <link rel="stylesheet" href="{{ asset('assets/css/kaiadmin.min.css') }}" />
+  <link rel="stylesheet" href="{{ asset('assets/css/buttons.css') }}" />
 
 </head>
 
+
 <body>
   <div class="wrapper">
-    @include('dashboard.partials.sidebar')
+    @include('dashboard-agent.partials.sidebar')
 
     <div class="main-panel">
       <div class="main-header">
@@ -327,13 +330,15 @@
                   aria-expanded="false">
                   <div class="avatar-sm">
                     <img
-                      src="assets/img/profile.jpg"
+                      src="{{asset('assets/img/profile.jpg')}}"
                       alt="..."
                       class="avatar-img rounded-circle" />
                   </div>
                   <span class="profile-username">
                     <span class="op-7">Hi,</span>
+
                     <span class="fw-bold">{{auth()->user()->name}}</span>
+
                   </span>
                 </a>
                 <ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -342,13 +347,14 @@
                       <div class="user-box">
                         <div class="avatar-lg">
                           <img
-                            src="assets/img/profile.jpg"
+                            src="{{asset('assets/img/profile.jpg')}}"
                             alt="image profile"
                             class="avatar-img rounded" />
                         </div>
                         <div class="u-text">
                           <h4>Hizrian</h4>
                           <p class="text-muted">{{auth()->user()->email}}</p>
+
                           <a
                             href="profile.html"
                             class="btn btn-xs btn-secondary btn-sm">View Profile</a>
@@ -368,6 +374,7 @@
                         @csrf
                         <button type="submit" class="btn btn-danger w-100">Logout</button>
                       </form>
+
 
                     </li>
                   </div>
@@ -389,73 +396,42 @@
 
   </div>
 
-  <!--   Core JS Files   -->
-  <script src="assets/js/core/jquery-3.7.1.min.js"></script>
-  <script src="assets/js/core/popper.min.js"></script>
-  <script src="assets/js/core/bootstrap.min.js"></script>
+<!-- Core JS Files -->
+<script src="{{ asset('assets/js/core/jquery-3.7.1.min.js') }}"></script>
+<script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
+<script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
 
-  <!-- jQuery Scrollbar -->
-  <script src="assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+<!-- jQuery Scrollbar -->
+<script src="{{ asset('assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
 
-  <!-- Chart JS -->
-  <script src="assets/js/plugin/chart.js/chart.min.js"></script>
+<!-- Chart JS -->
+<script src="{{ asset('assets/js/plugin/chart.js/chart.min.js') }}"></script>
 
-  <!-- jQuery Sparkline -->
-  <script src="assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
+<!-- jQuery Sparkline -->
+<script src="{{ asset('assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js') }}"></script>
 
-  <!-- Chart Circle -->
-  <script src="assets/js/plugin/chart-circle/circles.min.js"></script>
+<!-- Chart Circle -->
+<script src="{{ asset('assets/js/plugin/chart-circle/circles.min.js') }}"></script>
 
-  <!-- Datatables -->
-  <script src="assets/js/plugin/datatables/datatables.min.js"></script>
+<!-- Datatables -->
+<script src="{{ asset('assets/js/plugin/datatables/datatables.min.js') }}"></script>
 
-  <!-- Bootstrap Notify -->
-  <script src="assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+<!-- Bootstrap Notify -->
+<script src="{{ asset('assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
 
-  <!-- jQuery Vector Maps -->
-  <script src="assets/js/plugin/jsvectormap/jsvectormap.min.js"></script>
-  <script src="assets/js/plugin/jsvectormap/world.js"></script>
+<!-- jQuery Vector Maps -->
+<script src="{{ asset('assets/js/plugin/jsvectormap/jsvectormap.min.js') }}"></script>
+<script src="{{ asset('assets/js/plugin/jsvectormap/world.js') }}"></script>
 
-  <!-- Sweet Alert -->
-  <script src="assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+<!-- Sweet Alert -->
+<script src="{{ asset('assets/js/plugin/sweetalert/sweetalert.min.js') }}"></script>
 
-  <!-- Kaiadmin JS -->
-  <script src="assets/js/kaiadmin.min.js"></script>
-
-
-  <script>
-    $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
-      type: "line",
-      height: "70",
-      width: "100%",
-      lineWidth: "2",
-      lineColor: "#177dff",
-      fillColor: "rgba(23, 125, 255, 0.14)",
-    });
-
-    $("#lineChart2").sparkline([99, 125, 122, 105, 110, 124, 115], {
-      type: "line",
-      height: "70",
-      width: "100%",
-      lineWidth: "2",
-      lineColor: "#f3545d",
-      fillColor: "rgba(243, 84, 93, .14)",
-    });
-
-    $("#lineChart3").sparkline([105, 103, 123, 100, 95, 105, 115], {
-      type: "line",
-      height: "70",
-      width: "100%",
-      lineWidth: "2",
-      lineColor: "#ffa534",
-      fillColor: "rgba(255, 165, 52, .14)",
-    });
-  </script>
+<!-- Kaiadmin JS -->
+<script src="{{ asset('assets/js/kaiadmin.min.js') }}"></script>
 
 
-
-  <!-- هنا يتم حقن السكربتات الخاصة بكل صفحة -->
-  @stack('scripts')
+<!-- حقن السكربتات -->
+@stack('scripts')
 </body>
 
 </html>

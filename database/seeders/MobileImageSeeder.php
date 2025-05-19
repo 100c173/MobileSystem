@@ -30,130 +30,130 @@ class MobileImageSeeder extends Seeder
             // iPhone 15 Pro Images
             [
                 'mobile_id' => $iphone15Pro->id,
-                'image_url' => 'images/iphone15pro_front.jpg',
+                'image_url' => 'uploads/images/iphone15pro_front.jpg',
                 'is_primary' => true,
                 'caption' => 'iPhone 15 Pro front view'
             ],
             [
                 'mobile_id' => $iphone15Pro->id,
-                'image_url' => 'images/iphone15pro_back.jpg',
+                'image_url' => 'uploads/images/iphone15pro_back.jpg',
                 'is_primary' => false,
                 'caption' => 'iPhone 15 Pro back view'
             ],
             // Samsung Galaxy S24 Ultra Images
             [
                 'mobile_id' => $samsungS24Ultra->id,
-                'image_url' => 'images/s24ultra_front.jpg',
+                'image_url' => 'uploads/images/s24ultra_front.jpg',
                 'is_primary' => true,
                 'caption' => 'Samsung Galaxy S24 Ultra front view'
             ],
             [
                 'mobile_id' => $samsungS24Ultra->id,
-                'image_url' => 'images/s24ultra_back.jpg',
+                'image_url' => 'uploads/images/s24ultra_back.jpg',
                 'is_primary' => false,
                 'caption' => 'Samsung Galaxy S24 Ultra back view'
             ],
             // Xiaomi 13 Pro Images
             [
                 'mobile_id' => $xiaomi13Pro->id,
-                'image_url' => 'images/mi13pro_front.jpg',
+                'image_url' => 'uploads/images/mi13pro_front.jpg',
                 'is_primary' => true,
                 'caption' => 'Xiaomi 13 Pro front view'
             ],
             [
                 'mobile_id' => $xiaomi13Pro->id,
-                'image_url' => 'images/mi13pro_back.jpg',
+                'image_url' => 'uploads/images/mi13pro_back.jpg',
                 'is_primary' => false,
                 'caption' => 'Xiaomi 13 Pro back view'
             ],
             // Google Pixel 8 Pro Images
             [
                 'mobile_id' => $googlePixel8Pro->id,
-                'image_url' => 'images/pixel8pro_front.jpg',
+                'image_url' => 'uploads/images/pixel8pro_front.jpg',
                 'is_primary' => true,
                 'caption' => 'Google Pixel 8 Pro front view'
             ],
             [
                 'mobile_id' => $googlePixel8Pro->id,
-                'image_url' => 'images/pixel8pro_back.jpg',
+                'image_url' => 'uploads/images/pixel8pro_back.jpg',
                 'is_primary' => false,
                 'caption' => 'Google Pixel 8 Pro back view'
             ],
             // OnePlus 12 Images
             [
                 'mobile_id' => $onePlus12->id,
-                'image_url' => 'images/oneplus12_front.jpg',
+                'image_url' => 'uploads/images/oneplus12_front.jpg',
                 'is_primary' => true,
                 'caption' => 'OnePlus 12 front view'
             ],
             [
                 'mobile_id' => $onePlus12->id,
-                'image_url' => 'images/oneplus12_back.jpg',
+                'image_url' => 'uploads/images/oneplus12_back.jpg',
                 'is_primary' => false,
                 'caption' => 'OnePlus 12 back view'
             ],
             // ASUS ROG Phone 7 Ultimate Images
             [
                 'mobile_id' => $asusROG7->id,
-                'image_url' => 'images/rog7_front.jpg',
+                'image_url' => 'uploads/images/rog7_front.jpg',
                 'is_primary' => true,
                 'caption' => 'ASUS ROG Phone 7 Ultimate front view',
             ],
             [
                 'mobile_id' => $asusROG7->id,
-                'image_url' => 'images/rog7_back.jpg',
+                'image_url' => 'uploads/images/rog7_back.jpg',
                 'is_primary' => false,
                 'caption' => 'ASUS ROG Phone 7 Ultimate back view'
             ],
             // Sony Xperia 1 V Images
             [
                 'mobile_id' => $sonyXperia1V->id,
-                'image_url' => 'images/xperia1v_front.jpg',
+                'image_url' => 'uploads/images/xperia1v_front.jpg',
                 'is_primary' => true,
                 'caption' => 'Sony Xperia 1 V front view'
             ],
             [
                 'mobile_id' => $sonyXperia1V->id,
-                'image_url' => 'images/xperia1v_back.jpg',
+                'image_url' => 'uploads/images/xperia1v_back.jpg',
                 'is_primary' => false,
                 'caption' => 'Sony Xperia 1 V back view'
             ],
             // Motorola Edge+ (2023) Images
             [
                 'mobile_id' => $motorolaEdge->id,
-                'image_url' => 'images/motorolaedge_front.jpg',
+                'image_url' => 'uploads/images/motorolaedge_front.jpg',
                 'is_primary' => true,
                 'caption' => 'Motorola Edge+ (2023) front view'
             ],
             [
                 'mobile_id' => $motorolaEdge->id,
-                'image_url' => 'images/motorolaedge_back.jpg',
+                'image_url' => 'uploads/images/motorolaedge_back.jpg',
                 'is_primary' => false,
                 'caption' => 'Motorola Edge+ (2023) back view'
             ],
             // Huawei P60 Pro Images
             [
                 'mobile_id' => $huaweiP60Pro->id,
-                'image_url' => 'images/huaweiP60pro_front.jpg',
+                'image_url' => 'uploads/images/huaweiP60pro_front.jpg',
                 'is_primary' => true,
                 'caption' => 'Huawei P60 Pro front view'
             ],
             [
                 'mobile_id' => $huaweiP60Pro->id,
-                'image_url' => 'images/huaweiP60pro_back.jpg',
+                'image_url' => 'uploads/images/huaweiP60pro_back.jpg',
                 'is_primary' => false,
                 'caption' => 'Huawei P60 Pro back view'
             ],
             // Realme GT5 Pro Images
             [
                 'mobile_id' => $realmeGT5Pro->id,
-                'image_url' => 'images/realmeGT5pro_front.jpg',
+                'image_url' => 'uploads/images/realmeGT5pro_front.jpg',
                 'is_primary' => true,
                 'caption' => 'Realme GT5 Pro front view'
             ],
             [
                 'mobile_id' => $realmeGT5Pro->id,
-                'image_url' => 'images/realmeGT5pro_back.jpg',
+                'image_url' => 'uploads/images/realmeGT5pro_back.jpg',
                 'is_primary' => false,
                 'caption' => 'Realme GT5 Pro back view'
             ],

@@ -58,3 +58,27 @@ Breadcrumbs::for('mobiles.index', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.dashboard');
     $trail->push('Mobiles', route('mobiles.index'));
 });
+// Admin Dashboard > Mobile > specification
+Breadcrumbs::for('specification', function (BreadcrumbTrail $trail, $mobile) {
+    $trail->parent('admin.dashboard'); 
+    $trail->push('Mobiles', route('mobiles.index')); 
+    $trail->push('Mobile Specification', route('specification', $mobile->id));   
+});
+// Admin Dashboard > Mobile > Description
+Breadcrumbs::for('description', function (BreadcrumbTrail $trail, $mobile) {
+    $trail->parent('admin.dashboard'); 
+    $trail->push('Mobiles', route('mobiles.index')); 
+    $trail->push('Mobile Description', route('description', $mobile->id));   
+});
+// Admin Dashboard > Mobile > images
+Breadcrumbs::for('images', function (BreadcrumbTrail $trail, $mobile) {
+    $trail->parent('admin.dashboard'); 
+    $trail->push('Mobiles', route('mobiles.index')); 
+    $trail->push('Mobile Images', route('images', $mobile->id));   
+});
+// Admin Dashboard > Mobile > add mobile
+Breadcrumbs::for('mobiles.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.dashboard'); 
+    $trail->push('Mobiles', route('mobiles.index')); 
+    $trail->push('Add Mobile', route('mobiles.create'));   
+});

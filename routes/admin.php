@@ -2,8 +2,12 @@
 
 use App\Http\Controllers\Aget\AgentRequestController;
 use App\Http\Controllers\Mobile\MobileController;
+use App\Http\Controllers\Mobile\MobileDescriptionController;
+use App\Http\Controllers\Mobile\MobileImageController;
+use App\Http\Controllers\Mobile\MobileSpecificationController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -46,10 +50,39 @@ Route::controller(UserController::class)->prefix('/admin/dashboard/')->group(fun
 });
 
 //Mobile
-Route::controller(MobileController::class)->group(function () {
+Route::controller(MobileController::class)->prefix('/admin/dashboard/')->group(function () {
     Route::middleware('auth', 'role:admin')->group(function () {
-        
+
         Route::resource('mobiles', MobileController::class);
+
+    });
+});
+
+//Mobile Specification
+Route::controller(MobileSpecificationController::class)->prefix('/admin/dashboard/')->group(function () {
+    Route::middleware('auth', 'role:admin')->group(function () {
+        route::get('specification/{id}','specification')->name('specification'); 
+        route::get('create_specification/{id}','create_specification')->name('create_specification');         
+        Route::resource('mobileSpcifications', MobileSpecificationController::class);
+    });
+});
+
+//Mobile Description
+Route::controller(MobileDescriptionController::class)->prefix('/admin/dashboard/')->group(function () {
+    Route::middleware('auth', 'role:admin')->group(function () {
+        route::get('description/{id}','description')->name('description');     
+        route::get('create_description/{id}','create_description')->name('create_description');     
+        Route::resource('mobileDescriptions', MobileDescriptionController::class);
+    });
+});
+
+//Mobile Images
+Route::controller(MobileImageController::class)->prefix('/admin/dashboard/')->group(function () {
+    Route::middleware('auth', 'role:admin')->group(function () {
+        route::get('images/{id}','images')->name('images');     
+        route::get('unEssential/{id}','make_image_unEssential')->name('make_image_unEssential');     
+        route::get('essential/{imageId}/{mobileId}','make_image_essential')->name('make_image_essential');     
+        Route::resource('mobileImages', MobileImageController::class);
     });
 });
 
