@@ -25,7 +25,7 @@ class MobileController extends Controller
     public function index()
     {
         $mobiles = $this->mobileService->index();
-        return view('dashboard.mobile.index',compact('mobiles'));
+        return view('dashboard.mobile.display.index',compact('mobiles'));
     }
 
     /**
@@ -33,7 +33,7 @@ class MobileController extends Controller
      */
     public function create()
     {
-        return view('dashboard.mobile.create');
+        return view('dashboard.mobile.create.create');
     }
 
     /**
@@ -42,7 +42,7 @@ class MobileController extends Controller
     public function store(MobileRequest $request)
     {
         $mobile = $this->mobileService->store($request);
-        return view('dashboard.mobile.createSpecification',compact('mobile'))->with('success','The mobile was successful added.');
+        return view('dashboard.mobile.create.createSpecification',compact('mobile'))->with('success','The mobile was successful added.');
     }
 
     /**

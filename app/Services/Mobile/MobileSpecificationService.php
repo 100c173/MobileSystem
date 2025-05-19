@@ -27,6 +27,23 @@ class MobileSpecificationService
         ];
     }
 
+    public function add_specification($id)
+    {
+        $mobile = Mobile::findOrfail($id);
+
+        if (!$mobile) {
+            throw new ModelNotFoundException("Mobile description not found");
+        }
+
+        return $mobile;
+    }
+
+    public function create_specification($id)
+    {
+        $mobile = Mobile::findOrfail($id);
+        return $mobile;
+    }
+
     public function store(Request $request)
     {
         $mobileSpecification = new MobileSpecification();

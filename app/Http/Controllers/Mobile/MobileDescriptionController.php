@@ -29,9 +29,14 @@ class MobileDescriptionController extends Controller
             $data = $this->mobileDescriptionService->description($id);
             $description = $data['description'];
             $mobile = $data['mobile'];
-            return view('dashboard.mobile.mobile_description', compact('description','mobile'));
+            return view('dashboard.mobile.display.mobile_description', compact('description','mobile'));
         } catch (ModelNotFoundException $e) {
-            abort(404, $e->getMessage());
+            try{
+                $mobile = $this->mobileDescriptionService->add_description($id);
+                return view('dashboard.mobile.display.mobile_description', compact('mobile'));
+            }catch (ModelNotFoundException $e) {
+                abort(404, $e->getMessage());
+            }
         } catch (\Exception $e) {
             Log::error('Error showing mobile description: ' . $e->getMessage());
             abort(500);
@@ -41,9 +46,18 @@ class MobileDescriptionController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create_description($id)
     {
-        //
+        try{
+            $mobile = $this->mobileDescriptionService->create_description($id);
+            return view('dashboard.mobile.create.createDescription',compact('mobile'));
+        } catch (ModelNotFoundException $e) {
+            abort(404, $e->getMessage());
+        } catch (\Exception $e) {
+            Log::error('Error showing mobile description: ' . $e->getMessage());
+            abort(500);
+        }
+      
     }
 
     /**
@@ -53,7 +67,7 @@ class MobileDescriptionController extends Controller
     {
         $mobile = $this->mobileDescriptionService->store($request);
 
-        return redirect()->route('mobiles.index')->with('success','The Mobile & Specification & Description were successfully added.');
+        return redirect()->route('mobiles.index')->with('success','The mobile description was successfully added.');
     }
 
     /**

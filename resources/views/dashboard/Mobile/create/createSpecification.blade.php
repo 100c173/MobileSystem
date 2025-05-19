@@ -26,7 +26,7 @@ Mobile
                         <form action="{{route('mobileSpcifications.store')}}" method="POST" enctype="multipart/form-data">
                             @csrf
 
-                            <div class="form-group" style="display: none;">
+                            <div class="form-group">
                                 <label for="exampleInputEmail" >Mobile Id</label>
                                 <input type="text" class="form-control" id="mobile_id" name="mobile_id" value="{{ $mobile->id }}" required>
                             </div>

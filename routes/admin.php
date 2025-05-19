@@ -61,7 +61,8 @@ Route::controller(MobileController::class)->prefix('/admin/dashboard/')->group(f
 //Mobile Specification
 Route::controller(MobileSpecificationController::class)->prefix('/admin/dashboard/')->group(function () {
     Route::middleware('auth', 'role:admin')->group(function () {
-        route::get('specification/{id}','specification')->name('specification');     
+        route::get('specification/{id}','specification')->name('specification'); 
+        route::get('create_specification/{id}','create_specification')->name('create_specification');         
         Route::resource('mobileSpcifications', MobileSpecificationController::class);
     });
 });
@@ -70,6 +71,7 @@ Route::controller(MobileSpecificationController::class)->prefix('/admin/dashboar
 Route::controller(MobileDescriptionController::class)->prefix('/admin/dashboard/')->group(function () {
     Route::middleware('auth', 'role:admin')->group(function () {
         route::get('description/{id}','description')->name('description');     
+        route::get('create_description/{id}','create_description')->name('create_description');     
         Route::resource('mobileDescriptions', MobileDescriptionController::class);
     });
 });

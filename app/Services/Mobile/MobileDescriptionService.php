@@ -28,6 +28,24 @@ class MobileDescriptionService
         ];
     }
 
+    public function add_description($id)
+    {
+        $mobile = Mobile::findOrfail($id);
+
+        if (!$mobile) {
+            throw new ModelNotFoundException("Mobile description not found");
+        }
+
+        return $mobile;
+    }
+
+    public function create_description($id)
+    {
+        $mobile = Mobile::findOrfail($id);
+        return $mobile;
+    }
+
+
     public function store(MobileDescriptionRequest $request)
     {
         $mobileDescription = new MobileDescription();
