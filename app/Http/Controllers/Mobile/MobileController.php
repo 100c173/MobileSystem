@@ -25,7 +25,11 @@ class MobileController extends Controller
     public function index()
     {
         $mobiles = $this->mobileService->index();
-        return view('dashboard.mobile.display.index',compact('mobiles'));
+        
+        if(auth()->user()->hasRole('admin'))
+          return view('dashboard.mobile.display.index',compact('mobiles'));
+        else
+          return view('dashboard-agent.my-devices.select-devices',compact('mobiles'));
     }
 
     /**

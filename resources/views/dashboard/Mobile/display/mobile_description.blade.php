@@ -68,8 +68,6 @@
                                         <i class="fa fa-pen me-1"></i> Update
                                     </button>
                                 </a>
-                            
-
                             </div>
                         </div>
                         

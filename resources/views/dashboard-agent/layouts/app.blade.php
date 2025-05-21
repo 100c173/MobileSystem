@@ -391,7 +391,7 @@
 
       </div>
 
-      @include('dashboard.layouts.footer')
+      @include('dashboard-agent.layouts.footer')
     </div>
 
   </div>
