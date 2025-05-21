@@ -5,8 +5,10 @@ use App\Http\Controllers\Mobile\MobileController;
 use App\Http\Controllers\Mobile\MobileDescriptionController;
 use App\Http\Controllers\Mobile\MobileImageController;
 use App\Http\Controllers\Mobile\MobileSpecificationController;
+use App\Http\Controllers\Notification\NotificationController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -83,6 +85,14 @@ Route::controller(MobileImageController::class)->prefix('/admin/dashboard/')->gr
         route::get('unEssential/{id}','make_image_unEssential')->name('make_image_unEssential');     
         route::get('essential/{imageId}/{mobileId}','make_image_essential')->name('make_image_essential');     
         Route::resource('mobileImages', MobileImageController::class);
+    });
+});
+
+//Notification 
+Route::controller(NotificationController::class)->prefix('/admin/dashboard/')->group(function () {
+    Route::middleware('auth', 'role:admin')->group(function () {
+        route::post('notification/markAllNotificationAsRead','markAllNotificationAsRead')->name('markAllNotificationAsRead');     
+        route::get('notification/markNotificationAsRead/{id}','markNotificationAsRead')->name('markNotificationAsRead');     
     });
 });
 
