@@ -22,6 +22,7 @@ class AgentMobileStockRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'mobile_id' => ['required'],
             'price' => ['required', 'numeric', 'gt:0'],
             'quantity' => ['required', 'integer', 'gt:0'],
         ];

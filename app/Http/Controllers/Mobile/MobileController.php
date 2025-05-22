@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Mobile;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Mobile\MobileRequest;
+use App\Models\AgentMobileStock;
 use App\Models\Mobile;
 use App\Services\Mobile\MobileService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class MobileController extends Controller
@@ -25,11 +27,13 @@ class MobileController extends Controller
     public function index()
     {
         $mobiles = $this->mobileService->index();
-        
-        if(auth()->user()->hasRole('admin'))
+        $user = Auth::user() ; 
+        if($user->hasRole('admin'))
           return view('dashboard.mobile.display.index',compact('mobiles'));
-        else
-          return view('dashboard-agent.my-devices.select-devices',compact('mobiles'));
+        else{
+          $my_products = AgentMobileStock::where('user_id',$user->id)->pluck('mobile_id')->toArray();
+          return view('dashboard-agent.my-devices.select-devices',compact('mobiles','my_products'));
+        }
     }
 
     /**

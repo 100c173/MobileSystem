@@ -81,11 +81,18 @@
                                                     <button class="fancy-btn btn-view" style="width: 180px;"> <i class="fa fa-eye me-1"></i> Mobile images</button>
                                                 </a>
                                             </div>
+                                            @if(!in_array($mobile->id,$my_products))
                                             <!-- Trigger Button -->
                                             <button type="button" class="fancy-btn btn-success" data-bs-toggle="modal" data-bs-target="#addProductModal{{ $mobile->id }}">
                                                 <i class="fa fa-plus me-1"></i>
                                                 Add to My Products
                                             </button>
+                                            @else
+                                            <!-- Trigger Button -->
+                                            <button  class="fancy-btn btn-warning">
+                                                 Selected
+                                            </button>
+                                            @endif
                                         </div>
                                     </div>
                                 </td>

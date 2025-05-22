@@ -22,7 +22,8 @@ class AgentMobileStocksController extends Controller
      */
     public function index()
     {
-        //
+        $mobiles = $this->mobilsStockService->getAllMyProducts();
+        return view('dashboard-agent.my-devices.my-inventory',compact('mobiles'));
     }
 
     /**
@@ -47,7 +48,7 @@ class AgentMobileStocksController extends Controller
      */
     public function show(string $id)
     {
-        //
+        
     }
 
     /**

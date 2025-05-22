@@ -50,7 +50,7 @@
                       </a>
                     </li>
                     <li>
-                      <a href="">
+                      <a href="{{route('agent-stocks.index')}}">
                         <span class="sub-item"> My Inventory</span>
                       </a>
                     </li>
