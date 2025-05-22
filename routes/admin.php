@@ -93,6 +93,7 @@ Route::controller(NotificationController::class)->prefix('/admin/dashboard/')->g
     Route::middleware('auth', 'role:admin')->group(function () {
         route::post('notification/markAllNotificationAsRead','markAllNotificationAsRead')->name('markAllNotificationAsRead');     
         route::get('notification/markNotificationAsRead/{id}','markNotificationAsRead')->name('markNotificationAsRead');     
+        Route::resource('notification', NotificationController::class);
     });
 });
 

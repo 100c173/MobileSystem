@@ -201,8 +201,8 @@
                 <div class="collapse" id="notifications">
                   <ul class="nav nav-collapse">
                     <li>
-                      <a href="#">
-                        <span class="sub-item">Send Notification</span>
+                      <a href="{{route('notification.index')}}">
+                        <span class="sub-item">Notifications</span>
                       </a>
                     </li>
                     <li>

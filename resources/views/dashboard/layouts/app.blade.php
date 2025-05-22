@@ -255,15 +255,9 @@
                     </div>
                   </li>
                   <li>
-                    @if(auth()->user()->unreadNotifications->isNotEmpty())
-                      <form action="{{route('markAllNotificationAsRead')}}" method="post" >
-                        @csrf
-                        @method('post')
-                        <button type="submit" class="fancy-btn btn-view" style="width: 95%;">Make all notifications As read</button>
-                      </form>
                       
-                    @endif
                   </li>
+                  <li><a class="see-all"  href="{{route('notification.index')}}">See all notifications<i class="fa fa-angle-right"></i>
                 </ul>
               </li>
               <li class="nav-item topbar-icon dropdown hidden-caret">

@@ -36,7 +36,8 @@ class NewUserRegisterNotification extends Notification
     {
         return[
             'message' => 'New user registered',
-            'user_id' => $this->user->id,
+            'user_name' => $this->user->name, 
+            'user_id' => $this->user->id, 
             'email'   => $this->user->email,
             'time'    => now()->toDayDateTimeString(),
         ];
