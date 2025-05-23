@@ -34,14 +34,15 @@ Notification
                     <div class="card-body">
                         <div style="padding-left: 20px;">
                             <ul class="list-group">
-                              
+
                                 @foreach (auth()->user()->notifications as $notification)
+                             
                                     <li class="list-group-item pb-4 {{ is_null($notification->read_at) ? 'unread' : '' }}" style="border-radius:10px;margin-bottom:3px; position:relative">
-                                        <form action="{{ route('notification.destroy', $notification->id) }}" method="POST" style="position:absolute; top:5px; right:10px">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" style="background:none;border:none;font-weight:bold;font-size:18px;line-height:1;color:#aaa" onclick="return confirm('Are you sure you want to delete the notification ?')">&times;</button>
-                                        </form>
+                                        <div style="position:absolute; top:5px; right:10px">
+                                            <button type="submit" style="background:none;border:none;font-weight:bold;font-size:18px;line-height:1;color:#aaa"  data-bs-toggle="modal" data-bs-target="#actionModalNotificationDestroy-{{ $notification->id }}" title="Take Action">&times;</button>
+                                        </div>
+                                       
+
 
                                         <a href="{{route('markNotificationAsRead',$notification->id)}}">
                                         <div class="d-flex" style="gap:15px">
@@ -69,6 +70,8 @@ Notification
                                         </div>
                                 </a>
                             </li>
+                            @include('dashboard.modals.notification-destroy')
+                           
                         @endforeach
 
                              

@@ -199,6 +199,10 @@
                   <li>
                     <div class="notif-scroll scrollbar-outer">
                       <div class="notif-center">
+                        @php
+                           $count=0;
+                        @endphp 
+                        
                           @foreach (auth()->user()->unreadNotifications as $notification)
                             <a href="{{route('markNotificationAsRead',$notification->id)}}">
                               
@@ -216,6 +220,11 @@
                                  <span class="time">{{$notification->data['time']}}</span>
                               </div>
                             </a> 
+                            @php
+                              $count++;
+                              if($count >=5)
+                                 break;
+                            @endphp
                           @endforeach
                        
                           <!-- <a href="#">
