@@ -1,10 +1,10 @@
-@extends('dashboard.layouts.app')
+@extends('dashboard-agent.layouts.app')
 
 @section('title')
 {{ $mobile->name }} Description
 @endsection
 
-@include('dashboard.components.alerts')
+@include('dashboard-agent.components.alerts')
 @section('content')
 <div class="page-inner">
 
@@ -28,7 +28,7 @@
                         @endif
                     
                         <div class="card-body">
-                            <a href="{{route(auth()->user()->getRoleNames()->first() . '.images',$mobile->id)}}">
+                            <a href="{{route('images',$mobile->id)}}">
                                 <button class="fancy-btn btn-view" style="width: 100%;" ><i class="fa fa-eye me-1"></i>See More Pictures<i class="fe fe-arrow-right ml-1"></i></button>
                             </a>
                         </div>
@@ -58,7 +58,7 @@
                                 <li class="list-group-item pb-4"><strong>CONS :</strong>{{$description->cons}}</li>
                             </ul>
                             <div style="padding-left:600px;padding-top:10px">
-                                <a href="{{route(auth()->user()->getRoleNames()->first().'.mobileDescriptions.edit',$description->id) }}">
+                                <a href="{{ route('mobileDescriptions.edit',$description->id) }}">
                                     <button type="button" class="fancy-btn btn-update" >
                                         <i class="fa fa-pen me-1"></i> Update
                                     </button>

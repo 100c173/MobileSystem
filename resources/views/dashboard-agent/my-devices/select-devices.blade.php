@@ -69,15 +69,15 @@
                                                 view
                                             </button>
                                             <div class="dropdown-menu p-2 text-center" style="min-width: 180px; height:150px">
-                                                <a href="">
+                                                <a href="{{route('agent.specification',$mobile->id)}}">
                                                     <button class="fancy-btn btn-view" style="width: 180px;"><i class="fa fa-eye me-1"></i>Mobile Specification</button>
                                                 </a>
                                                 <div style="height: 10px;"></div>
-                                                <a href="">
+                                                <a href="{{route('agent.description',$mobile->id)}}">
                                                     <button class="fancy-btn btn-view" style="width: 180px;"><i class="fa fa-eye me-1"></i>Mobile description </button>
                                                 </a>
                                                 <div style="height: 10px;"></div>
-                                                <a href="">
+                                                <a href="{{route('agent.images',$mobile->id)}}">
                                                     <button class="fancy-btn btn-view" style="width: 180px;"> <i class="fa fa-eye me-1"></i> Mobile images</button>
                                                 </a>
                                             </div>

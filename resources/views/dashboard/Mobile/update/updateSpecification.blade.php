@@ -7,12 +7,7 @@ Mobile
 @include('dashboard.components.alerts')
 @section('content')
 <div class="page-inner">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            {!! Breadcrumbs::render('mobiles.create') !!}
-        </ol>
-    </nav>
-  
+
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
@@ -23,7 +18,7 @@ Mobile
                 </div>
 
                     <div class="card-body text-primary">
-                        <form action="{{route('mobileSpcifications.update',$specification->id)}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{route(auth()->user()->getRoleNames()->first().'.mobileSpcifications.update',$specification->id)}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('put')
 

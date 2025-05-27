@@ -7,6 +7,7 @@ use App\Http\Requests\Mobile\MobileDescriptionRequest;
 use App\Models\Mobile;
 use App\Models\MobileDescription;
 use App\Services\Mobile\MobileDescriptionService;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -29,12 +30,12 @@ class MobileDescriptionController extends Controller
             $data = $this->mobileDescriptionService->description($id);
             $description = $data['description'];
             $mobile = $data['mobile'];
-            return view('dashboard.mobile.display.mobile_description', compact('description','mobile'));
+            return view('dashboard.mobile.display.mobile_description', compact('description', 'mobile'));
         } catch (ModelNotFoundException $e) {
-            try{
+            try {
                 $mobile = $this->mobileDescriptionService->add_description($id);
                 return view('dashboard.mobile.display.mobile_description', compact('mobile'));
-            }catch (ModelNotFoundException $e) {
+            } catch (ModelNotFoundException $e) {
                 abort(404, $e->getMessage());
             }
         } catch (\Exception $e) {
@@ -48,16 +49,15 @@ class MobileDescriptionController extends Controller
      */
     public function create_description($id)
     {
-        try{
+        try {
             $mobile = $this->mobileDescriptionService->create_description($id);
-            return view('dashboard.mobile.create.createDescription',compact('mobile'));
+            return view('dashboard.mobile.create.createDescription', compact('mobile'));
         } catch (ModelNotFoundException $e) {
             abort(404, $e->getMessage());
         } catch (\Exception $e) {
             Log::error('Error showing mobile description: ' . $e->getMessage());
             abort(500);
         }
-      
     }
 
     /**
@@ -67,7 +67,7 @@ class MobileDescriptionController extends Controller
     {
         $mobile = $this->mobileDescriptionService->store($request);
 
-        return redirect()->route('mobiles.index')->with('success','The mobile description was successfully added.');
+        return redirect()->route('mobiles.index')->with('success', 'The mobile description was successfully added.');
     }
 
     /**
@@ -92,8 +92,8 @@ class MobileDescriptionController extends Controller
      */
     public function update(MobileDescriptionRequest $request, $id)
     {
-        $this->mobileDescriptionService->update($request, $id);       
-        return redirect()->route('mobiles.index')->with('success','Mobile description updated');
+        $this->mobileDescriptionService->update($request, $id);
+        return redirect()->route('mobiles.index')->with('success', 'Mobile description updated');
     }
 
     /**

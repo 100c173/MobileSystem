@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/admin/dashboard', function () {
     return view('dashboard.index');
-})->middleware(['auth', 'verified' , 'role:admin'])->name('admin.dashboard');
+})->middleware(['auth', 'verified', 'role:admin'])->name('admin.dashboard');
 
 
 Route::controller(AgentRequestController::class)->prefix('/admin/dashboard/agent-requests')->group(function () {
@@ -46,44 +46,48 @@ Route::controller(UserController::class)->prefix('/admin/dashboard/')->group(fun
         // RESTful resource routes
         Route::resource('users', UserController::class);
     });
-
 });
 
 //Mobile
 Route::controller(MobileController::class)->prefix('/admin/dashboard/')->group(function () {
-    Route::middleware('auth', 'role:admin')->group(function () {
+    Route::middleware('auth', 'role:admin|agent')->group(function () {
 
         Route::resource('mobiles', MobileController::class);
-
     });
 });
 
-//Mobile Specification
-Route::controller(MobileSpecificationController::class)->prefix('/admin/dashboard/')->group(function () {
-    Route::middleware('auth', 'role:admin')->group(function () {
-        route::get('specification/{id}','specification')->name('specification'); 
-        route::get('create_specification/{id}','create_specification')->name('create_specification');         
-        Route::resource('mobileSpcifications', MobileSpecificationController::class);
-    });
-});
+foreach (['admin', 'agent'] as $userType) {
+    // Mobile Specifications
+    Route::controller(MobileSpecificationController::class)
+        ->prefix("$userType/dashboard")
+        ->middleware(['auth', "role:$userType"])
+        ->as("$userType.")
+        ->group(function () {
+            Route::get('specification/{id}', 'specification')->name('specification');
+            Route::get('create_specification/{id}', 'create_specification')->name('create_specification');
+            Route::resource('mobileSpcifications', MobileSpecificationController::class);
+        });
 
-//Mobile Description
-Route::controller(MobileDescriptionController::class)->prefix('/admin/dashboard/')->group(function () {
-    Route::middleware('auth', 'role:admin')->group(function () {
-        route::get('description/{id}','description')->name('description');     
-        route::get('create_description/{id}','create_description')->name('create_description');     
-        Route::resource('mobileDescriptions', MobileDescriptionController::class);
-    });
-});
+    // Mobile Descriptions
+    Route::controller(MobileDescriptionController::class)
+        ->prefix("$userType/dashboard")
+        ->middleware(['auth', "role:$userType"])
+        ->as("$userType.")
+        ->group(function () {
+            Route::get('description/{id}', 'description')->name('description');
+            Route::get('create_description/{id}', 'create_description')->name('create_description');
+            Route::resource('mobileDescriptions', MobileDescriptionController::class);
+        });
 
-//Mobile Images
-Route::controller(MobileImageController::class)->prefix('/admin/dashboard/')->group(function () {
-    Route::middleware('auth', 'role:admin')->group(function () {
-        route::get('images/{id}','images')->name('images');     
-        route::get('unEssential/{id}','make_image_unEssential')->name('make_image_unEssential');     
-        route::get('essential/{imageId}/{mobileId}','make_image_essential')->name('make_image_essential');     
-        Route::resource('mobileImages', MobileImageController::class);
-    });
-});
-
-
+    //  Mobile Images
+    Route::controller(MobileImageController::class)
+        ->prefix("$userType/dashboard")
+        ->middleware(['auth', "role:$userType"])
+        ->as("$userType.")
+        ->group(function () {
+            Route::get('images/{id}', 'images')->name('images');
+            Route::get('unEssential/{id}', 'make_image_unEssential')->name('make_image_unEssential');
+            Route::get('essential/{imageId}/{mobileId}', 'make_image_essential')->name('make_image_essential');
+            Route::resource('mobileImages', MobileImageController::class);
+        });
+}

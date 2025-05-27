@@ -27,6 +27,7 @@ class MobileSpecificationController extends Controller
             $data = $this->mobileSpecificationService->specification($id);
             $specification = $data['specification'];
             $mobile = $data['mobile'];
+           
             return view('dashboard.mobile.display.mobile_specification', compact('specification','mobile'));
         } catch (ModelNotFoundException $e) {
             try{
