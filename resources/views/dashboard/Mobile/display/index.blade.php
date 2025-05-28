@@ -7,11 +7,7 @@ Mobile
 @include('dashboard.components.alerts')
 @section('content')
 <div class="page-inner">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            {!! Breadcrumbs::render('mobiles.index') !!}
-        </ol>
-    </nav>
+
     <div class="col-md-12">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
@@ -20,7 +16,7 @@ Mobile
                     Mobiles control panel
                 </h4>
 
-                <a href="{{ route('mobiles.create') }}" class="fancy-btn btn-success" style="border-radius: 25px;">
+                <a href="{{ route('admin.mobiles.create') }}" class="fancy-btn btn-success" style="border-radius: 25px;">
                     <i class="fas fa-plus"></i> Add mobile
                 </a>
             </div>
@@ -76,21 +72,21 @@ Mobile
                                                 view
                                             </button>
                                             <div class="dropdown-menu p-2 text-center" style="min-width: 180px; height:150px">
-                                                <a href="{{route('specification',$mobile->id)}}">
+                                                <a href="{{route('admin.specification',$mobile->id)}}">
                                                     <button class="fancy-btn btn-view" style="width: 180px;"><i class="fa fa-eye me-1"></i>Mobile Specification</button>
                                                 </a>
                                                 <div style="height: 10px;"></div>
-                                                <a href="{{route('description',$mobile->id)}}">
+                                                <a href="{{route('admin.description',$mobile->id)}}">
                                                     <button class="fancy-btn btn-view" style="width: 180px;"><i class="fa fa-eye me-1"></i>Mobile description </button>
                                                 </a>
                                                 <div style="height: 10px;"></div>
-                                                <a href="{{route('images',$mobile->id)}}">
+                                                <a href="{{route('admin.images',$mobile->id)}}">
                                                     <button class="fancy-btn btn-view" style="width: 180px;"> <i class="fa fa-eye me-1"></i> Mobile images</button>
                                                 </a>
                                             </div>
                                         </div>
 
-                                        <a href="{{route('mobiles.edit',$mobile->id)}}">
+                                        <a href="{{route('admin.mobiles.edit',$mobile->id)}}">
                                             <button type="button" class="fancy-btn btn-update">
                                                 <i class="fa fa-pen me-1"></i> Update
                                             </button>

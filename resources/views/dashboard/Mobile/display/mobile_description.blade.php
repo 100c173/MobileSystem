@@ -9,7 +9,7 @@
 <div class="page-inner">
 
         @if(empty($description))
-            <a href="{{route('create_description',$mobile->id)}}">
+            <a href="{{route('admin.create_description',$mobile->id)}}">
                 <button class="fancy-btn btn-success" style="width: 180px;"><i class="fas fa-plus"></i> Add description</button>
             </a>
         @else

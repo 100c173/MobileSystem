@@ -28,13 +28,13 @@
                             </button>
 
                             @if($image->is_primary)
-                            <a href="{{ route(auth()->user()->getRoleNames()->first().'.make_image_unEssential',$image->id) }}">
+                            <a href="{{ route('admin.make_image_unEssential',$image->id) }}">
                                 <button type="button" class="fancy-btn btn-update ">
                                     <i class="far fa-star"></i> Un essential
                                 </button>
                             </a>
                             @else
-                            <a href="{{ route(auth()->user()->getRoleNames()->first() . '.make_image_essential',[$image->id,$mobile->id]) }}">
+                            <a href="{{ route( 'admin.make_image_essential',[$image->id,$mobile->id]) }}">
                                 <button type="button" class="fancy-btn btn-success ">
                                     <i class="fas fa-star"></i> Essential
                                 </button>

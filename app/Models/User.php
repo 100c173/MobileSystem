@@ -80,5 +80,4 @@ class User extends Authenticatable
     {
         return $this->banned_until ? now()->diffInHours($this->banned_until, false) : null;
     }
-
-
+}
