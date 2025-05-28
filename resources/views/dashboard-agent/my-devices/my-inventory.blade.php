@@ -77,7 +77,7 @@
                                                     <button class="fancy-btn btn-view" style="width: 180px;"><i class="fa fa-eye me-1"></i>Mobile description </button>
                                                 </a>
                                                 <div style="height: 10px;"></div>
-                                                <a href="route('agent.images',$mobile->id)">
+                                                <a href="{{route('agent.images',$mobile->id)}}">
                                                     <button class="fancy-btn btn-view" style="width: 180px;"> <i class="fa fa-eye me-1"></i> Mobile images</button>
                                                 </a>
                                             </div>
