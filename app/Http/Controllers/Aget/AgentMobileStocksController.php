@@ -40,7 +40,7 @@ class AgentMobileStocksController extends Controller
     public function store(AgentMobileStockRequest $request )
     {
         $this->mobilsStockService->saveInMyProducts($request->validated());
-        return to_route('agent.select-devices')->with('success','A mobile add to your stock successfully');
+        return to_route('select-devices')->with('success','A mobile add to your stock successfully');
     }
 
     /**
