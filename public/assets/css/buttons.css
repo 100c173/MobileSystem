@@ -57,4 +57,35 @@
 .fancy-btn:active {
   transform: scale(0.97);
 }
+
+.circle_icon{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #3490dc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 18px;
+}
+.circle_icon_info{
+
+  background-color: #3490dc;
+}
+.circle_icon_pink{
+
+  background-color: #c31394;
+}
+.unread{
+  background-color: hwb(0 97% 9%);
+  font-weight: bold;
+}
  
+.date{
+  position: absolute;
+  padding: 5px;
+  right:10px;
+  font-size: 12px;
+  bottom: 1px;
+}

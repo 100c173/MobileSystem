@@ -20,7 +20,7 @@ class AgentRequestAdminService
         $agent_requests = AgentRequest::where('status', 'pending')->get();
         $unique_addresses = AgentRequest::distinct()->pluck('address')->toArray();
         return [
-            'agent_requests' => $agent_requests,
+            'agent_requests'   => $agent_requests,
             'unique_addresses' => $unique_addresses,
         ];
     }
