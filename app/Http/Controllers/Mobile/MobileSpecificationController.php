@@ -37,7 +37,7 @@ class MobileSpecificationController extends Controller
 
             return $this->viewForRole(
                 'dashboard.mobile.display.mobile_specification',
-                'dashboard-agent.mobile.mobile_specification',
+                'dashboard-agent.mobile.display.mobile_specification',
                 compact('specification', 'mobile')
             );
 
