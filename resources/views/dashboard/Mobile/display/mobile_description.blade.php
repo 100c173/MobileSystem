@@ -58,7 +58,7 @@
                                 <li class="list-group-item pb-4"><strong>CONS :</strong>{{$description->cons}}</li>
                             </ul>
                             <div style="padding-left:600px;padding-top:10px">
-                                <a href="{{'admin.mobileDescriptions.edit',$description->id) }}">
+                                <a href="{{route('admin.mobileDescriptions.edit',$description->id) }}">
                                     <button type="button" class="fancy-btn btn-update" >
                                         <i class="fa fa-pen me-1"></i> Update
                                     </button>
