@@ -10,7 +10,7 @@
 
             <div class="modal-body p-4 bg-light">
             <div class="card-body text-primary">
-                <form action="{{route('mobileImages.store')}}" method="POST" enctype="multipart/form-data">
+                <form action="{{route(auth()->user()->getRoleNames()->first().'.mobileImages.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group" style="display: none;">
                         <label for="exampleInputEmail" >Mobile Id </label>

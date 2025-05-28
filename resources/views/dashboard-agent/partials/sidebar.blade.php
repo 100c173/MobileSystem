@@ -39,14 +39,19 @@
               <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#mobile">
                   <i class="icon-screen-smartphone"></i>
-                  <p>Mobiles</p>
+                  <p>My Devices</p>
                   <span class="caret"></span>
                 </a>
                 <div class="collapse" id="mobile">
                   <ul class="nav nav-collapse">
                     <li>
-                      <a href="">
-                        <span class="sub-item">Add to my products</span>
+                      <a href="{{route('agent.mobiles.index')}}">
+                        <span class="sub-item">Select Devices</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{{route('agent-stocks.index')}}">
+                        <span class="sub-item"> My Inventory</span>
                       </a>
                     </li>
                   </ul>

@@ -1,15 +1,15 @@
-@extends('dashboard.layouts.app')
+@extends('dashboard-agent.layouts.app')
 
 @section('title')
 {{ $mobile->name }} Specification
 @endsection
 
-@include('dashboard.components.alerts')
+@include('dashboard-agent.components.alerts')
 @section('content')
 <div class="page-inner">
 
     @if(empty($specification))
-            <a href="">
+            <a href="{{route('agent.create_specification',$mobile->id)}}">
                 <button class="fancy-btn btn-success" style="width: 180px;"><i class="fas fa-plus"></i> Add specification</button>
             </a>
     @else
@@ -28,7 +28,7 @@
                 @endif
                 
                 <div class="card-body">
-                    <a href="">
+                    <a href="{{route(auth()->user()->getRoleNames()->first() .'.images',$mobile->id)}}">
                         <button class="fancy-btn btn-view" style="width: 100%;" ><i class="fa fa-eye me-1"></i>See More Pictures<i class="fe fe-arrow-right ml-1"></i></button>
                     </a>
                 </div>
@@ -57,7 +57,7 @@
                             <li class="list-group-item pb-4"><strong>ACTION :</strong>{{$specification->security_features}}</li>
                         </ul>
                         <div style="padding-left:600px;padding-top:10px">
-                        <a href="{{ route('admin.mobileSpcifications.edit',$specification->id) }}">
+                        <a href="{{ route(auth()->user()->getRoleNames()->first() .'.mobileSpcifications.edit',$specification->id) }}">
                                 <button type="button" class="fancy-btn btn-update" >
                                     <i class="fa fa-pen me-1"></i> Update
                                 </button>

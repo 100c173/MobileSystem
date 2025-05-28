@@ -9,7 +9,7 @@
                 <p class="mb-3">Are you sure you want to delete?</p>
                 <div class="d-flex justify-content-center gap-3">
                     {{-- Approve --}}
-                    <form action="{{route('mobileImages.destroy',$image->id)}}" method="post" style="display: inline;">
+                    <form action="{{route(auth()->user()->getRoleNames()->first().'.mobileImages.destroy',$image->id)}}" method="post" style="display: inline;">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="fancy-btn btn-delete"> Delete</button>
