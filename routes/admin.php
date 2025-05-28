@@ -45,18 +45,22 @@ Route::controller(UserController::class)->prefix('/admin/dashboard/')->group(fun
 
         // RESTful resource routes
         Route::resource('users', UserController::class);
+
     });
 });
 
-//Mobile
-Route::controller(MobileController::class)->prefix('/admin/dashboard/')->group(function () {
-    Route::middleware('auth', 'role:admin|agent')->group(function () {
 
-        Route::resource('mobiles', MobileController::class);
-    });
-});
 
 foreach (['admin', 'agent'] as $userType) {
+
+    Route::controller(MobileController::class)
+        ->prefix("$userType/dashboard")
+        ->middleware(['auth', "role:$userType"])
+        ->as("$userType.")
+        ->group(function () {
+            Route::resource('mobiles', MobileController::class);
+        });
+
     // Mobile Specifications
     Route::controller(MobileSpecificationController::class)
         ->prefix("$userType/dashboard")

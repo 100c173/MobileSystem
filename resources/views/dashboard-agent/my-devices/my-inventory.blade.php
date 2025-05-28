@@ -13,7 +13,7 @@
                     My Devices
                 </h4>
 
-                <a href="{{ route('mobiles.create') }}" class="fancy-btn btn-success" style="border-radius: 25px;">
+                <a href="{{ route('agent.mobiles.create') }}" class="fancy-btn btn-success" style="border-radius: 25px;">
                     <i class="fas fa-plus"></i> Add mobile
                 </a>
             </div>

@@ -45,7 +45,7 @@
                 <div class="collapse" id="mobile">
                   <ul class="nav nav-collapse">
                     <li>
-                      <a href="{{route('agent.select-devices')}}">
+                      <a href="{{route('agent.mobiles.index')}}">
                         <span class="sub-item">Select Devices</span>
                       </a>
                     </li>

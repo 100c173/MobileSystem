@@ -27,7 +27,7 @@ class MobileSpecificationService
         ];
     }
 
-    public function add_specification($id)
+    public function addSpecification($id)
     {
         $mobile = Mobile::findOrfail($id);
 
@@ -38,7 +38,7 @@ class MobileSpecificationService
         return $mobile;
     }
 
-    public function create_specification($id)
+    public function createSpecification($id)
     {
         $mobile = Mobile::findOrfail($id);
         return $mobile;

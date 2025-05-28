@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.app')
+@extends('dashboard-agent.layouts.app')
 
 @section('title')
 {{ $mobile->name }} Images
@@ -6,14 +6,10 @@
 
 
 @section('content')
-@include('dashboard.components.alerts')
+@include('dashboard-agent.components.alerts')
 <div class="page-inner">
     <div style="display:flex;justify-content:space-between; margin-bottom:10px">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                {!! Breadcrumbs::render('images',$mobile) !!}
-            </ol>
-        </nav>
+
         <button type="button" class="fancy-btn btn-success" data-bs-toggle="modal" data-bs-target="#detailsModalAddImage-{{$mobile->id}}" title="Take Action">
             <i class="fas fa-plus"></i> Add Photo
         </button>
@@ -32,13 +28,13 @@
                             </button>
 
                             @if($image->is_primary)
-                            <a href="{{ route('make_image_unEssential',$image->id) }}">
+                            <a href="{{ route('agent.make_image_unEssential',$image->id) }}">
                                 <button type="button" class="fancy-btn btn-update ">
                                     <i class="far fa-star"></i> Un essential
                                 </button>
                             </a>
                             @else
-                            <a href="{{ route('make_image_essential',[$image->id,$mobile->id]) }}">
+                            <a href="{{ route('agent.make_image_essential',[$image->id,$mobile->id]) }}">
                                 <button type="button" class="fancy-btn btn-success ">
                                     <i class="fas fa-star"></i> Essential
                                 </button>
