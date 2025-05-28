@@ -6,11 +6,12 @@ Users
 @section('content')
 @include('dashboard.components.alerts')
 <div class="page-inner">
-    <nav aria-label="breadcrumb" class="bg-white py-3 px-4 rounded shadow-sm border d-flex align-items-center mb-4">
-        <ol class="breadcrumb mb-0 d-flex flex-wrap align-items-center" style="--bs-breadcrumb-divider: '›';">
-            {!! Breadcrumbs::render('users.index') !!}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+             {!! Breadcrumbs::render('users.index') !!}
         </ol>
     </nav>
+
 
 
     <div class="col-md-12">

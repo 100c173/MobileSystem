@@ -6,8 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\CreateUserRequest;
 use App\Http\Requests\Api\LoginRequest;
 use App\Http\Resources\UserResource;
+use App\Models\User;
+use App\Notifications\NewUserRegisterNotification;
 use App\Services\AuthApiService ;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
+
 
 class AuthController extends Controller
 {
@@ -22,6 +26,10 @@ class AuthController extends Controller
     {
         $data = $request->validated();
         [$user, $token] = $this->authService->register($data);
+
+        $admins = user::role('admin')->get();
+        
+        Notification::send($admins,new NewUserRegisterNotification($user));
 
         return $this->registerResponse(new UserResource($user),$token);
     }
