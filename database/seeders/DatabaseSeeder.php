@@ -3,12 +3,14 @@
 namespace Database\Seeders;
 
 
-use Database\Seeders\AdminSeeder;
-use Database\Seeders\AgentRequestSeeder;
-use Database\Seeders\MobileSeeder;
-use Database\Seeders\CustomSeeder;
-use Database\Seeders\RoleSeeder;
 use Illuminate\Database\Seeder;
+use Database\Seeders\RoleSeeder;
+use Database\Seeders\AdminSeeder;
+use Database\Seeders\AgentSeeder;
+use Database\Seeders\CustomSeeder;
+use Database\Seeders\MobileSeeder;
+use Database\Seeders\PermissionSeeder;
+use Database\Seeders\AgentRequestSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -28,8 +30,10 @@ class DatabaseSeeder extends Seeder
 
 
         $this->call([
+            PermissionSeeder::class,
             RoleSeeder::class,
             AdminSeeder::class,
+            AgentSeeder::class,
             CustomSeeder::class,
             AgentRequestSeeder::class,
             MobileSeeder::class,

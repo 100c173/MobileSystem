@@ -52,11 +52,11 @@ Route::controller(UserController::class)->prefix('/admin/dashboard/')->group(fun
 });
 
 
-//Notification 
+//Notification
 Route::controller(NotificationController::class)->prefix('/admin/dashboard/')->group(function () {
     Route::middleware('auth', 'role:admin')->group(function () {
-        route::post('notification/markAllNotificationAsRead','markAllNotificationAsRead')->name('markAllNotificationAsRead');     
-        route::get('notification/markNotificationAsRead/{id}','markNotificationAsRead')->name('markNotificationAsRead');     
+        route::post('notification/markAllNotificationAsRead','markAllNotificationAsRead')->name('markAllNotificationAsRead');
+        route::get('notification/markNotificationAsRead/{id}','markNotificationAsRead')->name('markNotificationAsRead');
         Route::resource('notification', NotificationController::class);
     });
 });
@@ -70,6 +70,9 @@ foreach (['admin', 'agent'] as $userType) {
         ->as("$userType.")
         ->group(function () {
             Route::resource('mobiles', MobileController::class);
+            Route::get('mobiles_under_review', [MobileController::class,'mobiles_under_review'])->name('mobiles_under_review');
+            Route::get('mobile_accept/{id}', [MobileController::class,'mobile_accept'])->name('mobile_accept');
+            Route::delete('mobile_reject/{id}', [MobileController::class,'mobile_reject'])->name('mobile_reject');
         });
 
     // Mobile Specifications

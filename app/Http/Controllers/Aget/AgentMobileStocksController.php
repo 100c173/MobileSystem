@@ -10,11 +10,11 @@ use Illuminate\Http\Request;
 
 class AgentMobileStocksController extends Controller
 {
-    protected $mobilsStockService ; 
+    protected $mobilsStockService ;
 
     public function __construct(AgentMobileStockService $mobilsStockService)
     {
-        $this->mobilsStockService = $mobilsStockService ; 
+        $this->mobilsStockService = $mobilsStockService ;
     }
 
     /**
@@ -48,7 +48,7 @@ class AgentMobileStocksController extends Controller
      */
     public function show(string $id)
     {
-        
+
     }
 
     /**

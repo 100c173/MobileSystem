@@ -9,6 +9,7 @@ use App\Services\Mobile\MobileDescriptionService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Log;
+use App\Models\Mobile;
 
 class MobileDescriptionController extends Controller
 {
@@ -76,6 +77,8 @@ class MobileDescriptionController extends Controller
     public function edit(int $id)
     {
         $description = MobileDescription::findOrFail($id);
+        $mobile = Mobile::findOrFail($description->mobile_id);
+        $this->authorize('update',$mobile);
         return view($this->resolveViewPath('update.updateDescription'), compact('description'));
     }
 

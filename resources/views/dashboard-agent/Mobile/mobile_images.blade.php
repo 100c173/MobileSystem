@@ -9,10 +9,11 @@
 @include('dashboard-agent.components.alerts')
 <div class="page-inner">
     <div style="display:flex;justify-content:space-between; margin-bottom:10px">
-
+       @can('addImages',$mobile)
         <button type="button" class="fancy-btn btn-success" data-bs-toggle="modal" data-bs-target="#detailsModalAddImage-{{$mobile->id}}" title="Take Action">
             <i class="fas fa-plus"></i> Add Photo
         </button>
+        @endcan
     </div>
     <div class="row">
         @if(!$images->isEmpty())
@@ -23,24 +24,27 @@
                         <div class="card-body">
                             <h2 class="card-title">{{$mobile->name }}</h2>
                             <p class="card-text">{{$image->caption}}</p>
-                            <button type="button" class="fancy-btn btn-delete" data-bs-toggle="modal" data-bs-target="#detailsModalDeleteImage-{{$image->id}}" title="Take Action">
-                                <i class="fa fa-trash me-1"></i> Delete
-                            </button>
-
-                            @if($image->is_primary)
-                            <a href="{{ route('agent.make_image_unEssential',$image->id) }}">
-                                <button type="button" class="fancy-btn btn-update ">
-                                    <i class="far fa-star"></i> Un essential
+                            @can('imageAction',$mobile)
+                                <button type="button" class="fancy-btn btn-delete" data-bs-toggle="modal" data-bs-target="#detailsModalDeleteImage-{{$image->id}}" title="Take Action">
+                                    <i class="fa fa-trash me-1"></i> Delete
                                 </button>
-                            </a>
-                            @else
-                            <a href="{{ route('agent.make_image_essential',[$image->id,$mobile->id]) }}">
-                                <button type="button" class="fancy-btn btn-success ">
-                                    <i class="fas fa-star"></i> Essential
-                                </button>
-                            </a>
 
-                            @endif
+
+                                @if($image->is_primary)
+                                <a href="{{ route('agent.make_image_unEssential',$image->id) }}">
+                                    <button type="button" class="fancy-btn btn-update ">
+                                        <i class="far fa-star"></i> Un essential
+                                    </button>
+                                </a>
+                                @else
+                                <a href="{{ route('agent.make_image_essential',[$image->id,$mobile->id]) }}">
+                                    <button type="button" class="fancy-btn btn-success ">
+                                        <i class="fas fa-star"></i> Essential
+                                    </button>
+                                </a>
+
+                                @endif
+                             @endcan
 
                         </div>
                     </div>
