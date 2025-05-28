@@ -115,8 +115,13 @@
                         <span class="sub-item">Add Mobile</span>
                       </a>
                     </li>
-                  
-                   
+                    <li>
+                      <a href="{{route('admin.mobiles_under_review')}}">
+                        <span class="sub-item">Mobiles Under Review</span>
+                      </a>
+                    </li>
+
+
                   </ul>
                 </div>
               </li>

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 class Mobile extends Model
-{    
+{
     protected $fillable = ['name', 'brand', 'os', 'release_date'];
 
     public function specification(){
@@ -21,6 +21,10 @@ class Mobile extends Model
 
     public function primaryImage(){
         return $this->hasOne(MobileImage::class)->where('is_primary',true);
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 
 

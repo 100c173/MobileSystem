@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('brand');
             $table->string('os');
             $table->date('release_date');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Foreign key linking to 'users' table
+            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->timestamps(); // created_at and updated_at
         });
     }

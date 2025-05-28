@@ -185,7 +185,7 @@
                   aria-expanded="false">
                   <i class="fa fa-bell"></i>
                   @if (auth()->user()->unreadNotifications->count() > 0)
-                     <span class="notification"> {{auth()->user()->unreadNotifications->count()}}</span>                    
+                     <span class="notification"> {{auth()->user()->unreadNotifications->count()}}</span>
                   @endif
                 </a>
                 <ul
@@ -201,15 +201,19 @@
                       <div class="notif-center">
                         @php
                            $count=0;
-                        @endphp 
-                        
+                        @endphp
+
                           @foreach (auth()->user()->unreadNotifications as $notification)
                             <a href="{{route('markNotificationAsRead',$notification->id)}}">
-                              
+
                                 @if($notification->type == 'App\Notifications\NewUserRegisterNotification')
                                    <div class="notif-icon notif-primary">
                                      <i class="fa fa-user-plus"></i>
                                    </div>
+                                @elseif(($notification->type == 'App\Notifications\AddNewMobileNotification'))
+                                    <div class="notif-icon notif-success">
+                                    <i class="fas fa-mobile-alt "></i>
+                                  </div>
                                 @else
                                   <div class="notif-icon notif-danger">
                                     <i class="fa fa-plus"></i>
@@ -219,14 +223,14 @@
                                  <span class="block">  {{$notification->data['message']}} </span>
                                  <span class="time">{{$notification->data['time']}}</span>
                               </div>
-                            </a> 
+                            </a>
                             @php
                               $count++;
                               if($count >=5)
                                  break;
                             @endphp
                           @endforeach
-                       
+
                           <!-- <a href="#">
                             <div class="notif-icon notif-success">
                               <i class="fa fa-comment"></i>
@@ -264,7 +268,7 @@
                     </div>
                   </li>
                   <li>
-                      
+
                   </li>
                   <li><a class="see-all"  href="{{route('notification.index')}}">See all notifications<i class="fa fa-angle-right"></i>
                 </ul>

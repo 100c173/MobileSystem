@@ -12,11 +12,11 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
 
-class AgentRequestService 
+class AgentRequestService
 {
-    
+
     public function store(AgentRequestRequest $request){
-        
+
         $existingRequest = AgentRequest::where('user_id', $request->user()->id)->where('status','pending')->first();
 
         if ($existingRequest) {
@@ -36,13 +36,13 @@ class AgentRequestService
 
         $agentRequest->save();
 
-        
-        $admins = user::role('admin')->get();
+
+        $admins = User::role('admin')->get();
         $user = User::findOrFail($request->user()->id);
-        
+
         Notification::send($admins,new AgentRequestNotification($user));
 
-        return $agentRequest ; 
+        return $agentRequest ;
     }
 
     public function show(Request $request){
@@ -51,7 +51,7 @@ class AgentRequestService
         return $agentRequest;
     }
 
-    
+
     public function showStatus(Request $request)
     {
         $agentRequest = AgentRequest::where('user_id', $request->user()->id)->first();
@@ -92,6 +92,6 @@ class AgentRequestService
         }
 
         $agentRequest->delete();
-     
+
     }
 }

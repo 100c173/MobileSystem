@@ -37,6 +37,18 @@ class MobileController extends Controller
         return view('dashboard-agent.my-devices.select-devices', compact('mobiles', 'my_products'));
     }
 
+    public function mobiles_under_review()
+    {
+        $mobiles = $this->mobileService->mobiles_under_review();
+        $user = Auth::user();
+
+        if ($user->hasRole('admin')) {
+            return view('dashboard.mobile.display.mobiles_under_review', compact('mobiles'));
+        }
+
+        return redirect()->back();
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -99,5 +111,37 @@ class MobileController extends Controller
     {
         $base = Auth::user()->hasRole('admin') ? 'dashboard.mobile' : 'dashboard-agent.mobile';
         return "{$base}.{$path}";
+    }
+
+    public function mobile_accept($id)
+    {
+        try {
+            $this->mobileService->mobile_accept($id);
+            return redirect()->back()->with('success', 'The mobile was successfully added.');
+        } catch (ModelNotFoundException $e) {
+            abort(404, $e->getMessage());
+        } catch (QueryException $e) {
+            Log::error('Unable to add mobile due to DB constraint: ' . $e->getMessage());
+            abort(500, 'Unable to add mobile due to database constraints.');
+        } catch (\Exception $e) {
+            Log::error('General error while adding mobile: ' . $e->getMessage());
+            abort(500);
+        }
+    }
+
+    public function mobile_reject($id)
+    {
+        try {
+            $this->mobileService->mobile_reject($id);
+            return redirect()->back()->with('success', 'The mobile was successfully rejected.');
+        } catch (ModelNotFoundException $e) {
+            abort(404, $e->getMessage());
+        } catch (QueryException $e) {
+            Log::error('Unable to reject mobile due to DB constraint: ' . $e->getMessage());
+            abort(500, 'Unable to reject mobile due to database constraints.');
+        } catch (\Exception $e) {
+            Log::error('General error while rejecting mobile: ' . $e->getMessage());
+            abort(500);
+        }
     }
 }

@@ -1,10 +1,13 @@
-@extends('dashboard-agent.layouts.app')
+@extends('dashboard.layouts.app')
 
-@section('title','Devices')
+@section('title')
+Mobile
+@endsection
 
+@include('dashboard.components.alerts')
 @section('content')
 <div class="page-inner">
-    @include('dashboard-agent.components.alerts')
+
     <div class="col-md-12">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
@@ -13,7 +16,7 @@
                     Mobiles control panel
                 </h4>
 
-                <a href="{{ route('agent.mobiles.create') }}" class="fancy-btn btn-success" style="border-radius: 25px;">
+                <a href="{{ route('admin.mobiles.create') }}" class="fancy-btn btn-success" style="border-radius: 25px;">
                     <i class="fas fa-plus"></i> Add mobile
                 </a>
             </div>
@@ -69,34 +72,36 @@
                                                 view
                                             </button>
                                             <div class="dropdown-menu p-2 text-center" style="min-width: 180px; height:150px">
-                                                <a href="{{route('agent.specification',$mobile->id)}}">
+                                                <a href="{{route('admin.specification',$mobile->id)}}">
                                                     <button class="fancy-btn btn-view" style="width: 180px;"><i class="fa fa-eye me-1"></i>Mobile Specification</button>
                                                 </a>
                                                 <div style="height: 10px;"></div>
-                                                <a href="{{route('agent.description',$mobile->id)}}">
+                                                <a href="{{route('admin.description',$mobile->id)}}">
                                                     <button class="fancy-btn btn-view" style="width: 180px;"><i class="fa fa-eye me-1"></i>Mobile description </button>
                                                 </a>
                                                 <div style="height: 10px;"></div>
-                                                <a href="{{route('agent.images',$mobile->id)}}">
+                                                <a href="{{route('admin.images',$mobile->id)}}">
                                                     <button class="fancy-btn btn-view" style="width: 180px;"> <i class="fa fa-eye me-1"></i> Mobile images</button>
                                                 </a>
                                             </div>
-                                            @if(!in_array($mobile->id,$my_products))
-                                            <!-- Trigger Button -->
-                                            <button type="button" class="fancy-btn btn-success" data-bs-toggle="modal" data-bs-target="#addProductModal{{ $mobile->id }}">
-                                                <i class="fa fa-plus me-1"></i>
-                                                Add to My Products
-                                            </button>
-                                            @else
-                                            <!-- Trigger Button -->
-                                            <button  class="fancy-btn btn-warning">
-                                                 Selected
-                                            </button>
-                                            @endif
                                         </div>
+
+                                        <a href="{{route('admin.mobile_accept',$mobile->id)}}">
+                                            <button type="button" class="fancy-btn btn-update">
+                                                <i class="fa fa-check"></i> Accept
+                                            </button>
+                                        </a>
+
+
+                                        <button type="button" class="fancy-btn btn-delete " data-bs-toggle="modal" data-bs-target="#actionModalMobileReject-{{$mobile->id}}" title="Take Action">
+                                            <i class="fa fa-times"></i> Reject
+                                        </button>
+
                                     </div>
+                                    @include('dashboard.modals.mobile_reject')
                                 </td>
-                                @include('dashboard-agent.modals.add-to-my-products')
+
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

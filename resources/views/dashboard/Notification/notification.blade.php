@@ -9,7 +9,7 @@ Notification
 <div class="page-inner">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            
+
         </ol>
     </nav>
             <div>
@@ -36,12 +36,12 @@ Notification
                             <ul class="list-group">
 
                                 @foreach (auth()->user()->notifications as $notification)
-                             
+
                                     <li class="list-group-item pb-4 {{ is_null($notification->read_at) ? 'unread' : '' }}" style="border-radius:10px;margin-bottom:3px; position:relative">
                                         <div style="position:absolute; top:5px; right:10px">
                                             <button type="submit" style="background:none;border:none;font-weight:bold;font-size:18px;line-height:1;color:#aaa"  data-bs-toggle="modal" data-bs-target="#actionModalNotificationDestroy-{{ $notification->id }}" title="Take Action">&times;</button>
                                         </div>
-                                       
+
 
 
                                         <a href="{{route('markNotificationAsRead',$notification->id)}}">
@@ -66,25 +66,35 @@ Notification
                                                     <p>{{ $notification->data['email']  }}</p>
                                                     <p class="time date">{{ $notification->created_at->diffForHumans() }}</p>
                                                 </div>
+                                            @elseif($notification->type == 'App\Notifications\AddNewMobileNotification')
+                                                <div class="notif-icon notif-danger circle_icon circle_icon_pink">
+                                                    <i class="fas fa-mobile-alt "></i>
+                                                </div>
+                                                <div class="notif-content" style="color:black">
+                                                    <p class="block">{{ $notification->data['message'] }}</p>
+                                                    <p>{{ $notification->data['user_name'] }}</p>
+                                                    <p>{{ $notification->data['email']  }}</p>
+                                                    <p class="time date">{{ $notification->created_at->diffForHumans() }}</p>
+                                                </div>
                                             @endif
                                         </div>
                                 </a>
                             </li>
                             @include('dashboard.modals.notification-destroy')
-                           
+
                         @endforeach
 
-                             
+
                             </ul>
-                        
+
                     </div>
                     </div>
                 </div>
                 <!-- end div2 -->
-            </div>  
+            </div>
             </div>
 
-    
+
 
 </div> <!-- /.page-inner -->
 @endsection

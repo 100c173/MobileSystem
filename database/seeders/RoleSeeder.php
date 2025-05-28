@@ -13,10 +13,23 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        $roles = ['admin', 'custom', 'agent'];
 
-        foreach ($roles as $role) {
-            Role::firstOrCreate(['name' => $role]);
-        }
+
+
+        $admin  = Role::firstOrCreate(['name' => 'admin']);
+        $custom = Role::firstOrCreate(['name' => 'custom']);
+        $agent  = Role::firstOrCreate(['name' => 'agent']);
+
+        // $agent->syncPermissions([
+        //     'add_mobile',
+        //     'edit_own_mobile',
+        //     'delete_own_mobile',
+        // ]);
+
+        // $admin->syncPermissions([
+        //     'add_mobile',
+        //     'edit_any_mobile',
+        //     'delete_any_mobile',
+        // ]);
     }
 }

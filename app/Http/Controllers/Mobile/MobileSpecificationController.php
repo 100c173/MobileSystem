@@ -62,7 +62,7 @@ class MobileSpecificationController extends Controller
     public function createSpecification($id)
     {
         try {
-            $mobile = $this->mobileSpecificationService->createSpecification($id); 
+            $mobile = $this->mobileSpecificationService->createSpecification($id);
 
             return $this->viewForRole(
                 'dashboard.mobile.create.createSpecification',
@@ -104,7 +104,8 @@ class MobileSpecificationController extends Controller
     public function edit($id)
     {
         $specification = MobileSpecification::findOrFail($id);
-
+        $mobile = Mobile::findOrFail($specification->mobile_id);
+        $this->authorize('update',$mobile);
         return $this->viewForRole(
             'dashboard.mobile.update.updateSpecification',
             'dashboard-agent.mobile.update.updateSpecification',
