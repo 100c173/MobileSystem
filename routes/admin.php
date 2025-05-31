@@ -1,13 +1,16 @@
 <?php
 
-use App\Http\Controllers\Aget\AgentRequestController;
-use App\Http\Controllers\Mobile\MobileController;
-use App\Http\Controllers\Mobile\MobileDescriptionController;
-use App\Http\Controllers\Mobile\MobileImageController;
-use App\Http\Controllers\Mobile\MobileSpecificationController;
-use App\Http\Controllers\Notification\NotificationController;
-use App\Http\Controllers\User\UserController;
+use App\Models\Brand;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\Brand\BrandController;
+use App\Http\Controllers\Mobile\MobileController;
+use App\Http\Controllers\Aget\AgentRequestController;
+use App\Http\Controllers\Mobile\MobileImageController;
+use App\Http\Controllers\Os\OperatingSystemController;
+use App\Http\Controllers\Mobile\MobileDescriptionController;
+use App\Http\Controllers\Notification\NotificationController;
+use App\Http\Controllers\Mobile\MobileSpecificationController;
 
 
 
@@ -53,17 +56,35 @@ Route::controller(UserController::class)->prefix('/admin/dashboard/')->group(fun
 
 
 //Notification
-Route::controller(NotificationController::class)->prefix('/admin/dashboard/')->group(function () {
+// Route::controller(NotificationController::class)->prefix('/admin/dashboard/')->group(function () {
+//     Route::middleware('auth', 'role:admin')->group(function () {
+//         route::post('notification/markAllNotificationAsRead','markAllNotificationAsRead')->name('markAllNotificationAsRead');
+//         route::get('notification/markNotificationAsRead/{id}','markNotificationAsRead')->name('markNotificationAsRead');
+//         Route::resource('notification', NotificationController::class);
+//     });
+// });
+
+// Brand
+Route::controller(BrandController::class)->prefix('/admin/dashboard/')->group(function () {
     Route::middleware('auth', 'role:admin')->group(function () {
-        route::post('notification/markAllNotificationAsRead','markAllNotificationAsRead')->name('markAllNotificationAsRead');
-        route::get('notification/markNotificationAsRead/{id}','markNotificationAsRead')->name('markNotificationAsRead');
-        Route::resource('notification', NotificationController::class);
+        Route::resource('brands', BrandController::class);
+        Route::get('mobilesByBrand/{id}', [BrandController::class,'mobilesByBrand'])->name('mobilesByBrand');
+    });
+});
+
+// Operating Systems
+Route::controller(OperatingSystemController::class)->prefix('/admin/dashboard/')->group(function () {
+    Route::middleware('auth', 'role:admin')->group(function () {
+        Route::resource('operatingSystems', OperatingSystemController::class);
+        Route::get('mobilesByOs/{id}', [OperatingSystemController::class,'mobilesByOs'])->name('mobilesByOs');
     });
 });
 
 
+
 foreach (['admin', 'agent'] as $userType) {
 
+    // Mobile
     Route::controller(MobileController::class)
         ->prefix("$userType/dashboard")
         ->middleware(['auth', "role:$userType"])
@@ -74,6 +95,22 @@ foreach (['admin', 'agent'] as $userType) {
             Route::get('mobile_accept/{id}', [MobileController::class,'mobile_accept'])->name('mobile_accept');
             Route::delete('mobile_reject/{id}', [MobileController::class,'mobile_reject'])->name('mobile_reject');
         });
+
+    // Notification
+    Route::controller(NotificationController::class)
+        ->prefix("$userType/dashboard")
+        ->middleware(['auth', "role:$userType"])
+        ->as("$userType.")
+        ->group(function () {
+            Route::controller(NotificationController::class)->prefix('/admin/dashboard/')->group(function () {
+            Route::middleware('auth', 'role:admin')->group(function () {
+            Route::post('notification/markAllNotificationAsRead','markAllNotificationAsRead')->name('markAllNotificationAsRead');
+            Route::get('notification/markNotificationAsRead/{id}','markNotificationAsRead')->name('markNotificationAsRead');
+            Route::resource('notifications', NotificationController::class);
+    });
+});
+        });
+
 
     // Mobile Specifications
     Route::controller(MobileSpecificationController::class)

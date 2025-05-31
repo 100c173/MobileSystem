@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers\Mobile;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Mobile\MobileRequest;
-use App\Models\AgentMobileStock;
+use App\Models\Brand;
 use App\Models\Mobile;
-use App\Services\Mobile\MobileService;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Database\QueryException;
-use Illuminate\Support\Facades\Auth;
+use App\Models\OperatingSystem;
+use App\Models\AgentMobileStock;
 use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Services\Mobile\MobileService;
+use Illuminate\Database\QueryException;
+use App\Http\Requests\Mobile\MobileRequest;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class MobileController extends Controller
 {
@@ -54,7 +56,9 @@ class MobileController extends Controller
      */
     public function create()
     {
-        return view($this->resolveViewPath('create.create'));
+        $brands = Brand::get();
+        $operatingsystems  = OperatingSystem::get();
+        return view($this->resolveViewPath('create.create'),compact('brands','operatingsystems'));
     }
 
     /**

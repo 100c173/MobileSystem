@@ -29,12 +29,12 @@ Mobile
 
                     <div class="form-group">
                         <label for="exampleInputEmail">Mobile brand</label>
-                        <input type="text" class="form-control" id="brand" name="brand" value="{{$mobile->brand}}" placeholder="Enter mobile brand" required>
+                        <input type="text" class="form-control" id="brand_id" name="brand_id" value="{{$mobile->brand_id}}" placeholder="Enter mobile brand" required>
                     </div>
 
                     <div class="form-group">
                         <label for="exampleInputEmail">Operating system </label>
-                        <input type="text" class="form-control" id="os" name="os" value="{{$mobile->os}}" placeholder="Enter mobile Operating system" required>
+                        <input type="text" class="form-control" id="operating_system_id" name="operating_system_id" value="{{$mobile->operating_system_id}}" placeholder="Enter mobile Operating system" required>
                     </div>
 
                     <div class="form-group">
