@@ -69,29 +69,28 @@ class MobileDescriptionService
 
         session(['mobile_step.description' => $data]);
 
-        // حفظ الكل دفعة واحدة
+       
         DB::transaction(function () {
             $base = session('mobile_step.base');
             $spec = session('mobile_step.specification');
             $desc = session('mobile_step.description');
 
-            // حفظ الموبايل
+            
             $mobile = Mobile::create($base);
 
-            // ربط المواصفات والوصف بالموبايل الجديد
+          
             $spec['mobile_id'] = $mobile->id;
             MobileSpecification::create($spec);
 
             $desc['mobile_id'] = $mobile->id;
             MobileDescription::create($desc);
 
-            // إرسال إشعار إذا لم يكن المستخدم أدمن
+        
             if (!User::findOrFail($base['user_id'])->hasRole('admin')) {
                 $admins = User::role('admin')->get();
                 Notification::send($admins, new AddNewMobileNotification(Auth::user()));
             }
 
-            // حذف بيانات الجلسة
             session()->forget([
                 'mobile_step.base',
                 'mobile_step.specification',

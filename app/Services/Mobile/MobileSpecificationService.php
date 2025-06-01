@@ -46,7 +46,7 @@ class MobileSpecificationService
 
     public function store(Request $request)
     {
-        // تخزين بيانات المواصفات مؤقتاً فقط في الجلسة
+      
         $data = [
             'cpu'               => $request->cpu,
             'ram'               => $request->ram,

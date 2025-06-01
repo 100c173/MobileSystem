@@ -63,7 +63,7 @@ class MobileService
     public function store(MobileRequest $request)
     {
         $user = Auth::user();
-        // جمع البيانات المطلوبة
+      
         $data = [
             'name'                 => $request->name,
             'operating_system_id' => $request->operating_system_id,
@@ -75,7 +75,7 @@ class MobileService
         ];
        
 
-        // تخزين البيانات في الجلسة فقط
+     
         session(['mobile_step.base' => $data]);
 
         return $data;
