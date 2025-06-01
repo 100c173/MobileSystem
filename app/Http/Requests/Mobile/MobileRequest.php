@@ -23,9 +23,9 @@ class MobileRequest extends FormRequest
     public function rules(): array
     {
         return [
-             'name' => 'required|string',
-             'brand' => 'required|string',
-             'os' => 'required|string',
+             'name'         => 'required|string',
+             'brand_id'     => 'required',
+             'operating_system_id'        => 'required',
              'release_date' => 'required|date'
         ];
     }

@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('mobiles', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('brand');
-            $table->string('os');
+            $table->foreignId('brand_id')->constrained('brands')->onDelete('cascade'); // Foreign key linking to 'brands' table
+            $table->foreignId('operating_system_id')->constrained('operating_systems')->onDelete('cascade'); // Foreign key linking to 'operating_systems' table
             $table->date('release_date');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Foreign key linking to 'users' table
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Foreign key linking to 'users' table
             $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->timestamps(); // created_at and updated_at
         });

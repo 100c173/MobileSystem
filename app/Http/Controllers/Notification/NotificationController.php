@@ -2,14 +2,21 @@
 
 namespace App\Http\Controllers\Notification;
 
-use App\Http\Controllers\Controller;
 use App\Models\Notification;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class NotificationController extends Controller
 {
     public function index(){
+       $user = Auth::user();
+
+    if ($user->hasRole('admin')) {
         return view('dashboard.Notification.notification');
+    }else{
+         return view('dashboard-agent.Notification.notification');
+    }
     }
 
     public function markAllNotificationAsRead(){
@@ -19,7 +26,7 @@ class NotificationController extends Controller
 
     public function markNotificationAsRead($id){
         $notification = auth()->user()->notifications()->where('id',$id)->first();
-        
+
         if($notification && $notification->unread()){
             $notification->markAsRead();
         }
@@ -30,7 +37,8 @@ class NotificationController extends Controller
     {
         $notification = Notification::findorFail($id);
         $notification->delete();
-        return redirect()->back()->with('success','The notification was successful deleted.');
+        
+        return back()->with('success','The notification was successful deleted.');
     }
 
 }

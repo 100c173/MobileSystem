@@ -7,18 +7,16 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class AddNewMobileNotification extends Notification
+class rejectedMobileNotification extends Notification
 {
     use Queueable;
-    protected $user;
 
 
     /**
      * Create a new notification instance.
      */
-    public function __construct($user)
+    public function __construct()
     {
-         $this->user =$user;
     }
 
     /**
@@ -26,7 +24,7 @@ class AddNewMobileNotification extends Notification
      *
      * @return array<int, string>
      */
-    public function via(object $notifiable): array
+     public function via(object $notifiable): array
     {
         return ['database'];
     }
@@ -37,14 +35,11 @@ class AddNewMobileNotification extends Notification
     public function toDatabase($notifiable)
     {
         return[
-            'message'   => 'New mobile added to pending list',
-            'user_name' => $this->user->name,
-            'user_id'   => $this->user->id,
-            'email'     => $this->user->email,
+            'message'   => 'Your request to add your mobile phone is rejected',
             'time'      => now()->toDayDateTimeString(),
         ];
-
     }
+
     /**
      * Get the array representation of the notification.
      *

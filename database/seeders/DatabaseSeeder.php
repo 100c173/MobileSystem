@@ -7,10 +7,12 @@ use Illuminate\Database\Seeder;
 use Database\Seeders\RoleSeeder;
 use Database\Seeders\AdminSeeder;
 use Database\Seeders\AgentSeeder;
+use Database\Seeders\BrandSeeder;
 use Database\Seeders\CustomSeeder;
 use Database\Seeders\MobileSeeder;
 use Database\Seeders\PermissionSeeder;
 use Database\Seeders\AgentRequestSeeder;
+use Database\Seeders\OperatingSystemSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -36,6 +38,8 @@ class DatabaseSeeder extends Seeder
             AgentSeeder::class,
             CustomSeeder::class,
             AgentRequestSeeder::class,
+            BrandSeeder::class,
+            OperatingSystemSeeder::class,
             MobileSeeder::class,
             MobileSpecificationSeeder::class,
             MobileDescriptionSeeder::class,

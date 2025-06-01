@@ -125,6 +125,40 @@
                   </ul>
                 </div>
               </li>
+              <!-- brand -->
+              <li class="nav-item">
+                <a data-bs-toggle="collapse" href="#brand">
+                  <i class="icon-screen-smartphone"></i>
+                  <p>Brands</p>
+                  <span class="caret"></span>
+                </a>
+                <div class="collapse" id="brand">
+                  <ul class="nav nav-collapse">
+                    <li>
+                      <a href="{{route('brands.index')}}">
+                        <span class="sub-item">Brands</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <!-- Operating System -->
+              <li class="nav-item">
+                <a data-bs-toggle="collapse" href="#os">
+                  <i class="icon-screen-smartphone"></i>
+                  <p>Operating Systems</p>
+                  <span class="caret"></span>
+                </a>
+                <div class="collapse" id="os">
+                  <ul class="nav nav-collapse">
+                    <li>
+                      <a href="{{route('operatingSystems.index')}}">
+                        <span class="sub-item">Operating Systems</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
 
               <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#orders">
@@ -206,7 +240,7 @@
                 <div class="collapse" id="notifications">
                   <ul class="nav nav-collapse">
                     <li>
-                      <a href="{{route('notification.index')}}">
+                      <a href="{{route('admin.notifications.index')}}">
                         <span class="sub-item">Notifications</span>
                       </a>
                     </li>

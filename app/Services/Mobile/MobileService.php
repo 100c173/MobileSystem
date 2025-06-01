@@ -9,11 +9,13 @@ use App\Models\Mobile;
 use App\Models\MobileImage;
 use App\Traits\ManageFiles;
 
-use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Mobile\MobileRequest;
-use App\Notifications\AddNewMobileNotification;
 use Illuminate\Support\Facades\Notification;
+use App\Notifications\AddNewMobileNotification;
+use App\Notifications\acceptedMobileNotification;
+use App\Notifications\rejectedMobileNotification;
 
 class MobileService
 {
@@ -35,6 +37,9 @@ class MobileService
         $mobile = Mobile::findOrfail($id);
         $mobile->status = 'approved';
         $mobile->save();
+
+        $user = $mobile->user;
+        Notification::send($user,new acceptedMobileNotification());
         return true;
     }
 
@@ -46,6 +51,8 @@ class MobileService
             $this->deleteFile($image->image_url);
         }
         $mobile->delete();
+        $user = $mobile->user;
+        Notification::send($user,new rejectedMobileNotification());
         return true;
     }
 
@@ -64,11 +71,11 @@ class MobileService
     {
         $mobile = new Mobile();
 
-        $mobile->name           = $request->name;
-        $mobile->os             = $request->os;
-        $mobile->brand          = $request->brand;
-        $mobile->release_date   = $request->release_date;
-        $mobile->user_id        = Auth::id();
+        $mobile->name                 = $request->name;
+        $mobile->operating_system_id = $request->operating_system_id;
+        $mobile->brand_id             = $request->brand_id ;
+        $mobile->release_date         = $request->release_date;
+        $mobile->user_id              = Auth::id();
         if(auth()->user()->hasRole('admin')){
             $mobile->status        = 'approved';
         }else{
@@ -89,10 +96,11 @@ class MobileService
     {
         $mobile = Mobile::findOrFail($id);
 
-        $mobile->name           = $request->name;
-        $mobile->os             = $request->os;
-        $mobile->brand          = $request->brand;
-        $mobile->release_date   = $request->release_date;
+        $mobile->name                 = $request->name;
+        $mobile->operating_system_id = $request->operating_system_id;
+        $mobile->brand_id             = $request->brand_id ;
+        $mobile->release_date         = $request->release_date;
+        $mobile->user_id              = Auth::id();
 
         $mobile->save();
         return $mobile;

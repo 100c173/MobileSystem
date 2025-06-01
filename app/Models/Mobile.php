@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Mobile extends Model
 {
-    protected $fillable = ['name', 'brand', 'os', 'release_date'];
+
 
     public function specification(){
         return $this->hasOne(MobileSpecification::class);
@@ -26,6 +26,13 @@ class Mobile extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+    public function brand(){
+        return $this->belongsTo(Brand::class);
+    }
+     public function operatingSystem(){
+        return $this->belongsTo(OperatingSystem::class);
+    }
+
 
 
 }
