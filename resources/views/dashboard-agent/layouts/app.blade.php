@@ -207,11 +207,11 @@
                             <a href="{{route('agent.markNotificationAsRead',$notification->id)}}">
 
                                 @if($notification->type == 'App\Notifications\acceptedMobileNotification')
-                                   <div class="notif-icon notif-primary">
-                                     <i class="fa fa-user-plus"></i>
+                                   <div class="notif-icon notif-success bg-success">
+                                    <i class="fas fa-mobile-alt "></i>
                                    </div>
                                 @elseif(($notification->type == 'App\Notifications\rejectedMobileNotification'))
-                                    <div class="notif-icon notif-success">
+                                    <div class="notif-icon notif-danger  bg-danger">
                                     <i class="fas fa-mobile-alt "></i>
                                   </div>
                                 @else

@@ -98,7 +98,7 @@ Mobile
                                         </button>
 
                                     </div>
-                                    @include('dashboard.modals.mobile-destroy')
+                                    @include('dashboard-agent.modals.mobile-destroy')
                                 </td>
 
                                 </td>
