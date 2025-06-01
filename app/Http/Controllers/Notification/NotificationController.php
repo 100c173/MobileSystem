@@ -13,7 +13,7 @@ class NotificationController extends Controller
        $user = Auth::user();
 
     if ($user->hasRole('admin')) {
-            return view('dashboard.Notification.notification');
+        return view('dashboard.Notification.notification');
     }else{
          return view('dashboard-agent.Notification.notification');
     }
@@ -37,7 +37,8 @@ class NotificationController extends Controller
     {
         $notification = Notification::findorFail($id);
         $notification->delete();
-        return redirect()->back()->with('success','The notification was successful deleted.');
+        
+        return back()->with('success','The notification was successful deleted.');
     }
 
 }

@@ -96,20 +96,7 @@ foreach (['admin', 'agent'] as $userType) {
             Route::delete('mobile_reject/{id}', [MobileController::class,'mobile_reject'])->name('mobile_reject');
         });
 
-    // Notification
-    Route::controller(NotificationController::class)
-        ->prefix("$userType/dashboard")
-        ->middleware(['auth', "role:$userType"])
-        ->as("$userType.")
-        ->group(function () {
-            Route::controller(NotificationController::class)->prefix('/admin/dashboard/')->group(function () {
-            Route::middleware('auth', 'role:admin')->group(function () {
-            Route::post('notification/markAllNotificationAsRead','markAllNotificationAsRead')->name('markAllNotificationAsRead');
-            Route::get('notification/markNotificationAsRead/{id}','markNotificationAsRead')->name('markNotificationAsRead');
-            Route::resource('notifications', NotificationController::class);
-    });
-});
-        });
+
 
 
     // Mobile Specifications
@@ -146,3 +133,25 @@ foreach (['admin', 'agent'] as $userType) {
             Route::resource('mobileImages', MobileImageController::class);
         });
 }
+
+// Admin Routes
+Route::prefix('admin/dashboard')
+    ->middleware(['auth', 'role:admin'])
+    ->as('admin.')
+    ->controller(NotificationController::class)
+    ->group(function () {
+        Route::post('notification/markAllNotificationAsRead','markAllNotificationAsRead')->name('markAllNotificationAsRead');
+        Route::get('notification/markNotificationAsRead/{id}','markNotificationAsRead')->name('markNotificationAsRead');
+        Route::resource('notifications', NotificationController::class);
+    });
+
+// Agent Routes
+Route::prefix('agent/dashboard')
+    ->middleware(['auth', 'role:agent'])
+    ->as('agent.')
+    ->controller(NotificationController::class)
+    ->group(function () {
+        Route::post('notification/markAllNotificationAsRead','markAllNotificationAsRead')->name('markAllNotificationAsRead');
+        Route::get('notification/markNotificationAsRead/{id}','markNotificationAsRead')->name('markNotificationAsRead');
+        Route::resource('notifications', NotificationController::class);
+    });

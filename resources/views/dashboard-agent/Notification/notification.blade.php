@@ -23,7 +23,7 @@ Notification
                                 Notification :
                             </h4>
                             @if(auth()->user()->unreadNotifications->isNotEmpty())
-                            <form action="{{route('markAllNotificationAsRead')}}" method="post" style="padding-top:10px" >
+                            <form action="{{route('agent.markAllNotificationAsRead')}}" method="post" style="padding-top:10px" >
                                 @csrf
                                 @method('post')
                                 <button type="submit" class="fancy-btn btn-view" style="width: 95%;">Make all notifications As read</button>
@@ -47,16 +47,16 @@ Notification
                                         <a href="{{route('agent.markNotificationAsRead',$notification->id)}}">
                                         <div class="d-flex" style="gap:15px">
                                             @if($notification->type == 'App\Notifications\acceptedMobileNotification')
-                                                <div class="notif-icon notif-primary circle_icon circle_icon_pink">
-                                                    <i class="fa fa-user-plus"></i>
+                                                <div class="notif-icon notif-primary circle_icon circle_icon bg-success">
+                                                    <i class="fas fa-mobile-alt "></i>
                                                 </div>
                                                 <div class="notif-content" style="color:black">
                                                     <p class="block">{{ $notification->data['message'] }}</p>
                                                     <p class="time date">{{ $notification->created_at->diffForHumans() }}</p>
                                                 </div>
                                             @elseif($notification->type == 'App\Notifications\rejectedMobileNotification')
-                                                <div class="notif-icon notif-danger circle_icon circle_icon_info">
-                                                    <i class="fa fa-user-tag"></i>
+                                                <div class="notif-icon notif-danger circle_icon circle_icon bg-danger">
+                                                    <i class="fas fa-mobile-alt "></i>
                                                 </div>
                                                 <div class="notif-content" style="color:black">
                                                     <p class="block">{{ $notification->data['message'] }}</p>
@@ -66,7 +66,7 @@ Notification
                                         </div>
                                 </a>
                             </li>
-                            @include('../../dashboardmodals.notification-destroy')
+                            @include('dashboard.modals.notification-destroy')
 
                         @endforeach
 
