@@ -60,8 +60,8 @@ Mobile
                                 <td><img style="max-height: 350px; max-width:100%" class="card-img-top w-100" src="{{asset('uploads/defaultImages/default_mobile.webp')}}"></td>
                                 @endif
                                 <td> {{ $mobile->name }}</td>
-                                <td> {{ $mobile->brand }}</td>
-                                <td> {{ $mobile->os }}</td>
+                                <td> {{ $mobile->brand->name }}</td>
+                                <td> {{ $mobile->operatingSystem->name }}</td>
                                 <td> {{ $mobile->release_date}}</td>
 
                                 <td>

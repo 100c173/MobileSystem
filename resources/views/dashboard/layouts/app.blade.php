@@ -204,7 +204,7 @@
                         @endphp
 
                           @foreach (auth()->user()->unreadNotifications as $notification)
-                            <a href="{{route('markNotificationAsRead',$notification->id)}}">
+                            <a href="{{route('admin.markNotificationAsRead',$notification->id)}}">
 
                                 @if($notification->type == 'App\Notifications\NewUserRegisterNotification')
                                    <div class="notif-icon notif-primary">
@@ -270,7 +270,7 @@
                   <li>
 
                   </li>
-                  <li><a class="see-all"  href="{{route('notification.index')}}">See all notifications<i class="fa fa-angle-right"></i>
+                  <li><a class="see-all"  href="{{route('admin.notifications.index')}}">See all notifications<i class="fa fa-angle-right"></i>
                 </ul>
               </li>
               <li class="nav-item topbar-icon dropdown hidden-caret">

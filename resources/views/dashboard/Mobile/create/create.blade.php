@@ -26,15 +26,27 @@ Mobile
                         <input type="text" class="form-control" id="name" name="name" placeholder="Enter mobile name" required>
                     </div>
 
-                    <div class="form-group">
-                        <label for="exampleInputEmail">Mobile brand</label>
-                        <input type="text" class="form-control" id="brand" name="brand" placeholder="Enter mobile brand" required>
-                    </div>
 
-                    <div class="form-group">
-                        <label for="exampleInputEmail">Operating system </label>
-                        <input type="text" class="form-control" id="os" name="os" placeholder="Enter mobile Operating system" required>
-                    </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail" >Mobile brand</label>
+                            <select name="brand_id" id=""  class="form-control" >
+                                <option value="" disabled selected>Select A Brand</option>
+                                @foreach($brands as $brand)
+                                    <option value="{{$brand->id}}">{{$brand->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail" >Operating system </label>
+                            <select name="operating_system_id" id=""  class="form-control" >
+                                <option value="" disabled selected>Select A Brand</option>
+                                @foreach($operatingsystems as $operatingsystem)
+                                    <option value="{{$operatingsystem->id}}">{{$operatingsystem->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
 
                     <div class="form-group">
                         <label for="exampleInputEmail">Release date </label>
