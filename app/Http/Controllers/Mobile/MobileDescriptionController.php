@@ -68,7 +68,7 @@ class MobileDescriptionController extends Controller
         $this->mobileDescriptionService->store($request);
 
         $route = Auth::user()->hasRole('admin') ? 'admin.mobiles.index' : 'agent.mobiles.index';
-        return redirect()->route($route)->with('success', 'The mobile description was successfully added.');
+        return redirect()->route($route)->with('success', 'Mobile was successfully added.');
     }
 
     /**

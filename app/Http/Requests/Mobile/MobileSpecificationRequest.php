@@ -23,7 +23,6 @@ class MobileSpecificationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'mobile_id' => 'required|exists:mobiles,id',
             'cpu' => 'required|string|max:255',
             'ram' => 'required|string|max:255',
             'storage' => 'required|string|max:255',

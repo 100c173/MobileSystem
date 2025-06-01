@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Mobile extends Model
 {
 
+    protected $fillable = ['name', 'brand', 'os', 'status', 'user_id' ,'release_date'];
+
 
     public function specification(){
         return $this->hasOne(MobileSpecification::class);

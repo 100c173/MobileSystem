@@ -13,18 +13,13 @@ Mobile
             <div class="card-header">
                 <h4 class="card-title m-0 d-flex align-items-center">
                     <i class="fas fa-mobile-alt me-2"></i>
-                    Add {{ $mobile->name }} Description
+                    Add Mobile Description
                 </h4>
             </div>
 
             <div class="card-body text-primary">
                 <form action="{{route('admin.mobileDescriptions.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
-
-
-                    <div class="form-group">
-                        <input type="hidden" class="form-control" id="mobile_id" name="mobile_id" value="{{ $mobile->id }}" required>
-                    </div>
 
                     <div class="form-group">
                         <label for="exampleInputEmail">Mobile design dimensions</label>
