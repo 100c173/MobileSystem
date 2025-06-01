@@ -66,7 +66,7 @@ Notification
                                         </div>
                                 </a>
                             </li>
-                            @include('dashboard.modals.notification-destroy')
+                            @include('dashboard-agent.modals.notification-destroy')
 
                         @endforeach
 
