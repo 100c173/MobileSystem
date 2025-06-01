@@ -23,7 +23,6 @@ class MobileDescriptionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'mobile_id'           => 'required|exists:mobiles,id',
             'design_dimensions'   => 'required|string',
             'display'             => 'required|string',
             'performance_cpu'     => 'required|string',

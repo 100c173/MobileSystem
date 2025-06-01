@@ -82,8 +82,6 @@ class MobileSpecificationController extends Controller
     {
         $this->mobileSpecificationService->store($request);
 
-        $mobile = Mobile::findOrFail($request->mobile_id);
-
         $successMessage = 'Mobile specification was added successfully.';
 
         // إذا لم تكن هناك description موجودة، انتقل لإضافة الوصف
@@ -91,7 +89,6 @@ class MobileSpecificationController extends Controller
             return $this->viewForRole(
                 'dashboard.mobile.create.createDescription',
                 'dashboard-agent.mobile.create.createDescription',
-                compact('mobile')
             )->with('success', $successMessage);
         }
 

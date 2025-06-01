@@ -14,7 +14,7 @@ class MobileSpecificationService
      */
     public function specification($id)
     {
-        $specification = MobileSpecification::where('mobile_id',$id)->first();
+        $specification = MobileSpecification::where('mobile_id', $id)->first();
         $mobile = Mobile::findOrfail($id);
 
         if (!$specification) {
@@ -46,26 +46,24 @@ class MobileSpecificationService
 
     public function store(Request $request)
     {
-        $mobileSpecification = new MobileSpecification();
-    
-        $mobileSpecification->mobile_id             =   $request->mobile_id;
-        $mobileSpecification->cpu                   =   $request->cpu;
-        $mobileSpecification->ram                   =   $request->ram;
-        $mobileSpecification->storage               =   $request->storage;
-        $mobileSpecification->camera                =   $request->camera;
-        $mobileSpecification->screen                =   $request->screen;
-        $mobileSpecification->battery               =   $request->battery;
-        $mobileSpecification->connectivity          =   $request->connectivity;
-        $mobileSpecification->security_features     =   $request->security_features;
-            
-        $mobileSpecification->save();
-        return $mobileSpecification;
-
+        // تخزين بيانات المواصفات مؤقتاً فقط في الجلسة
+        $data = [
+            'cpu'               => $request->cpu,
+            'ram'               => $request->ram,
+            'storage'           => $request->storage,
+            'camera'            => $request->camera,
+            'screen'            => $request->screen,
+            'battery'           => $request->battery,
+            'connectivity'      => $request->connectivity,
+            'security_features' => $request->security_features,
+        ];
+         session(['mobile_step.specification' => $data]);
+        return $data ;
     }
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
         $mobileSpecification = MobileSpecification::findorfail($id);
-    
+
         $mobileSpecification->mobile_id             =   $request->mobile_id;
         $mobileSpecification->cpu                   =   $request->cpu;
         $mobileSpecification->ram                   =   $request->ram;
@@ -75,11 +73,8 @@ class MobileSpecificationService
         $mobileSpecification->battery               =   $request->battery;
         $mobileSpecification->connectivity          =   $request->connectivity;
         $mobileSpecification->security_features     =   $request->security_features;
-            
+
         $mobileSpecification->save();
         return $mobileSpecification;
-
     }
-
-
 }
