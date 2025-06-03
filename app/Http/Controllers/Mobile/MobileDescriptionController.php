@@ -88,7 +88,8 @@ class MobileDescriptionController extends Controller
     public function update(MobileDescriptionRequest $request, int $id)
     {
         $this->mobileDescriptionService->update($request, $id);
-        return redirect()->route('mobiles.index')->with('success', 'Mobile description updated');
+         $route = Auth::user()->hasRole('admin') ? 'admin.mobiles.index' : 'agent.mobiles.index';
+        return redirect()->route($route)->with('success', 'Mobile description updated');
     }
 
     /**

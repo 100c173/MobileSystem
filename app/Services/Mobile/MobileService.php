@@ -75,8 +75,7 @@ class MobileService
         $data = [
             'name'                 => $request->name,
             'operating_system_id' => $request->operating_system_id,
-            'brand'                => $request->brand,
-            'os'                => $request->os,
+            'brand_id'                => $request->brand_id,
             'release_date'         => $request->release_date,
             'user_id'              => $user->id,
             'status'               => $user->hasRole('admin') ? 'approved' : 'pending',

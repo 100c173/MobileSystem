@@ -113,7 +113,8 @@ class MobileSpecificationController extends Controller
     public function update(MobileSpecificationRequest $request, $id)
     {
         $this->mobileSpecificationService->update($request, $id);
-        return redirect()->route('mobiles.index')->with('success', 'Mobile specification updated successfully.');
+        $route = Auth::user()->hasRole('admin') ? 'admin.mobiles.index' : 'agent.mobiles.index';
+        return redirect()->route($route)->with('success', 'Mobile specification updated successfully.');
     }
 
     public function destroy(string $id)

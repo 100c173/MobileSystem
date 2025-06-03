@@ -6,7 +6,7 @@ use App\Http\Requests\Mobile\MobileDescriptionRequest;
 use App\Models\Mobile;
 use App\Models\MobileDescription;
 use App\Models\MobileSpecification;
-use App\Models\Notification;
+use Illuminate\Support\Facades\Notification;
 use App\Models\User;
 use App\Notifications\AddNewMobileNotification;
 use Illuminate\Database\Eloquent\ModelNotFoundException;

@@ -28,7 +28,7 @@
                 @endif
                 
                 <div class="card-body">
-                    <a href="">
+                    <a href="{{route('admin.images',$mobile->id)}}">
                         <button class="fancy-btn btn-view" style="width: 100%;" ><i class="fa fa-eye me-1"></i>See More Pictures<i class="fe fe-arrow-right ml-1"></i></button>
                     </a>
                 </div>
@@ -44,8 +44,8 @@
                 <div class="card-body">
                     <div style="padding-left: 20px;">
                         <ul class="list-group">
-                            <li class="list-group-item pb-4 "><strong>BRAND :</strong>{{$mobile->brand}}</li>
-                            <li class="list-group-item pb-4"><strong>OS :</strong>{{$mobile->os}}</li>
+                            <li class="list-group-item pb-4 "><strong>BRAND :</strong>{{$mobile->brand->name}}</li>
+                            <li class="list-group-item pb-4"><strong>OS :</strong>{{$mobile->operatingSystem->name}}</li>
                             <li class="list-group-item pb-4"><strong>CPU :</strong>{{$specification->cpu}}</li>
                             <li class="list-group-item pb-4"><strong>RAM :</strong>{{$specification->ram}}</li>
                             <li class="list-group-item pb-4"><strong>STORAGE :</strong>{{$specification->storage}}</li>

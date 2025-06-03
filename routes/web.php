@@ -22,4 +22,5 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 require __DIR__.'/admin.php';
 require __DIR__.'/agent.php';
+require __DIR__.'/admin-agent.php';
 
