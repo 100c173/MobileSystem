@@ -1,0 +1,710 @@
+/* style.css */
+
+/* Basic Reset and General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+a {
+    text-decoration: none;
+    color: #007bff;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #0056b3;
+}
+
+.button {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+h1,
+h2,
+h3 {
+    color: #222;
+    margin-bottom: 15px;
+}
+
+/* Header Styles */
+header {
+    background-color: white;
+    padding: 20px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo img {
+    height: 40px;
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+header nav ul li {
+    margin-left: 20px;
+    position: relative;
+}
+
+header nav ul li:first-child {
+    margin-left: 0;
+}
+
+header nav ul li a {
+    display: block;
+    padding: 10px 15px;
+    color: #333;
+}
+
+header nav ul li a.active {
+    color: #007bff;
+    font-weight: bold;
+}
+
+/* Dropdown Menu */
+header nav ul li .dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-top: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 10px 0;
+    display: none;
+    min-width: 180px;
+    z-index: 1;
+}
+
+header nav ul li:hover .dropdown {
+    display: block;
+}
+
+header nav ul li .dropdown li {
+    margin: 0;
+}
+
+header nav ul li .dropdown li a {
+    padding: 10px 20px;
+    color: #333;
+}
+
+header nav ul li .dropdown li:hover a {
+    background-color: #f9f9f9;
+    color: #007bff;
+}
+
+/* Submenu */
+header nav ul li .submenu {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 10px 0;
+    display: none;
+    min-width: 180px;
+    z-index: 2;
+}
+
+header nav ul li .dropdown li:hover .submenu {
+    display: block;
+}
+
+header nav ul li .submenu li {
+    margin: 0;
+}
+
+header nav ul li .submenu li a {
+    padding: 10px 20px;
+    color: #333;
+}
+
+header nav ul li .submenu li:hover a {
+    background-color: #f9f9f9;
+    color: #007bff;
+}
+
+/* Header Icons */
+header .header-icons {
+    display: flex;
+    align-items: center;
+}
+
+header .search-bar {
+    display: flex;
+    margin-right: 20px;
+}
+
+header .search-bar input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+}
+
+header .search-bar button {
+    background-color: #eee;
+    color: #333;
+    border: 1px solid #ccc;
+    border-left: none;
+    padding: 10px 15px;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+header .search-bar button:hover {
+    background-color: #ddd;
+}
+
+header .header-icons a {
+    margin-left: 15px;
+    font-size: 20px;
+    color: #555;
+    position: relative;
+}
+
+header .header-icons a:hover {
+    color: #007bff;
+}
+
+header .header-icons .cart {
+    position: relative;
+}
+
+header .header-icons .cart .cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #ff6f61;
+    color: white;
+    border-radius: 50%;
+    padding: 4px 6px;
+    font-size: 12px;
+}
+
+/* Hero Section Styles */
+.hero {
+    padding: 80px 0;
+    background-color: #f9f9f9;
+}
+
+.hero .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hero-content {
+    flex: 1;
+    padding-right: 40px;
+}
+
+.hero-content h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.hero-image {
+    flex: 1;
+    text-align: center;
+}
+
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Featured Categories Styles */
+.featured-categories {
+    padding: 60px 0;
+}
+
+.featured-categories h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2em;
+}
+
+.featured-categories .category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.featured-categories .category-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.featured-categories .category-item:hover {
+    transform: translateY(-5px);
+}
+
+.featured-categories .category-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.featured-categories .category-item h3 {
+    padding: 15px;
+    text-align: center;
+    font-size: 1.2em;
+    color: #333;
+    margin-bottom: 0;
+}
+
+
+/* New Arrivals and Best Sellers Styles  */
+.new-arrivals,
+.best-sellers {
+    padding: 60px 0;
+    background-color: #fff;
+}
+
+.new-arrivals h2,
+.best-sellers h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2em;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    /* احتفاظ بالحد الأدنى للعرض */
+    gap: 30px;
+}
+
+/* لتحديد عدد الأعمدة على الأقل (4 في هذه الحالة) */
+@media (min-width: 900px) {
+
+    /* يمكنك تعديل هذا العرض حسب الحاجة */
+    .product-grid {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        /* تقليل الحد الأدنى للعرض للسماح بـ 4 */
+    }
+}
+
+.product-item {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* ظل أكثر بروزًا */
+    transition: transform 0.2s ease-in-out;
+    /* انتقال أكثر سلاسة */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    /* لترتيب العناصر عموديًا */
+}
+
+.product-item:hover {
+    transform: scale(1.03);
+    /* تأثير تكبير طفيف عند التhover */
+}
+
+.product-item .image-container {
+    position: relative;
+    /* لتمكين تحديد موضع الأيقونات لاحقًا إذا لزم الأمر */
+    overflow: hidden;
+    /* لمنع تجاوز الصورة للحاوية */
+}
+
+.product-item .image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-bottom: 1px solid #eee;
+}
+
+.product-item h3 {
+    font-size: 1.1em;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    padding: 0 15px;
+    color: #333;
+}
+
+.product-item .price {
+    color: #ff6f61;
+    /* لون أكثر حماسًا للسعر */
+    font-weight: bold;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.product-item .product-actions {
+    display: flex;
+    justify-content: center;
+    /* توسيط الأيقونات والأزرار */
+    align-items: center;
+    padding: 15px;
+    gap: 10px;
+    /* مسافة بين الأيقونات والأزرار */
+}
+
+.product-item .action-icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+    color: #555;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 16px;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.product-item .action-icon:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.product-item .view-button {
+    padding: 10px 20px;
+    font-size: 0.9em;
+    border-radius: 5px;
+}
+
+.view-all {
+    text-align: center;
+    margin-top: 30px;
+}
+
+
+/* Brands Section Styles */
+.brands {
+    padding: 50px 0;
+    background-color: #f9f9f9;
+}
+
+.brands h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2em;
+}
+
+.brands .brand-grid {
+    display: grid;
+    /* استخدام Grid بدلاً من Flexbox */
+    grid-template-columns: repeat(4, 1fr);
+    /* 4 أعمدة متساوية العرض */
+    justify-items: center;
+    /* توسيط العناصر داخل الخلايا */
+    align-items: center;
+    /* توسيط العناصر عمودياً */
+    gap: 30px;
+}
+
+/* تعديل لاستيعاب 4 أعمدة في الشاشات الأصغر إذا لزم الأمر */
+@media (max-width: 992px) {
+    .brands .brand-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        /* مرونة أكثر للشاشات الأصغر */
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .brands .brand-grid {
+        grid-template-columns: repeat(2, 1fr);
+        /* عمودين على الشاشات الصغيرة جداً */
+    }
+}
+
+.brands .brand-grid a {
+    display: block;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+    text-align: center;
+    /* للتأكد من توسيط الصور داخل الروابط */
+}
+
+.brands .brand-grid a:hover {
+    opacity: 1;
+}
+
+.brands .brand-grid img {
+    height: 60px;
+    /* زيادة حجم شعارات العلامات التجارية */
+    max-width: 100%;
+    object-fit: contain;
+    /* للتأكد من احتواء الصورة بالكامل */
+}
+
+.brands .view-all-brands {
+    text-align: center;
+    margin-top: 40px;
+    /* مسافة أعلى لزر عرض الكل */
+}
+
+/* Special Offers Section Styles */
+.special-offers {
+    padding: 60px 0;
+    background-color: #fff;
+}
+
+.special-offers .offer-banner {
+    background-color: #ffe0b2;
+    padding: 40px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.special-offers .offer-content {
+    flex: 1;
+    padding-right: 30px;
+}
+
+.special-offers .offer-content h2 {
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.special-offers .offer-content p {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.special-offers .offer-image {
+    flex: 1;
+    text-align: center;
+}
+
+.special-offers .offer-image img {
+    max-width: 80%;
+    height: auto;
+}
+
+/* Why Choose Us Section Styles */
+.why-choose-us {
+    padding: 60px 0;
+    background-color: #f4f4f4;
+}
+
+.why-choose-us h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2em;
+}
+
+.why-choose-us .reasons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.why-choose-us .reason {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.why-choose-us .reason i {
+    font-size: 2.5em;
+    color: #007bff;
+    margin-bottom: 15px;
+}
+
+.why-choose-us .reason h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.why-choose-us .reason p {
+    color: #555;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 40px 0;
+}
+
+footer .container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+footer .footer-links {
+    display: flex;
+    justify-content: space-around;
+    width: 70%;
+    margin-bottom: 30px;
+}
+
+footer .footer-col {
+    flex: 1;
+    margin-right: 20px;
+}
+
+footer .footer-col:last-child {
+    margin-right: 0;
+}
+
+footer h3 {
+    color: white;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+footer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+footer ul li {
+    margin-bottom: 8px;
+}
+
+footer ul li a {
+    color: #ddd;
+    transition: color 0.3s ease;
+}
+
+footer ul li a:hover {
+    color: white;
+}
+
+footer .social-icons a {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 20px;
+    color: #ddd;
+    transition: color 0.3s ease;
+}
+
+footer .social-icons a:hover {
+    color: white;
+}
+
+footer .footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid #555;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer .footer-bottom p {
+    margin: 0;
+    font-size: 0.9em;
+}
+
+footer .payment-icons i {
+    font-size: 24px;
+    margin-left: 10px;
+    color: #ddd;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    header .container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    header .logo {
+        margin-bottom: 15px;
+    }
+
+    header nav {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    header nav ul {
+        flex-direction: column;
+    }
+
+    header nav ul li {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+
+    header nav ul li .dropdown,
+    header nav ul li .submenu {
+        position: static;
+        border: 1px solid #ddd;
+        box-shadow: none;
+        display: none;
+        /* Hide dropdown and submenu by default on smaller screens */
+        width: 100%;
+    }
+
+    header nav ul li:hover .dropdown,
+    header nav ul li .dropdown li:hover .submenu {
+        display: block;
+    }
+
+    header .header-icons {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+
+
+}
