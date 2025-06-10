@@ -21,10 +21,15 @@ Mobile
             <div class="card-body text-primary">
                 <form action="{{route('admin.mobileSpcifications.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    
+
                     <div class="form-group">
                         <label for="exampleInputEmail">Mobile cpu</label>
                         <input type="text" class="form-control" id="cpu" name="cpu" placeholder="Enter mobile cpu" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail">Mobile gpu</label>
+                        <input type="text" class="form-control" id="gpu" name="gpu" placeholder="Enter mobile gpu" required>
                     </div>
 
                     <div class="form-group">
@@ -32,10 +37,14 @@ Mobile
                         <input type="text" class="form-control" id="ram" name="ram" placeholder="Enter mobile ram" required>
                     </div>
 
-                    <div class="form-group">
-                        <label for="exampleInputEmail">Mobile storage</label>
-                        <input type="text" class="form-control" id="storage" name="storage" placeholder="Enter mobile storage" required>
+                    <div class="form-group" id="storage-group">
+                        <label>Mobile Storage</label>
+                        <input type="text" class="form-control mb-2" name="storage[]" placeholder="e.g. 128GB">
                     </div>
+
+                    <button type="button" class="btn btn-outline-primary btn-sm" onclick="addStorageField()">
+                        <i class="fas fa-plus-circle"></i> Add another
+                    </button>
 
                     <div class="form-group">
                         <label for="exampleInputEmail">Mobile camera</label>
@@ -95,5 +104,17 @@ Mobile
             });
         });
     });
+
+
+    function addStorageField() {
+        const group = document.getElementById('storage-group');
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.name = 'storage[]';
+        input.className = 'form-control mb-2';
+        input.placeholder = 'e.g. 256GB';
+        group.appendChild(input);
+    }
 </script>
+
 @endpush

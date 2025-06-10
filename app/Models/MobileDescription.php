@@ -20,6 +20,11 @@ class MobileDescription extends Model
         'pros',
         'cons',
     ];
+
+    protected $casts = [
+        'display' => 'array' , 
+    ]; 
+
     public function mobile(){
         return $this->belongsTo(Mobile::class);
     }    

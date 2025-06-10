@@ -49,6 +49,7 @@ class MobileSpecificationService
       
         $data = [
             'cpu'               => $request->cpu,
+            'gpu'               => $request->gpu,
             'ram'               => $request->ram,
             'storage'           => $request->storage,
             'camera'            => $request->camera,
@@ -57,7 +58,7 @@ class MobileSpecificationService
             'connectivity'      => $request->connectivity,
             'security_features' => $request->security_features,
         ];
-         session(['mobile_step.specification' => $data]);
+        session(['mobile_step.specification' => $data]);
         return $data ;
     }
     public function update(Request $request, $id)
@@ -66,6 +67,7 @@ class MobileSpecificationService
 
         $mobileSpecification->mobile_id             =   $request->mobile_id;
         $mobileSpecification->cpu                   =   $request->cpu;
+        $mobileSpecification->gpu                   =   $request->gpu;
         $mobileSpecification->ram                   =   $request->ram;
         $mobileSpecification->storage               =   $request->storage;
         $mobileSpecification->camera                =   $request->camera;

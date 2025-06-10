@@ -27,9 +27,23 @@ Mobile
                     </div>
 
                     <div class="form-group">
-                        <label for="exampleInputEmail">Mobile display</label>
-                        <input type="text" class="form-control" id="display" name="display" placeholder="Enter mobile display" required>
+                        <label>Display</label>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" name="display[type]" placeholder="Type" required>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" name="display[size]" placeholder="Size" required>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" name="display[resolution]" placeholder="Resolution" required>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" name="display[refresh_rate]" placeholder="Refresh Rate" required>
+                            </div>
+                        </div>
                     </div>
+
 
                     <div class="form-group">
                         <label for="exampleInputEmail">Mobile performance cpu</label>

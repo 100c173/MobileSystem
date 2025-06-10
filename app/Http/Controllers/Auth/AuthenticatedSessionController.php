@@ -34,7 +34,7 @@ class AuthenticatedSessionController extends Controller
             return redirect()->intended('/agent/dashboard');
         }
 
-        return redirect()->intended('/');
+        return redirect()->intended('/home');
     }
 
     public function destroy(Request $request): RedirectResponse

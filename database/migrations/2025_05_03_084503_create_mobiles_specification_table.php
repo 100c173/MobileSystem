@@ -16,8 +16,9 @@ return new class extends Migration
 
             $table->foreignId('mobile_id')->constrained()->onDelete('cascade'); // Foreign key linking to 'mobiles' table
             $table->string('cpu');                // Type of processor (CPU)
+            $table->string('gpu');                // Type of processor (GPU)
             $table->string('ram');                // Amount of RAM
-            $table->string('storage');            // Internal storage capacity
+            $table->json('storage')->nullable();  // Internal storage capacity
             $table->string('camera');             // Camera specifications
             $table->string('screen');             // Screen type and resolution
             $table->string('battery');            // Battery capacity and type

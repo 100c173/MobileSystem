@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('mobile_id') ->constrained()->onDelete('cascade'); // Foreign key linking to 'mobiles' table
 
             $table->text('design_dimensions');   // Detailed info about the design and physical dimensions
-            $table->text('display');             // Description of screen type, size, resolution, and quality
+            $table->json('display')->nullable(); // Description of screen type, size, resolution, and quality
 
             $table->text('performance_cpu');     // Explanation of processor performance and hardware capabilities
             $table->text('storage_desc');        // Description of storage options and expandability
