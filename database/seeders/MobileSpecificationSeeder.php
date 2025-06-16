@@ -12,6 +12,7 @@ class MobileSpecificationSeeder extends Seeder
         $specifications = [
             // Sample specification for a flagship phone
             [
+
                 'mobile_id' => 1, // Assuming this links to a mobile in your 'mobiles' table
                 'cpu' => 'Snapdragon 8 Gen 3',
                 'gpu' => 'Adreno 750',
@@ -53,10 +54,12 @@ class MobileSpecificationSeeder extends Seeder
                 ]),
                 'created_at' => now(),
                 'updated_at' => now()
+
             ],
-            
+
             // Sample specification for a mid-range phone
             [
+
                 'mobile_id' => 2,
                 'cpu' => 'Dimensity 7200',
                 'gpu' => 'Mali-G610 MC4',
@@ -96,8 +99,9 @@ class MobileSpecificationSeeder extends Seeder
                 ]),
                 'created_at' => now(),
                 'updated_at' => now()
+
             ],
-            
+
             // Sample specification for an entry-level phone
             [
                 'mobile_id' => 3,
@@ -140,7 +144,6 @@ class MobileSpecificationSeeder extends Seeder
                 'updated_at' => now()
             ]
         ];
-
         DB::table('mobile_specification')->insert($specifications);
     }
 }

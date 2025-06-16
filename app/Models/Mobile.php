@@ -57,4 +57,11 @@ class Mobile extends Model
     {
         return Carbon::parse($this->release_date)->format('F j, Y');
     }
+
+    public function agentMobileStock()
+    {
+        return $this->hasMany(AgentMobileStock::class);
+    }
+
+
 }

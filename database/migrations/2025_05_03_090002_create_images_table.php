@@ -11,7 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
+<<<<<<< HEAD:database/migrations/2025_05_03_090002_create_images_table.php
         Schema::create('images', function (Blueprint $table) {
+=======
+        
+        Schema::create('mobile_images', function (Blueprint $table) {
+>>>>>>> Zeina:database/migrations/2025_05_03_090002_create_mobile_images_table.php
             $table->id(); // Primary key
 
 

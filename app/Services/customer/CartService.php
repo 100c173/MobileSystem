@@ -2,6 +2,7 @@
 
 namespace App\Services\customer;
 
+use App\Models\AgentMobileStock;
 use App\Models\CartItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,16 +17,13 @@ class CartService
 
     public function storeProduct(int $id)
     {
-        $exists = CartItem::where('user_id', Auth::user()->id)
-            ->where('product_id', $id)
-            ->exists();
 
-        if ($exists) {
-            throw new \Exception('The product is already in the cart');
-        }
+        $stock = AgentMobileStock::findOrFail($id);
+
         CartItem::create([
-            'user_id' => Auth::id(),
+            'user_id'    => Auth::id(),
             'product_id' => $id,
+            'agent_id'   =>  $stock->user_id,
         ]);
     }
 
