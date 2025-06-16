@@ -67,8 +67,11 @@ class MobileController extends Controller
     public function store(MobileRequest $request)
     {
         $mobile = $this->mobileService->store($request);
-        return view($this->resolveViewPath('create.createSpecification'), compact('mobile'))
-            ->with('success', 'The mobile was successfully added.');
+        
+        if(Auth::user()->hasRole('admin'))
+            return redirect()->route('admin.mobileSpcifications.create');
+        else 
+            return redirect()->route('agent.mobileSpcifications.create');
     }
 
     /**

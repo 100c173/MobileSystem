@@ -2,146 +2,145 @@
 
 namespace Database\Seeders;
 
-use App\Models\Mobile;
-use App\Models\MobileSpecification;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class MobileSpecificationSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        
-        $iphone15Pro = Mobile::where('name', 'iPhone 15 Pro')->first();
-        $samsungS24Ultra = Mobile::where('name', 'Samsung Galaxy S24 Ultra')->first();
-        $xiaomi13Pro = Mobile::where('name', 'Xiaomi 13 Pro')->first();
-        $googlePixel8Pro = Mobile::where('name', 'Google Pixel 8 Pro')->first();
-        $onePlus12 = Mobile::where('name', 'OnePlus 12')->first();
-        $asusROG7 = Mobile::where('name', 'ASUS ROG Phone 7 Ultimate')->first();
-        $sonyXperia1V = Mobile::where('name', 'Sony Xperia 1 V')->first();
-        $motorolaEdge = Mobile::where('name', 'Motorola Edge+ (2023)')->first();
-        $huaweiP60Pro = Mobile::where('name', 'Huawei P60 Pro')->first();
-        $realmeGT5Pro = Mobile::where('name', 'Realme GT5 Pro')->first();
-
         $specifications = [
+            // Sample specification for a flagship phone
             [
-                'mobile_id' => $iphone15Pro->id,
-                'cpu' => 'A17 Pro Chipset',
-                'ram' => '6GB',
-                'storage' => '128GB, 256GB, 512GB',
-                'camera' => '48MP (wide), 12MP (ultra-wide), 12MP (telephoto)',
-                'screen' => '6.1-inch Super Retina XDR OLED, 2532 x 1170',
-                'battery' => '3200mAh, Fast charging 20W',
-                'connectivity' => '5G, Wi-Fi 6, Bluetooth 5.3',
-                'security_features' => 'Face ID, Secure Enclave',
-            ],
-            [
-                'mobile_id' => $samsungS24Ultra->id,
+                'mobile_id' => 1, // Assuming this links to a mobile in your 'mobiles' table
                 'cpu' => 'Snapdragon 8 Gen 3',
-                'ram' => '12GB',
-                'storage' => '256GB, 512GB, 1TB',
-                'camera' => '200MP (wide), 12MP (ultra-wide), 10MP (periscope)',
-                'screen' => '6.8-inch Dynamic AMOLED 2X, 3088 x 1440',
-                'battery' => '5000mAh, 45W fast charging',
-                'connectivity' => '5G, Wi-Fi 6E, Bluetooth 5.3',
-                'security_features' => 'Under-display fingerprint, Face recognition',
+                'gpu' => 'Adreno 750',
+                'ram' => '12GB LPDDR5X',
+                'storage' => json_encode([
+                    '128GB' => 'UFS 3.1',
+                    '256GB' => 'UFS 4.0',
+                    '512GB' => 'UFS 4.0',
+                    '1TB' => 'UFS 4.0'
+                ]),
+                'camera' => json_encode([
+                    'main' => '200MP, f/1.7, OIS',
+                    'ultrawide' => '12MP, f/2.2, 120° FOV',
+                    'telephoto' => '50MP, f/3.5, 10x optical zoom',
+                    'front' => '32MP, f/2.2'
+                ]),
+                'screen' => '6.8" Dynamic AMOLED 2X, 1440x3088, 120Hz',
+                'battery' => json_encode([
+                    'capacity' => '5000mAh',
+                    'wired_charging' => '45W',
+                    'wireless' => '15W',
+                    'reverse_wireless' => '4.5W'
+                ]),
+                'connectivity' => json_encode([
+                    'network' => '5G (Sub6/mmWave), LTE',
+                    'wi_fi' => 'Wi-Fi 6E (802.11ax)',
+                    'bluetooth_version' => '5.3',
+                    'short_range' => 'NFC, UWB',
+                    'GNSS' => 'GPS, GLONASS, Galileo, BeiDou',
+                    'USB' => 'USB 3.2 Gen 2 Type-C'
+                ]),
+                'security_features' => json_encode([
+                    'fingerprint_sensor_type' => 'Ultrasonic under-display',
+                    'biometric_authentication' => 'Face recognition (3D)',
+                    'security_platform' => 'Samsung Knox',
+                    'private_file_protection' => 'Secure Folder, Private Share',
+                    'ingress_protection_rating' => 'IP68',
+                    'security_updates_policy' => '5 years of security updates'
+                ]),
+                'created_at' => now(),
+                'updated_at' => now()
             ],
+            
+            // Sample specification for a mid-range phone
             [
-                'mobile_id' => $xiaomi13Pro->id,
-                'cpu' => 'Snapdragon 8 Gen 2',
-                'ram' => '12GB',
-                'storage' => '256GB, 512GB',
-                'camera' => '50MP (wide), 50MP (telephoto), 50MP (ultra-wide)',
-                'screen' => '6.73-inch AMOLED, 3200 x 1440',
-                'battery' => '4820mAh, 120W fast charging',
-                'connectivity' => '5G, Wi-Fi 6, Bluetooth 5.3',
-                'security_features' => 'In-display fingerprint, Face unlock',
+                'mobile_id' => 2,
+                'cpu' => 'Dimensity 7200',
+                'gpu' => 'Mali-G610 MC4',
+                'ram' => '8GB LPDDR4X',
+                'storage' => json_encode([
+                    '128GB' => 'UFS 2.2',
+                    '256GB' => 'UFS 2.2'
+                ]),
+                'camera' => json_encode([
+                    'main' => '64MP, f/1.8, OIS',
+                    'ultrawide' => '8MP, f/2.2, 118° FOV',
+                    'macro' => '2MP, f/2.4',
+                    'front' => '16MP, f/2.0'
+                ]),
+                'screen' => '6.7" AMOLED, 1080x2400, 90Hz',
+                'battery' => json_encode([
+                    'capacity' => '4500mAh',
+                    'wired_charging' => '67W',
+                    'wireless' => 'Not supported',
+                    'reverse_wireless' => 'Not supported'
+                ]),
+                'connectivity' => json_encode([
+                    'network' => '5G (Sub6), LTE',
+                    'wi_fi' => 'Wi-Fi 6 (802.11ax)',
+                    'bluetooth_version' => '5.2',
+                    'short_range' => 'NFC',
+                    'GNSS' => 'GPS, GLONASS, Galileo',
+                    'USB' => 'USB 2.0 Type-C'
+                ]),
+                'security_features' => json_encode([
+                    'fingerprint_sensor_type' => 'Optical under-display',
+                    'biometric_authentication' => 'Face recognition (2D)',
+                    'security_platform' => 'Standard Android',
+                    'private_file_protection' => 'File encryption',
+                    'ingress_protection_rating' => 'IP53',
+                    'security_updates_policy' => '3 years of security updates'
+                ]),
+                'created_at' => now(),
+                'updated_at' => now()
             ],
+            
+            // Sample specification for an entry-level phone
             [
-                'mobile_id' => $googlePixel8Pro->id,
-                'cpu' => 'Google Tensor G3',
-                'ram' => '12GB',
-                'storage' => '128GB, 256GB, 512GB',
-                'camera' => '50MP (wide), 48MP (ultra-wide), 48MP (telephoto)',
-                'screen' => '6.7-inch LTPO OLED, 3120 x 1440',
-                'battery' => '5050mAh, 30W fast charging',
-                'connectivity' => '5G, Wi-Fi 6E, Bluetooth 5.2',
-                'security_features' => 'In-display fingerprint, Face unlock',
-            ],
-            [
-                'mobile_id' => $onePlus12->id,
-                'cpu' => 'Snapdragon 8 Gen 3',
-                'ram' => '12GB',
-                'storage' => '256GB, 512GB',
-                'camera' => '50MP (wide), 48MP (ultra-wide), 32MP (telephoto)',
-                'screen' => '6.7-inch Fluid AMOLED, 3216 x 1440',
-                'battery' => '5000mAh, 100W fast charging',
-                'connectivity' => '5G, Wi-Fi 6E, Bluetooth 5.3',
-                'security_features' => 'Under-display fingerprint, Face unlock',
-            ],
-            [
-                'mobile_id' => $asusROG7->id,
-                'cpu' => 'Snapdragon 8 Gen 2',
-                'ram' => '16GB',
-                'storage' => '512GB, 1TB',
-                'camera' => '50MP (wide), 13MP (ultra-wide), 8MP (macro)',
-                'screen' => '6.78-inch AMOLED, 2448 x 1080',
-                'battery' => '6000mAh, 65W fast charging',
-                'connectivity' => '5G, Wi-Fi 6E, Bluetooth 5.3',
-                'security_features' => 'In-display fingerprint, Face unlock',
-            ],
-            [
-                'mobile_id' => $sonyXperia1V->id,
-                'cpu' => 'Snapdragon 8 Gen 2',
-                'ram' => '12GB',
-                'storage' => '256GB, 512GB',
-                'camera' => '48MP (wide), 12MP (ultra-wide), 12MP (telephoto)',
-                'screen' => '6.5-inch 4K OLED, 3840 x 1644',
-                'battery' => '5000mAh, 30W fast charging',
-                'connectivity' => '5G, Wi-Fi 6, Bluetooth 5.3',
-                'security_features' => 'Side-mounted fingerprint, Face unlock',
-            ],
-            [
-                'mobile_id' => $motorolaEdge->id,
-                'cpu' => 'Snapdragon 8 Gen 2',
-                'ram' => '12GB',
-                'storage' => '256GB, 512GB',
-                'camera' => '50MP (wide), 50MP (ultra-wide), 12MP (telephoto)',
-                'screen' => '6.7-inch OLED, 2400 x 1080',
-                'battery' => '5100mAh, 68W fast charging',
-                'connectivity' => '5G, Wi-Fi 6E, Bluetooth 5.3',
-                'security_features' => 'In-display fingerprint, Face unlock',
-            ],
-            [
-                'mobile_id' => $huaweiP60Pro->id,
-                'cpu' => 'Kirin 9000S',
-                'ram' => '12GB',
-                'storage' => '256GB, 512GB',
-                'camera' => '50MP (wide), 13MP (ultra-wide), 64MP (periscope)',
-                'screen' => '6.67-inch OLED, 2700 x 1228',
-                'battery' => '4815mAh, 88W fast charging',
-                'connectivity' => '5G, Wi-Fi 6E, Bluetooth 5.3',
-                'security_features' => 'In-display fingerprint, Face unlock',
-            ],
-            [
-                'mobile_id' => $realmeGT5Pro->id,
-                'cpu' => 'Snapdragon 8 Gen 3',
-                'ram' => '16GB',
-                'storage' => '256GB, 512GB',
-                'camera' => '50MP (wide), 50MP (ultra-wide), 2MP (depth)',
-                'screen' => '6.74-inch AMOLED, 2772 x 1240',
-                'battery' => '4600mAh, 240W fast charging',
-                'connectivity' => '5G, Wi-Fi 6, Bluetooth 5.3',
-                'security_features' => 'In-display fingerprint, Face unlock',
-            ],
+                'mobile_id' => 3,
+                'cpu' => 'Snapdragon 4 Gen 1',
+                'gpu' => 'Adreno 619',
+                'ram' => '6GB LPDDR4X',
+                'storage' => json_encode([
+                    '64GB' => 'eMMC 5.1',
+                    '128GB' => 'eMMC 5.1'
+                ]),
+                'camera' => json_encode([
+                    'main' => '50MP, f/1.8',
+                    'depth' => '2MP, f/2.4',
+                    'front' => '8MP, f/2.0'
+                ]),
+                'screen' => '6.5" IPS LCD, 720x1600, 60Hz',
+                'battery' => json_encode([
+                    'capacity' => '5000mAh',
+                    'wired_charging' => '18W',
+                    'wireless' => 'Not supported',
+                    'reverse_wireless' => 'Not supported'
+                ]),
+                'connectivity' => json_encode([
+                    'network' => 'LTE',
+                    'wi_fi' => 'Wi-Fi 5 (802.11ac)',
+                    'bluetooth_version' => '5.0',
+                    'short_range' => 'NFC (region dependent)',
+                    'GNSS' => 'GPS, GLONASS',
+                    'USB' => 'USB 2.0 Type-C'
+                ]),
+                'security_features' => json_encode([
+                    'fingerprint_sensor_type' => 'Side-mounted',
+                    'biometric_authentication' => 'Face recognition (2D)',
+                    'security_platform' => 'Standard Android',
+                    'private_file_protection' => 'Basic file encryption',
+                    'ingress_protection_rating' => 'None',
+                    'security_updates_policy' => '2 years of security updates'
+                ]),
+                'created_at' => now(),
+                'updated_at' => now()
+            ]
         ];
 
-        foreach ($specifications as $specification) {
-            MobileSpecification::create($specification);
-        }
-
+        DB::table('mobile_specification')->insert($specifications);
     }
 }

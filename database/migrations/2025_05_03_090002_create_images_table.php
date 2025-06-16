@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('mobile_images', function (Blueprint $table) {
+        Schema::create('images', function (Blueprint $table) {
             $table->id(); // Primary key
 
-            $table->foreignId('mobile_id')->constrained()->onDelete('cascade'); // Link to 'mobiles' table, delete images if mobile is deleted
 
-            $table->string('image_url');        // URL or path to the image file
+            $table->string('url');        // URL or path to the image file
             $table->boolean('is_primary')->default(false);       // Flag indicating if this is the main image
-
             $table->text('caption')->nullable(); // Optional image caption or description
+            $table->morphs('imageable');
 
             $table->timestamps(); // created_at and updated_at
         });

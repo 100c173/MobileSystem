@@ -13,9 +13,10 @@ class MobileSpecification extends Model
     protected $table = "mobile_specification";
 
     protected $fillable = [
-        'mobile_id',        
+        'mobile_id',
         'cpu',
         'ram',
+        'gpu',
         'storage',
         'camera',
         'screen',
@@ -24,8 +25,16 @@ class MobileSpecification extends Model
         'security_features',
     ];
 
-    public function mobile(){
+    protected $casts = [
+        'storage'           => 'array',
+        'camera'            => 'array',
+        'battery'           => 'array',
+        'connectivity'      => 'array',
+        'security_features' => 'array',
+    ];
+
+    public function mobile()
+    {
         return $this->belongsTo(Mobile::class);
     }
-    
 }

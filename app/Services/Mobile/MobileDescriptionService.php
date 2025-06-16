@@ -61,7 +61,7 @@ class MobileDescriptionService
             'storage_desc'      => $request->storage_desc,
             'connectivity_desc' => $request->connectivity_desc,
             'battery_desc'      => $request->battery_desc,
-            'extra_features'    => $request->extra_features,
+            'key_features'      => $request->key_features,
             'security_privacy'  => $request->security_privacy,
             'pros'              => $request->pros,
             'cons'              => $request->cons,

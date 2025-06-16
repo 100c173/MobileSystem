@@ -15,11 +15,19 @@ class MobileDescription extends Model
         'storage_desc',
         'connectivity_desc',
         'battery_desc',
-        'extra_features',
+        'key_features',
         'security_privacy',
         'pros',
         'cons',
     ];
+
+    protected $casts = [
+        'display'      => 'array' , 
+        'key_features' => 'array' , 
+        'pros'         => 'array' , 
+        'cons'         => 'array' , 
+    ]; 
+
     public function mobile(){
         return $this->belongsTo(Mobile::class);
     }    

@@ -61,62 +61,7 @@ class MobileSeeder extends Seeder
                 'status' =>'approved',
                 'release_date' => '2023-02-28',
             ],
-            [
-                'name' => 'Google Pixel 8 Pro',
-                'brand_id' => $google->id,
-                'operating_system_id' => $googleOS->id,
-                'user_id' => 1,
-                'status' =>'approved',
-                'release_date' => '2023-10-12',
-            ],
-            [
-                'name' => 'OnePlus 12',
-                'brand_id' => $onePlus->id,
-                'operating_system_id' => $onePlusOS->id,
-                'user_id' => 1,
-                'status' =>'approved',
-                'release_date' => '2024-01-23',
-            ],
-            [
-                'name' => 'ASUS ROG Phone 7 Ultimate',
-                'brand_id' => $asus->id,
-                'operating_system_id' => $asusOS->id,
-                'user_id' => 1,
-                'status' =>'approved',
-                'release_date' => '2023-04-13',
-            ],
-            [
-                'name' => 'Sony Xperia 1 V',
-                'brand_id' => $sony->id,
-                'operating_system_id' => $sonyOS->id,
-                'user_id' => 1,
-                'status' =>'approved',
-                'release_date' => '2023-05-11',
-            ],
-            [
-                'name' => 'Motorola Edge+ (2023)',
-                'brand_id' => $motorola->id,
-                'operating_system_id' => $motorolaOS->id,
-                'user_id' => 1,
-                'status' =>'approved',
-                'release_date' => '2023-05-09',
-            ],
-            [
-                'name' => 'Huawei P60 Pro',
-                'brand_id' => $huawei->id,
-                'operating_system_id' => $harmonyOS->id,
-                'user_id' => 1,
-                'status' =>'approved',
-                'release_date' => '2023-03-31',
-            ],
-            [
-                'name' => 'Realme GT5 Pro',
-                'brand_id' => $realme->id,
-                'operating_system_id' => $realmeOS->id,
-                'user_id' => 1,
-                'status' =>'approved',
-                'release_date' => '2023-12-14',
-            ],
+
         ];
 
         foreach ($mobiles as $mobile) {

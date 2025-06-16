@@ -1,13 +1,11 @@
 <?php
 
+use App\Http\Controllers\Customer\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', [HomeController::class,'homePage']);
 
 
 
@@ -21,7 +19,8 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 require __DIR__.'/customer.php';
+require __DIR__.'/admin-agent.php';
 require __DIR__.'/admin.php';
 require __DIR__.'/agent.php';
-require __DIR__.'/admin-agent.php';
+
 

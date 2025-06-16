@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('mobile_id') ->constrained()->onDelete('cascade'); // Foreign key linking to 'mobiles' table
 
             $table->text('design_dimensions');   // Detailed info about the design and physical dimensions
-            $table->text('display');             // Description of screen type, size, resolution, and quality
+            $table->json('display')->nullable(); // Description of screen type, size, resolution, and quality
 
             $table->text('performance_cpu');     // Explanation of processor performance and hardware capabilities
             $table->text('storage_desc');        // Description of storage options and expandability
@@ -25,12 +25,12 @@ return new class extends Migration
             $table->text('connectivity_desc');   // Info on network support, ports, and wireless options
 
             $table->text('battery_desc');        // Battery life, charging speed, and endurance review
-            $table->text('extra_features');      // Additional non-core features (e.g., water resistance, stylus)
+            $table->json('key_features');      // Additional non-core features (e.g., water resistance, stylus)
 
             $table->text('security_privacy');    // Security mechanisms and privacy protections available
 
-            $table->text('pros');                // Main advantages of the mobile device
-            $table->text('cons');                // Main drawbacks or disadvantages
+            $table->json('pros');                // Main advantages of the mobile device
+            $table->json('cons');                // Main drawbacks or disadvantages
 
             $table->timestamps(); // created_at and updated_at
         });

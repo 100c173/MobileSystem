@@ -12,7 +12,7 @@ class MobileSpecificationRequest extends FormRequest
     public function authorize(): bool
     {
         //return $this->user() && $this->user()->hasRole('admin');
-        return true ;
+        return true;
     }
 
     /**
@@ -24,13 +24,26 @@ class MobileSpecificationRequest extends FormRequest
     {
         return [
             'cpu' => 'required|string|max:255',
+            'gpu' => 'required|string|max:255',
             'ram' => 'required|string|max:255',
-            'storage' => 'required|string|max:255',
-            'camera' => 'required|string|max:255',
+
+            'storage' => 'required|array',
+            'storage.*' => 'required|string|max:255',
+
+            'camera' => 'required|array',
+            'camera.*' => 'required|string|max:255',
+
+            'connectivity' => 'required|array',
+            'connectivity.*' => 'required|string|max:255',
+
+            'battery' => 'required|array',
+            'battery.*' => 'required|string|max:255',
+
             'screen' => 'required|string|max:255',
-            'battery' => 'required|string|max:255',
-            'connectivity' => 'required|string|max:255',
-            'security_features' => 'required|string|max:255',
+
+            'security_features' => 'required|array',
+            'security_features.*' => 'required|string|max:255',
+            
         ];
     }
 }

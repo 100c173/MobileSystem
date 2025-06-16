@@ -24,17 +24,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        $user = Auth::user();
-        
-        if ($user->hasRole('admin')) {
-            return redirect()->intended('/admin/dashboard');
-        }
-    
-        if ($user->hasRole('agent')) {
-            return redirect()->intended('/agent/dashboard');
-        }
-
-        return redirect()->intended('/');
+        return redirect()->intended('/home')->with('success' , __("Welcome" .' ' . auth()->user()->name ) );
     }
 
     public function destroy(Request $request): RedirectResponse
@@ -45,6 +35,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+         return redirect()->intended('/home')->with('success' , __("Good Bye"));
     }
 }
