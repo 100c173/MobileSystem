@@ -2,6 +2,7 @@
 
 @section('title','MobileTech Hub | Latest Phones & Devices')
 
+@include('customers.components.alerts')
 @section('content')
 <div class="font-sans bg-gray-50">
     <!-- Login/Register Modal -->

@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        
         Schema::create('mobile_descriptions', function (Blueprint $table) {
             $table->id(); // Primary key
 

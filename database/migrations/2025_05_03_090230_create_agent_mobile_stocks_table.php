@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        
         Schema::create('agent_mobile_stocks', function (Blueprint $table) {
             $table->id(); // Primary key
 

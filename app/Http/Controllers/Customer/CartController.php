@@ -8,6 +8,9 @@ use App\Services\customer\CartService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use Stripe\Stripe;
+use Stripe\PaymentIntent;
+
 class CartController extends Controller
 {
     protected $cartService;
@@ -18,11 +21,40 @@ class CartController extends Controller
     }
 
     // Display cart items
-    public function index()
-    {
-        $cartItems =  $this->cartService->getAllCartItems();
-        return view('customers.devices.cart', compact('cartItems'));
+   public function index()
+{
+    $user = Auth::user();
+    $cartItems = $user->cartItems()->with('product', 'agent')->get();
+
+    $total = 0;
+    foreach ($cartItems as $item) {
+        $total += $item->product->price * $item->quantity;
     }
+
+    $clientSecret = null;
+
+    if ($total > 0) {
+        Stripe::setApiKey(config('stripe.secret'));
+
+        $paymentIntent = PaymentIntent::create([
+            'amount' => (int) ($total * 100),
+            'currency' => 'usd',
+            'metadata' => [
+                'user_id' => $user->id,
+            ]
+        ]);
+
+        $clientSecret = $paymentIntent->client_secret;
+    }
+
+    return view('customers.devices.cart', [
+        'cartItems' => $cartItems,
+        'total' => $total,
+        'clientSecret' => $clientSecret,
+    ]);
+}
+
+
 
     // store product in cart 
     public function addToCart($id)
