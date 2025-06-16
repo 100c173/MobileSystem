@@ -7,8 +7,7 @@ use App\Http\Requests\AgentRequestRequest;
 use App\Models\AgentRequest;
 use App\Models\User;
 use App\Notifications\AgentRequestNotification;
-use App\Notifications\NewUserRegisterNotification;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
 

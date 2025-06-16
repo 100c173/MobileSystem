@@ -28,8 +28,12 @@ class CartController extends Controller
     // store product in cart 
     public function addToCart($id)
     {
-        $this->cartService->storeProduct($id);
-        return redirect()->back();
+        try{
+            $this->cartService->storeProduct($id);
+            return redirect()->back()->with('success', __('The product has been added to the cart.') );
+        }catch (\Exception $e) {
+             return back()->with('error', $e->getMessage());
+        }
     }
 
     public function updateQuantity(Request $request)

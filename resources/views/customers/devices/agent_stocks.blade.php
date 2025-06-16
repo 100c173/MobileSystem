@@ -54,25 +54,23 @@
         transform: translateX(0);
     }
 </style>
-<div class="bg-gray-100 min-h-screen">
+<div class="bg-gray-50">
     <br><br><br>
-    <!-- Main Content -->
-    <main class="container mx-auto px-4 py-8">
-        <!-- Search and Filter -->
-        <div class="mb-8">
-            <div class="flex flex-col md:flex-row gap-4">
-                <div class="flex-1 relative">
-                    <input type="text" placeholder="Search mobiles..." class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                    <i class="fas fa-search absolute right-3 top-3.5 text-gray-400"></i>
-                </div>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        {{-- Header and Filter Options --}}
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-900">Get the distinguished mobile from trusted agents</h1>
+            <div class="flex items-center space-x-4">
+                <span class="text-gray-500">Filter by:</span>
                 <select id="brandFilter" class="bg-white px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                    <option value="" >All Brands</option>
+                    <option value="">All Brands</option>
                     @foreach($brands as $brand)
                     <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                     @endforeach
                 </select>
                 <select id="priceFilter" class="bg-white px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                    <option>Price Range</option>
+                    <option value="">Price Range</option>
                     <option value="<200">Under $200</option>
                     <option value=">=200<=500">$200 - $500</option>
                     <option value=">=500<=800">$500 - $800</option>
@@ -83,12 +81,12 @@
 
         <!-- Mobile Cards Grid -->
 
-        <div  id="filterContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div id="filterContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <!-- Card  -->
             @foreach($agentStock as $agent_mobile)
             <div class="mobile-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
                 <div class="relative">
-                    <img src="{{$agent_mobile->mobile->primaryImage->image_url}}" alt="{{$agent_mobile->mobile->name}}" class="w-full h-48 object-cover">
+                    <img src="{{$agent_mobile->mobile->primaryImage->url}}" alt="{{$agent_mobile->mobile->name}}" class="w-full h-48 object-cover">
                     <span class="absolute top-2 right-2 bg-indigo-600 text-white text-xs px-2 py-1 rounded-full">NEW</span>
                 </div>
                 <div class="p-5">
@@ -148,5 +146,48 @@
 @endsection
 
 @push('scripts')
+<script>
+    document.getElementById("brandFilter").addEventListener("change", filterProducts);
+    document.getElementById("priceFilter").addEventListener("change", filterProducts);
+
+    function filterProducts() {
+        const brand = document.getElementById("brandFilter").value;
+        const price = document.getElementById("priceFilter").value;
+
+
+        fetch(`agent_devices/filter?brand=${brand}&price=${price}`)
+            .then(response => response.text())
+            .then(html => {
+                const container = document.getElementById("filterContainer");
+
+                // Check if the HTML contains the "no-results" marker
+                if (html.includes('id="no-results"')) {
+                    container.innerHTML = `
+                    <div class="col-span-full text-center py-12">
+                        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <h3 class="mt-2 text-lg font-medium text-gray-900">No devices found</h3>
+                        <p class="mt-1 text-gray-500">Try adjusting your filters to find what you're looking for.</p>
+                        <button onclick="resetFilters()" class="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+                            Reset Filters
+                        </button>
+                    </div>
+        `;
+                } else {
+                    container.innerHTML = html;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+
+    function resetFilters() {
+        document.getElementById("brandFilter").value = '';
+        document.getElementById("priceFilter").value = '';
+        filterProducts(); // reload full list with no filters
+    }
+</script>
 
 @endpush

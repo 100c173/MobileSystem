@@ -24,7 +24,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended('/home');
+        return redirect()->intended('/home')->with('success' , __("Welcome" .' ' . auth()->user()->name ) );
     }
 
     public function destroy(Request $request): RedirectResponse
@@ -35,6 +35,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+         return redirect()->intended('/home')->with('success' , __("Good Bye"));
     }
 }

@@ -2,21 +2,25 @@
 
 namespace App\Http\Controllers\Aget;
 
-
+use App\Exceptions\AgentRequestNotFoundException;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AgentRequestRequest;
 use Illuminate\Database\QueryException;
 use App\Services\Agent\AgentRequestAdminService;
+use App\Services\Agent\AgentRequestService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class AgentRequestController extends Controller
 {
     protected $agentRequestService;
+    protected $agentRequestServiceCustom;
 
-    public function __construct(AgentRequestAdminService $agentRequestService)
+    public function __construct(AgentRequestAdminService $agentRequestService ,AgentRequestService $agentRequestServiceCustom)
     {
         $this->agentRequestService = $agentRequestService;
+        $this->agentRequestServiceCustom = $agentRequestServiceCustom;
     }
     /**
      * Display a listing of the resource.
@@ -29,6 +33,20 @@ class AgentRequestController extends Controller
         return view('dashboard.agents.index', compact('agent_requests', 'unique_addresses'));
     }
 
+
+    public function store(AgentRequestRequest $request)
+    {
+        try {
+            $agentRequest = $this->agentRequestServiceCustom->store($request);
+            return redirect()->route('home.page')->with('success', __('Your request has been submitted successfully and is under review. You will receive a notification soon with the result.'));
+        } catch (AgentRequestNotFoundException $e) {
+            return redirect()->route('home.page')->with('error' , __($e->getMessage()));
+        } catch (\Exception $e) {
+            // If an unexpected error occurs
+            Log::error('Unable to fetch agent requests :' . $e->getMessage());
+            abort(500);
+        }
+    }
 
     public function agent_requests_accepted()
     {
@@ -84,10 +102,10 @@ class AgentRequestController extends Controller
         }
     }
 
-    public function rejectAgentRequest(Request $request , $id)
+    public function rejectAgentRequest(Request $request, $id)
     {
         try {
-            $this->agentRequestService->rejectAgentRequest($request , $id);
+            $this->agentRequestService->rejectAgentRequest($request, $id);
             return redirect()->route('agent-requests')->with('success', 'The request was successfully rejected.');;
         } catch (ModelNotFoundException $e) {
             abort(404, $e->getMessage());
@@ -143,8 +161,9 @@ class AgentRequestController extends Controller
     }
 
 
-    public function rependingAgentRequest($id){
-            $this->agentRequestService->rependingAgentRequest($id);
-            return redirect()->route('agent-requests')->with('success', 'The request was successfully repending.');
+    public function rependingAgentRequest($id)
+    {
+        $this->agentRequestService->rependingAgentRequest($id);
+        return redirect()->route('agent-requests')->with('success', 'The request was successfully repending.');
     }
 }

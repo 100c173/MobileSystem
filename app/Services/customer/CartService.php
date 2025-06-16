@@ -16,6 +16,13 @@ class CartService
 
     public function storeProduct(int $id)
     {
+        $exists = CartItem::where('user_id', Auth::user()->id)
+            ->where('product_id', $id)
+            ->exists();
+
+        if ($exists) {
+            throw new \Exception('The product is already in the cart');
+        }
         CartItem::create([
             'user_id' => Auth::id(),
             'product_id' => $id,
@@ -40,7 +47,7 @@ class CartService
 
     public function removeItem($id)
     {
-        $product = CartItem::findOrFail($id) ; 
+        $product = CartItem::findOrFail($id);
         $product->delete();
     }
 }

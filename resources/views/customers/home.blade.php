@@ -2,6 +2,7 @@
 
 @section('title','MobileTech Hub | Latest Phones & Devices')
 
+
 @section('content')
 <div class="font-sans bg-gray-50">
     <!-- Login/Register Modal -->
@@ -932,18 +933,19 @@
 
                         <div class="md:w-1/2 bg-gray-50 p-8">
                             <h3 class="text-2xl font-bold text-gray-800 mb-6">Agent Application</h3>
-                            <form class="space-y-4">
+                            <form action="{{route('make_agent_request')}}" method="post" class="space-y-4">
+                                @csrf
                                 <div>
                                     <label for="business-name" class="block text-sm font-medium text-gray-700 mb-1">Business Name</label>
-                                    <input type="text" id="business-name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                    <input name="business_name" type="text" id="business-name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
                                 </div>
                                 <div>
                                     <label for="commercial-number" class="block text-sm font-medium text-gray-700 mb-1">Commercial Number</label>
-                                    <input type="text" id="commercial-number" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                    <input name="commercial_number" type="text" id="commercial-number" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
                                 </div>
                                 <div>
                                     <label for="address" class="block text-sm font-medium text-gray-700 mb-1">Business Address</label>
-                                    <textarea id="address" rows="2" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+                                    <textarea name="address" id="address" rows="2" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
                                 </div>
 
                                 <div>
@@ -960,11 +962,11 @@
                                     <div class="grid grid-cols-2 gap-4">
                                         <div>
                                             <label for="latitude" class="block text-sm font-medium text-gray-700 mb-1">Latitude</label>
-                                            <input type="text" id="latitude" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                            <input name="latitude" type="text" id="latitude" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
                                         </div>
                                         <div>
                                             <label for="longitude" class="block text-sm font-medium text-gray-700 mb-1">Longitude</label>
-                                            <input type="text" id="longitude" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                            <input name="longitude" type="text" id="longitude" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
                                         </div>
                                     </div>
                                 </div>

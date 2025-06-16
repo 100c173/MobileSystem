@@ -20,7 +20,7 @@ class HomeService
             $mobiles = Mobile::with('primaryImage')->paginate(10);
             $brands = Brand::all();
             $operatingSystems = OperatingSystem::all();
-            return [$mobiles, $brands, $operatingSystems,$number_of_product_in_cart];
+            return [$mobiles, $brands, $operatingSystems, $number_of_product_in_cart];
         } catch (\Exception $e) {
             Log::error('Error in getLatestDevices: ' . $e->getMessage());
             throw $e;
@@ -44,7 +44,7 @@ class HomeService
         $brand = $request->query('brand');
         $os = $request->query('os');
 
-        $query = Mobile::with(['brand', 'operatingSystem','primaryImage'])->latest();
+        $query = Mobile::with(['brand', 'operatingSystem', 'primaryImage'])->latest();
 
         if (!empty($brand)) {
             $query->whereHas('brand', function ($q) use ($brand) {
@@ -61,12 +61,41 @@ class HomeService
         return  $query->paginate(10);
     }
 
+    public function getFilterAgentMobiles(Request $request)
+    {
+        $brand = $request->query('brand');
+        $price = $request->query('price');
+
+        $query = AgentMobileStock::with(['mobile.primaryImage', 'agent'])->latest();
+
+        if (!empty($brand)) {
+            $query->whereHas('mobile', function ($q) use ($brand) {
+                $q->where('brand_id', $brand);
+            });
+        }
+
+
+        if (!empty($price)) {
+            if ($request->price == '<200') {
+                $query->where('price', '<', 200);
+            } elseif ($request->price == '>=200<=500') {
+                $query->whereBetween('price', [200, 500]);
+            } elseif ($request->price == '>=500<=800') {
+                $query->whereBetween('price', [500, 800]);
+            } elseif ($request->price == '>800') {
+                $query->where('price', '>', 800);
+            }
+        }
+
+        return  $query->paginate(10);
+    }
+
     // Get all agent stocks with related agent and mobile data
     public function getAgentStock()
     {
         try {
             $brands = Brand::all();
-            return [AgentMobileStock::with(['agent', 'mobile'])->paginate(10),$brands];
+            return [AgentMobileStock::with(['agent', 'mobile'])->paginate(10), $brands];
         } catch (\Exception $e) {
             Log::error('Error in getAgentStock: ' . $e->getMessage());
             throw $e;

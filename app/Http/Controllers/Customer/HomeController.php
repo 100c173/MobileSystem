@@ -47,6 +47,11 @@ class HomeController extends Controller
         ]);
     }
 
+    public function filterAgentMobiles(Request $request)
+    {
+        $agentStock = $this->homeService->getFilterAgentMobiles($request);
+        return view('customers.partials.agent_mobile_card',compact('agentStock'));
+    }
 
     // Display detailed view of a single mobile device
     public function mobileDetails(string $id)

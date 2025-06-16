@@ -29,7 +29,6 @@ class AgentRequestRequest extends FormRequest
             'address'            => 'required|string|max:255',
             'latitude'           => 'required|numeric|between:-90,90',
             'longitude'          => 'required|numeric|between:-180,180',
-            'notes'              => 'nullable|string|max:1000',
         ];
     }
 
@@ -44,15 +43,6 @@ class AgentRequestRequest extends FormRequest
             'longitude.required' => 'The longitude is required.',
             'longitude.between' => 'The longitude must be between -180 and 180.',
         ];
-    }
-
-    public function failedValidation(Validator $validator)
-    {
-        throw new HttpResponseException(response()->json([
-            'success'   => false,
-            'message'   => 'Validation errors',
-            'data'      => $validator->errors()
-        ]));
     }
 
     
