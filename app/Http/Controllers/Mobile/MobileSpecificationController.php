@@ -82,8 +82,6 @@ class MobileSpecificationController extends Controller
     {
         $this->mobileSpecificationService->store($request);
 
-        $mobile = Mobile::findOrFail($request->mobile_id);
-
         $successMessage = 'Mobile specification was added successfully.';
 
         // إذا لم تكن هناك description موجودة، انتقل لإضافة الوصف
@@ -91,7 +89,6 @@ class MobileSpecificationController extends Controller
             return $this->viewForRole(
                 'dashboard.mobile.create.createDescription',
                 'dashboard-agent.mobile.create.createDescription',
-                compact('mobile')
             )->with('success', $successMessage);
         }
 
@@ -116,7 +113,8 @@ class MobileSpecificationController extends Controller
     public function update(MobileSpecificationRequest $request, $id)
     {
         $this->mobileSpecificationService->update($request, $id);
-        return redirect()->route('mobiles.index')->with('success', 'Mobile specification updated successfully.');
+        $route = Auth::user()->hasRole('admin') ? 'admin.mobiles.index' : 'agent.mobiles.index';
+        return redirect()->route($route)->with('success', 'Mobile specification updated successfully.');
     }
 
     public function destroy(string $id)

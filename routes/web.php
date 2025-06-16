@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('customers.home');
 });
 
 
@@ -20,6 +20,8 @@ Route::middleware('auth')->group(function () {
 
 
 require __DIR__.'/auth.php';
+require __DIR__.'/customer.php';
 require __DIR__.'/admin.php';
 require __DIR__.'/agent.php';
+require __DIR__.'/admin-agent.php';
 

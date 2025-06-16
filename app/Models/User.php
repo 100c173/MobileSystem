@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Models\AgentRequest;
+use App\Models\Mobile;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -27,6 +28,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'stripe_account_id'
     ];
 
     /**
@@ -84,5 +86,15 @@ class User extends Authenticatable
     public function mobiles()
     {
         return $this->hasMany(Mobile::class);
+    }
+    
+    public function cartItems()
+    {
+        return $this->hasMany(CartItem::class);
+    }
+
+    public function agentMobileStock()
+    {
+        return $this->hasMany(AgentMobileStock::class,'user_id');
     }
 }

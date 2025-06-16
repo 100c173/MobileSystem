@@ -44,8 +44,8 @@
                 <div class="card-body">
                     <div style="padding-left: 20px;">
                         <ul class="list-group">
-                            <li class="list-group-item pb-4 "><strong>BRAND :</strong>{{$mobile->brand}}</li>
-                            <li class="list-group-item pb-4"><strong>OS :</strong>{{$mobile->os}}</li>
+                            <li class="list-group-item pb-4 "><strong>BRAND :</strong>{{$mobile->brand->name}}</li>
+                            <li class="list-group-item pb-4"><strong>OS :</strong>{{$mobile->operatingSystem->name}}</li>
                             <li class="list-group-item pb-4"><strong>CPU :</strong>{{$specification->cpu}}</li>
                             <li class="list-group-item pb-4"><strong>RAM :</strong>{{$specification->ram}}</li>
                             <li class="list-group-item pb-4"><strong>STORAGE :</strong>{{$specification->storage}}</li>

@@ -12,7 +12,7 @@ class MobileSpecificationRequest extends FormRequest
     public function authorize(): bool
     {
         //return $this->user() && $this->user()->hasRole('admin');
-        return true ;
+        return true;
     }
 
     /**
@@ -23,10 +23,11 @@ class MobileSpecificationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'mobile_id' => 'required|exists:mobiles,id',
             'cpu' => 'required|string|max:255',
+            'gpu' => 'required|string|max:255',
             'ram' => 'required|string|max:255',
-            'storage' => 'required|string|max:255',
+            'storage' => 'required|array',
+            'storage.*' => 'required|string|max:255',
             'camera' => 'required|string|max:255',
             'screen' => 'required|string|max:255',
             'battery' => 'required|string|max:255',

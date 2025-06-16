@@ -13,7 +13,7 @@ Mobile
             <div class="card-header">
                 <h4 class="card-title m-0 d-flex align-items-center">
                     <i class="fas fa-mobile-alt me-2"></i>
-                    Add {{ $mobile->name }} Description
+                    Add Mobile Description
                 </h4>
             </div>
 
@@ -21,20 +21,29 @@ Mobile
                 <form action="{{route('admin.mobileDescriptions.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
 
-
-                    <div class="form-group">
-                        <input type="hidden" class="form-control" id="mobile_id" name="mobile_id" value="{{ $mobile->id }}" required>
-                    </div>
-
                     <div class="form-group">
                         <label for="exampleInputEmail">Mobile design dimensions</label>
                         <input type="text" class="form-control" id="design_dimensions" name="design_dimensions" placeholder="Enter mobile design_dimensions" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="exampleInputEmail">Mobile display</label>
-                        <input type="text" class="form-control" id="display" name="display" placeholder="Enter mobile display" required>
+                        <label>Display</label>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" name="display[type]" placeholder="Type" required>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" name="display[size]" placeholder="Size" required>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" name="display[resolution]" placeholder="Resolution" required>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" name="display[refresh_rate]" placeholder="Refresh Rate" required>
+                            </div>
+                        </div>
                     </div>
+
 
                     <div class="form-group">
                         <label for="exampleInputEmail">Mobile performance cpu</label>

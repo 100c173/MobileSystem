@@ -30,6 +30,7 @@ class MobileSpecificationSeeder extends Seeder
             [
                 'mobile_id' => $iphone15Pro->id,
                 'cpu' => 'A17 Pro Chipset',
+                'gpu' => 'gpu',
                 'ram' => '6GB',
                 'storage' => '128GB, 256GB, 512GB',
                 'camera' => '48MP (wide), 12MP (ultra-wide), 12MP (telephoto)',
@@ -41,6 +42,7 @@ class MobileSpecificationSeeder extends Seeder
             [
                 'mobile_id' => $samsungS24Ultra->id,
                 'cpu' => 'Snapdragon 8 Gen 3',
+                'gpu' => 'gpu',
                 'ram' => '12GB',
                 'storage' => '256GB, 512GB, 1TB',
                 'camera' => '200MP (wide), 12MP (ultra-wide), 10MP (periscope)',
@@ -52,6 +54,7 @@ class MobileSpecificationSeeder extends Seeder
             [
                 'mobile_id' => $xiaomi13Pro->id,
                 'cpu' => 'Snapdragon 8 Gen 2',
+                'gpu' => 'gpu',
                 'ram' => '12GB',
                 'storage' => '256GB, 512GB',
                 'camera' => '50MP (wide), 50MP (telephoto), 50MP (ultra-wide)',
@@ -63,6 +66,7 @@ class MobileSpecificationSeeder extends Seeder
             [
                 'mobile_id' => $googlePixel8Pro->id,
                 'cpu' => 'Google Tensor G3',
+                'gpu' => 'gpu',
                 'ram' => '12GB',
                 'storage' => '128GB, 256GB, 512GB',
                 'camera' => '50MP (wide), 48MP (ultra-wide), 48MP (telephoto)',
@@ -74,6 +78,7 @@ class MobileSpecificationSeeder extends Seeder
             [
                 'mobile_id' => $onePlus12->id,
                 'cpu' => 'Snapdragon 8 Gen 3',
+                'gpu' => 'gpu',
                 'ram' => '12GB',
                 'storage' => '256GB, 512GB',
                 'camera' => '50MP (wide), 48MP (ultra-wide), 32MP (telephoto)',
@@ -85,6 +90,7 @@ class MobileSpecificationSeeder extends Seeder
             [
                 'mobile_id' => $asusROG7->id,
                 'cpu' => 'Snapdragon 8 Gen 2',
+                'gpu' => 'gpu',
                 'ram' => '16GB',
                 'storage' => '512GB, 1TB',
                 'camera' => '50MP (wide), 13MP (ultra-wide), 8MP (macro)',
@@ -96,6 +102,7 @@ class MobileSpecificationSeeder extends Seeder
             [
                 'mobile_id' => $sonyXperia1V->id,
                 'cpu' => 'Snapdragon 8 Gen 2',
+                'gpu' => 'gpu',
                 'ram' => '12GB',
                 'storage' => '256GB, 512GB',
                 'camera' => '48MP (wide), 12MP (ultra-wide), 12MP (telephoto)',
@@ -107,6 +114,7 @@ class MobileSpecificationSeeder extends Seeder
             [
                 'mobile_id' => $motorolaEdge->id,
                 'cpu' => 'Snapdragon 8 Gen 2',
+                'gpu' => 'gpu',
                 'ram' => '12GB',
                 'storage' => '256GB, 512GB',
                 'camera' => '50MP (wide), 50MP (ultra-wide), 12MP (telephoto)',
@@ -118,6 +126,7 @@ class MobileSpecificationSeeder extends Seeder
             [
                 'mobile_id' => $huaweiP60Pro->id,
                 'cpu' => 'Kirin 9000S',
+                'gpu' => 'gpu',
                 'ram' => '12GB',
                 'storage' => '256GB, 512GB',
                 'camera' => '50MP (wide), 13MP (ultra-wide), 64MP (periscope)',
@@ -129,6 +138,7 @@ class MobileSpecificationSeeder extends Seeder
             [
                 'mobile_id' => $realmeGT5Pro->id,
                 'cpu' => 'Snapdragon 8 Gen 3',
+                'gpu' => 'gpu',
                 'ram' => '16GB',
                 'storage' => '256GB, 512GB',
                 'camera' => '50MP (wide), 50MP (ultra-wide), 2MP (depth)',

@@ -23,12 +23,12 @@ class MobileService
 
     public function index()
     {
-        $mobiles = Mobile::with('primaryImage')->where('status','approved')->get();
+        $mobiles = Mobile::with('primaryImage')->where('status', 'approved')->get();
         return $mobiles;
     }
     public function mobiles_under_review()
     {
-        $mobiles = Mobile::with('primaryImage')->where('status','pending')->get();
+        $mobiles = Mobile::with('primaryImage')->where('status', 'pending')->get();
         return $mobiles;
     }
 
@@ -46,8 +46,8 @@ class MobileService
     public function mobile_reject($id)
     {
         $mobile = Mobile::findOrfail($id);
-        $images = MobileImage::where('mobile_id',$mobile->id)->get();
-        foreach($images as $image){
+        $images = MobileImage::where('mobile_id', $mobile->id)->get();
+        foreach ($images as $image) {
             $this->deleteFile($image->image_url);
         }
         $mobile->delete();
@@ -59,8 +59,8 @@ class MobileService
     public function destroy($id)
     {
         $mobile = Mobile::findOrfail($id);
-        $images = MobileImage::where('mobile_id',$mobile->id)->get();
-        foreach($images as $image){
+        $images = MobileImage::where('mobile_id', $mobile->id)->get();
+        foreach ($images as $image) {
             $this->deleteFile($image->image_url);
         }
         $mobile->delete();
@@ -69,30 +69,27 @@ class MobileService
 
     public function store(MobileRequest $request)
     {
-        $mobile = new Mobile();
 
-        $mobile->name                 = $request->name;
-        $mobile->operating_system_id = $request->operating_system_id;
-        $mobile->brand_id             = $request->brand_id ;
-        $mobile->release_date         = $request->release_date;
-        $mobile->user_id              = Auth::id();
-        if(auth()->user()->hasRole('admin')){
-            $mobile->status        = 'approved';
-        }else{
-            $mobile->status        = 'pending';
-        }
-        $mobile->save();
+        $user = Auth::user();
+      
+        $data = [
+            'name'                 => $request->name,
+            'operating_system_id' => $request->operating_system_id,
+            'brand_id'                => $request->brand_id,
+            'release_date'         => $request->release_date,
+            'user_id'              => $user->id,
+            'status'               => $user->hasRole('admin') ? 'approved' : 'pending',
+        ];
+       
 
-        $user = User::findOrFail($request->user()->id);
+     
+        session(['mobile_step.base' => $data]);
 
-         if (!$user->hasRole('admin')) {
-            $admins = User::role('admin')->get();
-            Notification::send($admins,new AddNewMobileNotification($user));
-        }
-        return $mobile;
+        return $data;
+
     }
 
-    public function update(MobileRequest $request,$id)
+    public function update(MobileRequest $request, $id)
     {
         $mobile = Mobile::findOrFail($id);
 
@@ -105,5 +102,4 @@ class MobileService
         $mobile->save();
         return $mobile;
     }
-
 }

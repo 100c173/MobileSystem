@@ -57,6 +57,29 @@
                   </ul>
                 </div>
               </li>
+              <li class="nav-item">
+                <a data-bs-toggle="collapse" href="#profile">
+                  <i class="bi bi-person"></i>
+                  <p>My Profile</p>
+                  <span class="caret"></span>
+                </a>
+                <div class="collapse" id="profile">
+                  <ul class="nav nav-collapse">
+                    <li>
+                      <a href="">
+                        <span class="sub-item"> My Profile</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{{route('stripe.connect')}}">
+                        <span class="sub-item"> My Stripe Account</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+
+
 
               <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#orders">

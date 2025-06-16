@@ -6,13 +6,6 @@ Users
 @section('content')
 @include('dashboard.components.alerts')
 <div class="page-inner">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-             {!! Breadcrumbs::render('users.index') !!}
-        </ol>
-    </nav>
-
-
 
     <div class="col-md-12">
         <div class="card">
@@ -32,7 +25,7 @@ Users
                                 <th>Name</th>
                                 <th>Role</th>
                                 <th>Email</th>
-                                <th>Purchase value</th>
+                              
                                 <th>Added date</th>
                                 <th>Status</th>
                                 <th>Action</th>
@@ -44,7 +37,7 @@ Users
                                 <th></th>
                                 <th></th>
                                 <th></th>
-                                <th></th>
+                               
                                 <th></th>
                                 <th></th>
                                 <th></th>
@@ -60,7 +53,6 @@ Users
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->getRoleNames()->first()}}</td>
                                 <td>{{$user->email}}</td>
-                                <td>$1000</td>
                                 <td>{{$user->created_at->format('Y-m-d')}}</td>
                                 <td>
                                     @if($user->is_permanently_banned)

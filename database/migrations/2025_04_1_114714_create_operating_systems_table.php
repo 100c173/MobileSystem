@@ -9,6 +9,7 @@ return new class extends Migration
 
     public function up(): void
     {
+        
         Schema::create('operating_systems', function (Blueprint $table) {
             $table->id();
             $table->string('name');

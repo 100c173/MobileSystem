@@ -1,0 +1,76 @@
+<?php
+
+namespace App\Http\Controllers\Customer;
+
+use App\Http\Controllers\Controller;
+use App\Models\CartItem;
+use App\Services\customer\CartService;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+use Stripe\Stripe;
+use Stripe\PaymentIntent;
+
+class CartController extends Controller
+{
+    protected $cartService;
+
+    public function __construct(CartService $cartService)
+    {
+        $this->cartService = $cartService;
+    }
+
+    // Display cart items
+   public function index()
+{
+    $user = Auth::user();
+    $cartItems = $user->cartItems()->with('product', 'agent')->get();
+
+    $total = 0;
+    foreach ($cartItems as $item) {
+        $total += $item->product->price * $item->quantity;
+    }
+
+    $clientSecret = null;
+
+    if ($total > 0) {
+        Stripe::setApiKey(config('stripe.secret'));
+
+        $paymentIntent = PaymentIntent::create([
+            'amount' => (int) ($total * 100),
+            'currency' => 'usd',
+            'metadata' => [
+                'user_id' => $user->id,
+            ]
+        ]);
+
+        $clientSecret = $paymentIntent->client_secret;
+    }
+
+    return view('customers.devices.cart', [
+        'cartItems' => $cartItems,
+        'total' => $total,
+        'clientSecret' => $clientSecret,
+    ]);
+}
+
+
+
+    // store product in cart 
+    public function addToCart($id)
+    {
+        $this->cartService->storeProduct($id);
+        return redirect()->back();
+    }
+
+    public function updateQuantity(Request $request)
+    {
+        $this->cartService->updateQuantity($request) ;
+        return redirect()->back();
+    }
+
+    public function removeItem($id) {
+        $this->cartService->removeItem($id) ;
+        return redirect()->back();
+    }
+}

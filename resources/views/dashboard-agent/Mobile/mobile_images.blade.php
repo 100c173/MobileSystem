@@ -53,7 +53,7 @@
             @endforeach
 
         @endif
-        @include('dashboard.modals.addImage')
+        @include('dashboard-agent.modals.addImage')
 
 
     </div>
