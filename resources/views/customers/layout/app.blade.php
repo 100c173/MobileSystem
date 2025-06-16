@@ -7,9 +7,9 @@
     <title>@yield('title')</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <style>
         /* Custom CSS */
         .device-card:hover .device-image {
@@ -58,8 +58,7 @@
 </head>
 
 <body class="font-sans bg-gray-50">
-    @include('customers.partials.navbar')
-
+    @include('customers.partials.navbar', ['number_of_product_in_cart' => $number_of_product_in_cart])
 
     @yield('content')
 

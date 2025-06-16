@@ -65,26 +65,25 @@
                     <input type="text" placeholder="Search mobiles..." class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500">
                     <i class="fas fa-search absolute right-3 top-3.5 text-gray-400"></i>
                 </div>
-                <select class="bg-white px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                    <option>All Brands</option>
-                    <option>Apple</option>
-                    <option>Samsung</option>
-                    <option>Xiaomi</option>
-                    <option>OnePlus</option>
+                <select id="brandFilter" class="bg-white px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <option value="" >All Brands</option>
+                    @foreach($brands as $brand)
+                    <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                    @endforeach
                 </select>
-                <select class="bg-white px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <select id="priceFilter" class="bg-white px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500">
                     <option>Price Range</option>
-                    <option>Under $200</option>
-                    <option>$200 - $500</option>
-                    <option>$500 - $800</option>
-                    <option>Above $800</option>
+                    <option value="<200">Under $200</option>
+                    <option value=">=200<=500">$200 - $500</option>
+                    <option value=">=500<=800">$500 - $800</option>
+                    <option value=">800">Above $800</option>
                 </select>
             </div>
         </div>
 
         <!-- Mobile Cards Grid -->
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div  id="filterContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <!-- Card  -->
             @foreach($agentStock as $agent_mobile)
             <div class="mobile-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
@@ -108,20 +107,23 @@
                         </div>
                     </div>
                     <div class="mt-4 flex justify-between items-center">
-                        <span class="text-2xl font-bold text-gray-900">${{$agent_mobile->price}}</span>
-                        <form action="{{route('cart.store',$agent_mobile->id)}}" method="POST">
-                            @csrf
-                            <button type='submit' class="add-to-cart bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg font-medium transition" data-id="1" data-name="iPhone 13 Pro" data-price="899">
-                                Add to Cart
-                            </button>
-                        </form>
+                        <div class="flex gap-3">
+                            <span class="text-2xl font-bold text-gray-900">${{$agent_mobile->price}}</span>
+                            <form action="{{route('cart.store',$agent_mobile->id)}}" method="POST">
+                                @csrf
+                                <button type='submit' class="add-to-cart bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg font-medium transition" data-id="1" data-name="iPhone 13 Pro" data-price="899">
+                                    Add to Cart
+                                </button>
+                            </form>
+                            <a href="{{route('mobil_details',$agent_mobile->mobile_id)}}">
+                                <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg font-medium transition"> Details </button>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
             @endforeach
         </div>
-
-
     </main>
 
     <!-- Cart Notification -->
@@ -140,84 +142,11 @@
         </div>
     </div>
 
-    <div class="mt-12 flex justify-center">
-        <nav class="flex" aria-label="Pagination">
-            <a href="#" class="relative inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">Previous</a>
-            <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">1</a>
-            <a href="#" aria-current="page" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-indigo-600 text-sm font-medium text-white">2</a>
-            <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">3</a>
-            <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700">...</span>
-            <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">8</a>
-            <a href="#" class="relative inline-flex items-center px-4 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">Next</a>
-        </nav>
-    </div>
+    {{ $agentStock->links('customers.vendor.pagination.custom') }}
     <br><br>
 </div>
 @endsection
 
 @push('scripts')
-<script>
-    // Cart functionality
-    let cart = [];
 
-    // Add to cart buttons
-    const addToCartButtons = document.querySelectorAll('.add-to-cart');
-    const cartCount = document.getElementById('cart-count');
-    const cartNotification = document.getElementById('cart-notification');
-    const notificationMessage = document.getElementById('notification-message');
-
-    addToCartButtons.forEach(button => {
-        button.addEventListener('click', (e) => {
-            const id = e.target.getAttribute('data-id');
-            const name = e.target.getAttribute('data-name');
-            const price = e.target.getAttribute('data-price');
-
-            // Check if item already exists in cart
-            const existingItem = cart.find(item => item.id === id);
-
-            if (existingItem) {
-                existingItem.quantity += 1;
-            } else {
-                cart.push({
-                    id,
-                    name,
-                    price,
-                    quantity: 1
-                });
-            }
-
-            // Update cart count
-            cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
-
-            // Show notification
-            notificationMessage.textContent = `${name} ($${price}) added to your cart!`;
-            cartNotification.classList.add('show');
-
-            // Hide notification after 3 seconds
-            setTimeout(() => {
-                cartNotification.classList.remove('show');
-            }, 3000);
-
-            // Button animation
-            button.innerHTML = '<i class="fas fa-check mr-1"></i> Added';
-            button.classList.add('bg-green-500', 'hover:bg-green-600');
-            button.classList.remove('bg-indigo-600', 'hover:bg-indigo-700');
-
-            setTimeout(() => {
-                button.innerHTML = 'Add to Cart';
-                button.classList.remove('bg-green-500', 'hover:bg-green-600');
-                button.classList.add('bg-indigo-600', 'hover:bg-indigo-700');
-            }, 1500);
-        });
-    });
-
-    // Cart button click
-    document.getElementById('cart-btn').addEventListener('click', () => {
-        if (cart.length === 0) {
-            alert('Your cart is empty!');
-        } else {
-            alert(`You have ${cart.reduce((total, item) => total + item.quantity, 0)} items in your cart.\nTotal: $${cart.reduce((total, item) => total + (item.price * item.quantity), 0)}`);
-        }
-    });
-</script>
 @endpush

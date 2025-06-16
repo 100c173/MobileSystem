@@ -52,13 +52,24 @@ class User extends Authenticatable
         ];
     }
 
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imageable');
+    }
+
+    public function isPrimary()
+    {
+        return $this->morphOne(Image::class,'imageable')->where('is_primary',true);
+    }
+
     public function agentRequest()
     {
         return $this->hasOne(AgentRequest::class);
     }
 
-    public function products(){
-        return $this->belongsToMany(Mobile::class,'agent_mobile_stocks');
+    public function products()
+    {
+        return $this->belongsToMany(Mobile::class, 'agent_mobile_stocks');
     }
 
 

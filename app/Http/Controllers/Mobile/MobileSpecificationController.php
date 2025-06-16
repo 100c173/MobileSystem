@@ -23,6 +23,7 @@ class MobileSpecificationController extends Controller
 
     private function viewForRole(string $adminView, string $agentView, array $data = [])
     {
+
         return Auth::user()->hasRole('admin')
             ? view($adminView, $data)
             : view($agentView, $data);
@@ -40,7 +41,6 @@ class MobileSpecificationController extends Controller
                 'dashboard-agent.mobile.display.mobile_specification',
                 compact('specification', 'mobile')
             );
-
         } catch (ModelNotFoundException $e) {
             try {
                 $mobile = $this->mobileSpecificationService->addSpecification($id); // تأكد من تعديل اسم الدالة في الـService أيضًا
@@ -59,50 +59,31 @@ class MobileSpecificationController extends Controller
         }
     }
 
-    public function createSpecification($id)
+    public function create()
     {
-        try {
-            $mobile = $this->mobileSpecificationService->createSpecification($id);
 
-            return $this->viewForRole(
-                'dashboard.mobile.create.createSpecification',
-                'dashboard-agent.mobile.create.createSpecification',
-                compact('mobile')
-            );
+        return $this->viewForRole(
+            'dashboard.mobile.create.createSpecification',
+            'dashboard-agent.mobile.create.createSpecification',
 
-        } catch (ModelNotFoundException $e) {
-            abort(404, $e->getMessage());
-        } catch (\Exception $e) {
-            Log::error('Error showing mobile specification form: ' . $e->getMessage());
-            abort(500);
-        }
+        );
     }
 
     public function store(MobileSpecificationRequest $request)
     {
         $this->mobileSpecificationService->store($request);
 
-        $successMessage = 'Mobile specification was added successfully.';
-
-        // إذا لم تكن هناك description موجودة، انتقل لإضافة الوصف
-        if (empty($mobile->description)) {
-            return $this->viewForRole(
-                'dashboard.mobile.create.createDescription',
-                'dashboard-agent.mobile.create.createDescription',
-            )->with('success', $successMessage);
-        }
-
-        // إذا كل شيء مكتمل، عد للقائمة
-        return Auth::user()->hasRole('admin')
-            ? redirect()->route('admin.mobiles.index')->with('success', $successMessage)
-            : redirect()->route('agent.mobiles.index')->with('success', $successMessage);
+        if(Auth::user()->hasRole('admin'))
+          return redirect()->route("admin.mobileDescriptions.create");
+        else 
+          return redirect()->route("agent.mobileDescriptions.create");
     }
 
     public function edit($id)
     {
         $specification = MobileSpecification::findOrFail($id);
         $mobile = Mobile::findOrFail($specification->mobile_id);
-        $this->authorize('update',$mobile);
+        $this->authorize('update', $mobile);
         return $this->viewForRole(
             'dashboard.mobile.update.updateSpecification',
             'dashboard-agent.mobile.update.updateSpecification',

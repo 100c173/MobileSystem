@@ -43,7 +43,7 @@ class DatabaseSeeder extends Seeder
             MobileSeeder::class,
             MobileSpecificationSeeder::class,
             MobileDescriptionSeeder::class,
-            MobileImageSeeder::class,
+       //     MobileImageSeeder::class,
         ]);
     }
 }

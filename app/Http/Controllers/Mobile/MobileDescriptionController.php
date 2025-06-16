@@ -30,7 +30,6 @@ class MobileDescriptionController extends Controller
             $description = $data['description'];
             $mobile = $data['mobile'];
             return view($this->resolveViewPath('display.mobile_description'), compact('description', 'mobile'));
-
         } catch (ModelNotFoundException $e) {
             try {
                 $mobile = $this->mobileDescriptionService->add_description($id);
@@ -47,17 +46,10 @@ class MobileDescriptionController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create_description(int $id)
+    public function create()
     {
-        try {
-            $mobile = $this->mobileDescriptionService->create_description($id);
-            return view($this->resolveViewPath('create.createDescription'), compact('mobile'));
-        } catch (ModelNotFoundException $e) {
-            abort(404, $e->getMessage());
-        } catch (\Exception $e) {
-            Log::error('Error creating mobile description: ' . $e->getMessage());
-            abort(500);
-        }
+        return view($this->resolveViewPath('create.createDescription'));
+        
     }
 
     /**
@@ -65,9 +57,11 @@ class MobileDescriptionController extends Controller
      */
     public function store(MobileDescriptionRequest $request)
     {
+       
         $this->mobileDescriptionService->store($request);
 
         $route = Auth::user()->hasRole('admin') ? 'admin.mobiles.index' : 'agent.mobiles.index';
+      
         return redirect()->route($route)->with('success', 'Mobile was successfully added.');
     }
 
@@ -78,7 +72,7 @@ class MobileDescriptionController extends Controller
     {
         $description = MobileDescription::findOrFail($id);
         $mobile = Mobile::findOrFail($description->mobile_id);
-        $this->authorize('update',$mobile);
+        $this->authorize('update', $mobile);
         return view($this->resolveViewPath('update.updateDescription'), compact('description'));
     }
 
@@ -88,7 +82,7 @@ class MobileDescriptionController extends Controller
     public function update(MobileDescriptionRequest $request, int $id)
     {
         $this->mobileDescriptionService->update($request, $id);
-         $route = Auth::user()->hasRole('admin') ? 'admin.mobiles.index' : 'agent.mobiles.index';
+        $route = Auth::user()->hasRole('admin') ? 'admin.mobiles.index' : 'agent.mobiles.index';
         return redirect()->route($route)->with('success', 'Mobile description updated');
     }
 

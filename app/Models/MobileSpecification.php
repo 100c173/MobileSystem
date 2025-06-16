@@ -26,7 +26,11 @@ class MobileSpecification extends Model
     ];
 
     protected $casts = [
-        'storage' => 'array',
+        'storage'           => 'array',
+        'camera'            => 'array',
+        'battery'           => 'array',
+        'connectivity'      => 'array',
+        'security_features' => 'array',
     ];
 
     public function mobile()

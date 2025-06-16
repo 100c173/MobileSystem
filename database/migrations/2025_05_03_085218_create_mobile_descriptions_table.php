@@ -25,12 +25,12 @@ return new class extends Migration
             $table->text('connectivity_desc');   // Info on network support, ports, and wireless options
 
             $table->text('battery_desc');        // Battery life, charging speed, and endurance review
-            $table->text('extra_features');      // Additional non-core features (e.g., water resistance, stylus)
+            $table->json('key_features');      // Additional non-core features (e.g., water resistance, stylus)
 
             $table->text('security_privacy');    // Security mechanisms and privacy protections available
 
-            $table->text('pros');                // Main advantages of the mobile device
-            $table->text('cons');                // Main drawbacks or disadvantages
+            $table->json('pros');                // Main advantages of the mobile device
+            $table->json('cons');                // Main drawbacks or disadvantages
 
             $table->timestamps(); // created_at and updated_at
         });

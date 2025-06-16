@@ -4,8 +4,10 @@ use App\Http\Controllers\Customer\CartController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Customer\HomeController;
 
+
 Route::get('home',[HomeController::class,'homePage']);
-Route::get('latest_devices',[HomeController::class,'latestDevices']);
+Route::get('latest_devices',[HomeController::class,'latestDevices'])->name('lastest.mobiles');
+Route::get('latest_devices/filter',[HomeController::class,'filterMobiles'])->name('mobiles.filter');
 Route::get('mobile_details/{id}',[HomeController::class,'mobileDetails'])->name('mobil_details');
 Route::get('agent_stocks',[HomeController::class,'agentStock'])->name('agent_stocks');
 

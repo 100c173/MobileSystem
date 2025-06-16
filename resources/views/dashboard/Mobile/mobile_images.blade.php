@@ -19,7 +19,7 @@
             @foreach ($images as $image )
                 <div class="col-xl-4 col-md-4" style="border-radius: 25px;">
                     <div class="card custom-card text-center">
-                        <img class="card-img-top w-100" src="{{asset($image->image_url)}}" alt="{{$image->image_url}}" style="width : 250px;height:300px">
+                        <img class="card-img-top w-100" src="{{asset($image->url)}}" alt="{{$image->url}}" style="width : 250px;height:300px">
                         <div class="card-body">
                             <h2 class="card-title">{{$mobile->name }}</h2>
                             <p class="card-text">{{$image->caption}}</p>

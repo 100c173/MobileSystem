@@ -23,7 +23,7 @@
                         </div>
                         <div class="col-sm-12 col-md-12">
                             <div class="custom-file">
-                                <input class="form-control" id="image_url" name="image_url" type="file">
+                                <input class="form-control" id="url" name="url" type="file">
                             </div>
                         </div>
                     </div>

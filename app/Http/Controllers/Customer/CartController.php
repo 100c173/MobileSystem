@@ -20,8 +20,9 @@ class CartController extends Controller
     // Display cart items
     public function index()
     {
+        $number_of_product_in_cart = CartItem::count();
         $cartItems =  $this->cartService->getAllCartItems();
-        return view('customers.devices.cart', compact('cartItems'));
+        return view('customers.devices.cart', compact('cartItems','number_of_product_in_cart'));
     }
 
     // store product in cart 

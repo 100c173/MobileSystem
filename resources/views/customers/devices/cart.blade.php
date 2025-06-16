@@ -50,7 +50,7 @@
                 @foreach($cartItems as $item)
                 <tr data-id="{{ $item->product_id }}" class="cart-item border-b">
                     <td class="p-2">
-                        <img src="{{ $item->product->mobile->primaryImage->image_url }}" alt="{{ $item->product->name }}" class="w-16 h-16 object-cover rounded">
+                        <img src="{{ $item->product->mobile->primaryImage->url }}" alt="{{ $item->product->name }}" class="w-16 h-16 object-cover rounded">
                     </td>
                     <td class="p-2">{{ $item->product->mobile->name }}</td>
                     <td class="p-2">Mobile phone</td>

@@ -20,14 +20,16 @@ class Mobile extends Model
     {
         return $this->hasOne(MobileDescription::class);
     }
+
     public function images()
     {
-        return $this->hasMany(MobileImage::class);
+        return $this->morphMany(Image::class, 'imageable');
     }
+
 
     public function primaryImage()
     {
-        return $this->hasOne(MobileImage::class)->where('is_primary', true);
+        return $this->morphOne(Image::class,'imageable')->where('is_primary', true);
     }
 
     public function user()
@@ -47,8 +49,8 @@ class Mobile extends Model
     {
         $description = $this->description;
         $specification = $this->specification;
-
-        return  $description->performance_cpu . ' ' . $specification->connectivity;
+      
+        return   $specification?->ram . ' , '  . $description->performance_cpu ; 
     }
 
     public function getDateFormattedAttribute()

@@ -12,6 +12,7 @@ use App\Traits\ManageFiles;
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Mobile\MobileRequest;
+use App\Models\Image;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\AddNewMobileNotification;
 use App\Notifications\acceptedMobileNotification;
@@ -59,10 +60,11 @@ class MobileService
     public function destroy($id)
     {
         $mobile = Mobile::findOrfail($id);
-        $images = MobileImage::where('mobile_id', $mobile->id)->get();
+        $images = Image::where('imageable_id', $mobile->id)->get();
         foreach ($images as $image) {
-            $this->deleteFile($image->image_url);
+            $this->deleteFile($image->url);
         }
+        $mobile->images()->delete();
         $mobile->delete();
         return true;
     }
