@@ -11,20 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-<<<<<<< HEAD:database/migrations/2025_05_03_090002_create_images_table.php
+
         Schema::create('images', function (Blueprint $table) {
-=======
-        
-        Schema::create('mobile_images', function (Blueprint $table) {
->>>>>>> Zeina:database/migrations/2025_05_03_090002_create_mobile_images_table.php
+
             $table->id(); // Primary key
-
-
             $table->string('url');        // URL or path to the image file
             $table->boolean('is_primary')->default(false);       // Flag indicating if this is the main image
             $table->text('caption')->nullable(); // Optional image caption or description
             $table->morphs('imageable');
-
             $table->timestamps(); // created_at and updated_at
         });
     }
@@ -34,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('mobile_images');
+        Schema::dropIfExists('images');
     }
 };
