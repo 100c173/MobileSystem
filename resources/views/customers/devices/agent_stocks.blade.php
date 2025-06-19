@@ -86,8 +86,13 @@
             @foreach($agentStock as $agent_mobile)
             <div class="mobile-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
                 <div class="relative">
-                    <img src="{{$agent_mobile->mobile->primaryImage->url}}" alt="{{$agent_mobile->mobile->name}}" class="w-full h-48 object-cover">
-                    <span class="absolute top-2 right-2 bg-indigo-600 text-white text-xs px-2 py-1 rounded-full">NEW</span>
+                    @if($agent_mobile->mobile->primaryImage)
+                        <img src="{{$agent_mobile->mobile->primaryImage->url}}" alt="{{$agent_mobile->mobile->name}}" class="w-full h-48 object-cover">
+                        <span class="absolute top-2 right-2 bg-indigo-600 text-white text-xs px-2 py-1 rounded-full">NEW</span>
+                    @else
+                        <img src="" alt="{{$agent_mobile->mobile->name}}" class="w-full h-48 object-cover">
+                        <span class="absolute top-2 right-2 bg-indigo-600 text-white text-xs px-2 py-1 rounded-full">NEW</span>
+                    @endif
                 </div>
                 <div class="p-5">
                     <div class="flex justify-between items-start">

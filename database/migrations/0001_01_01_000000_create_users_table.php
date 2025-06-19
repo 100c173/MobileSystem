@@ -19,14 +19,13 @@ return new class extends Migration
             $table->string('password');
             $table->string('stripe_account_id')->nullable();
             $table->rememberToken();
-            $table->timestamps();            
+            $table->timestamps();
             $table->SoftDeletes();
-
             // حقل الحظر
             $table->timestamp('banned_until')->nullable(); // للحظر المؤقت
             $table->boolean('is_permanently_banned')->default(false); // للحظر الدائم
         });
-        
+
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();

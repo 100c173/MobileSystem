@@ -48,17 +48,18 @@ class CartController extends Controller
 
             $clientSecret = $paymentIntent->client_secret;
         }
-
+        $number_of_product_in_cart = CartItem::count();
         return view('customers.devices.cart', [
-            'cartItems' => $cartItems,
-            'total' => $total,
-            'clientSecret' => $clientSecret,
+            'cartItems'                 => $cartItems,
+            'total'                     => $total,
+            'clientSecret'              => $clientSecret,
+            'number_of_product_in_cart' => $number_of_product_in_cart,
         ]);
     }
 
 
 
-    // store product in cart 
+    // store product in cart
     public function addToCart($id)
     {
         try {

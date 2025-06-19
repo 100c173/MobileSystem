@@ -50,7 +50,11 @@
                 @foreach($cartItems as $item)
                 <tr data-id="{{ $item->product_id }}" class="cart-item border-b">
                     <td class="p-2">
-                        <img src="{{ $item->product->mobile->primaryImage->url }}" alt="{{ $item->product->name }}" class="w-16 h-16 object-cover rounded">
+                        @if($item->product->mobile->primaryImage)
+                            <img src="{{ $item->product->mobile->primaryImage->url }}" alt="{{ $item->product->name }}" class="w-16 h-16 object-cover rounded">
+                        @else
+                            <img src="" alt="{{ $item->product->name }}" class="w-16 h-16 object-cover rounded">
+                        @endif
                     </td>
                     <td class="p-2">{{ $item->product->mobile->name }}</td>
                     <td class="p-2">Mobile phone</td>
@@ -69,26 +73,30 @@
                         <form action="{{route('cart.removeItem',$item->id)}}" method="post">
                             @csrf
                             @method('delete')
-                          <button type='submit' class="remove-btn text-red-600 hover:underline">Remove</button>
+                            <button type='submit' class="remove-btn text-red-600 hover:underline">Remove</button>
                         </form>
                     </td>
                 </tr>
                 @endforeach
+            </tbody>
+        </table>
 
-            <div class="mt-6 text-right font-bold text-xl">
-                Total: <span id="total-price"></span>
-            </div>
+        <!-- ✅ خارج الجدول الآن -->
+        <div class="mt-6 text-right font-bold text-xl">
+            Total: <span id="total-price"></span>
+        </div>
 
-            <!-- Stripe Payment Form -->
-            <div class="mt-10 bg-white p-6 rounded shadow-md max-w-md mx-auto">
-                <h2 class="text-xl font-semibold mb-4">  Enter the payment data :</h2>
-                <form id="payment-form">
-                    @csrf
-                    <div id="card-element" class="mb-4 border p-2 rounded"><!-- Stripe injects here --></div>
-                    <button id="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Pay now </button>
-                    <div id="error-message" class="text-red-500 mt-2"></div>
-                </form>
-            </div>
+        <!-- Stripe Payment Form -->
+        <div class="mt-10 bg-white p-6 rounded shadow-md max-w-md mx-auto">
+            <h2 class="text-xl font-semibold mb-4">Enter the payment data:</h2>
+            <form id="payment-form">
+                @csrf
+                <div id="card-element" class="mb-4 border p-2 rounded"><!-- Stripe injects here --></div>
+                <button id="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Pay now</button>
+                <div id="error-message" class="text-red-500 mt-2"></div>
+            </form>
+        </div>
+
         @endif
     </div>
 </div>

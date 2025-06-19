@@ -2,59 +2,54 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use App\Services\Profile\ProfileService;
+use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\ProfileUpdateRequest;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display the user's profile form.
-     */
-    public function edit(Request $request): View
+    protected $profileService;
+
+    public function __construct(ProfileService $profileService)
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
+        $this->profileService = $profileService;
     }
 
-    /**
-     * Update the user's profile information.
-     */
+    public function index(Request $request): View
+    {
+        $user = $this->profileService->getAuthenticatedUser();
+        $number_of_product_in_cart = $this->profileService->getCartItemCount();
+
+        return view('profile.index', compact('user', 'number_of_product_in_cart', 'request'));
+    }
+
+    public function edit(Request $request): View
+    {
+        $number_of_product_in_cart = $this->profileService->getCartItemCount();
+        return view('profile.index', [
+            'user' => $request->user(),
+            'number_of_product_in_cart' => $number_of_product_in_cart,
+        ])->with('success', 'we');
+    }
+
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
-
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
-
-        $request->user()->save();
+        $this->profileService->updateUserProfile($request->user(), $request->validated());
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
-    /**
-     * Delete the user's account.
-     */
     public function destroy(Request $request): RedirectResponse
     {
         $request->validateWithBag('userDeletion', [
             'password' => ['required', 'current_password'],
         ]);
 
-        $user = $request->user();
+        $this->profileService->deleteUserAccount($request);
 
-        Auth::logout();
-
-        $user->delete();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return Redirect::to('/');
+        return Redirect::to('/home');
     }
 }

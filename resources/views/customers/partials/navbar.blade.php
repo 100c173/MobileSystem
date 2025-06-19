@@ -50,7 +50,7 @@
 
                         <!-- عناصر القائمة -->
                         <div class="py-1">
-                            <a href="#" class="flex items-center px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-all">
+                            <a href="{{route('profile.index')}}" class="flex items-center px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-all">
                                 <i class="fas fa-user-circle mr-3 text-gray-400 w-4 text-center"></i>
                                 My Profile
                             </a>

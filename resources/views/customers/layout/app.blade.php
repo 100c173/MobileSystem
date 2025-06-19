@@ -60,7 +60,7 @@
 <body class="font-sans bg-gray-50">
     @include('customers.partials.navbar', ['number_of_product_in_cart' => $number_of_product_in_cart])
     @include('customers.components.alert')
-    
+
     @yield('content')
 
 
