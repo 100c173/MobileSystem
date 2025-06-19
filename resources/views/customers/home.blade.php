@@ -943,33 +943,68 @@
                                     <label for="commercial-number" class="block text-sm font-medium text-gray-700 mb-1">Commercial Number</label>
                                     <input name="commercial_number" type="text" id="commercial-number" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
                                 </div>
-                                <div>
-                                    <label for="address" class="block text-sm font-medium text-gray-700 mb-1">Business Address</label>
-                                    <textarea name="address" id="address" rows="2" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+                                    <!-- Country Selector -->
+                                    <div class="relative group">
+                                        <label for="country" class="block text-sm font-medium text-gray-700 mb-1.5">Country</label>
+                                        <div class="relative">
+                                            <select
+                                                id="country"
+                                                name="country_id"
+                                                required
+                                                class="appearance-none w-full px-4 py-3 pr-10 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all duration-300 bg-white text-gray-800 shadow-sm hover:border-gray-400 cursor-pointer">
+                                                <option value="">Select Country</option>
+                                                @foreach($countries as $country)
+                                                <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                                                <svg class="h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Province Selector -->
+                                    <div class="relative group">
+                                        <label for="province" class="block text-sm font-medium text-gray-700 mb-1.5">Province/State</label>
+                                        <div class="relative">
+                                            <select
+                                                id="province"
+                                                name="city_id"
+                                                required
+                                                class="appearance-none w-full px-4 py-3 pr-10 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all duration-300 bg-gray-50 text-gray-500 shadow-sm cursor-not-allowed"
+                                                disabled>
+                                                <option value="">Select Country First</option>
+                                            </select>
+                                            <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                                                <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-1">Store Location</label>
                                     <div class="border rounded-lg p-2 h-48 mb-2">
                                         <!-- Map placeholder -->
-                                        <div class="bg-gray-200 h-full rounded-lg flex items-center justify-center text-gray-500">
-                                            <div class="text-center">
-                                                <i class="fas fa-map-pin text-2xl mb-2"></i>
-                                                <p class="text-sm">Click on the map to select your store location</p>
-                                            </div>
-                                        </div>
+                                        <div id="map" class="border rounded-lg p-2 h-48 mb-2"></div>
+
+                                        <p class="mt-4 text-sm text-gray-700">Address: <span id="address" class="font-medium">Loading...</span></p>
+
+                                    
+                                        <input type="hidden" name="latitude" id="latitude">
+                                        <input type="hidden" name="address" id="address">
+                                        <input type="hidden" name="longitude" id="longitude">
+
                                     </div>
-                                    <div class="grid grid-cols-2 gap-4">
-                                        <div>
-                                            <label for="latitude" class="block text-sm font-medium text-gray-700 mb-1">Latitude</label>
-                                            <input name="latitude" type="text" id="latitude" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                                        </div>
-                                        <div>
-                                            <label for="longitude" class="block text-sm font-medium text-gray-700 mb-1">Longitude</label>
-                                            <input name="longitude" type="text" id="longitude" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                                        </div>
-                                    </div>
+                                    <br><br><br><br>
+
                                 </div>
+
 
                                 <div class="pt-2">
                                     <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-lg font-semibold transition">
@@ -1103,6 +1138,141 @@
 </div>
 @push('scripts')
 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize map
+        const map = L.map('map').setView([35.5186, 35.7916], 7);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        let marker = L.marker([35.5186, 35.7916], {
+            draggable: true
+        }).addTo(map);
+        document.getElementById('latitude').value = 35.5186;
+        document.getElementById('longitude').value = 35.7916;
+
+        // Address lookup function
+        function updateAddress(lat, lon) {
+            fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&accept-language=en`)
+                .then(res => res.json())
+                .then(data => {
+                    const address = data.display_name || 'Location selected';
+                    document.getElementById('address').textContent = address;
+
+                    const cityName = data.address.state || data.address.county ||
+                        data.address.city || data.address.town ||
+                        data.address.village || '';
+
+                    if (cityName) {
+                        const provinceSelect = document.getElementById('province');
+                        for (let i = 0; i < provinceSelect.options.length; i++) {
+                            if (provinceSelect.options[i].text.toLowerCase() === cityName.toLowerCase()) {
+                                provinceSelect.selectedIndex = i;
+                                break;
+                            }
+                        }
+                    }
+                });
+        }
+
+        // Map click handler
+        map.on('click', function(e) {
+            const lat = e.latlng.lat;
+            const lon = e.latlng.lng;
+            marker.setLatLng([lat, lon]);
+            document.getElementById('latitude').value = lat;
+            document.getElementById('longitude').value = lon;
+            updateAddress(lat, lon);
+        });
+
+        // Marker drag handler
+        marker.on('dragend', function(e) {
+            const pos = marker.getLatLng();
+            document.getElementById('latitude').value = pos.lat;
+            document.getElementById('longitude').value = pos.lng;
+            updateAddress(pos.lat, pos.lng);
+        });
+
+        // Initial address update
+        updateAddress(35.5186, 35.7916);
+
+        // Country change handler
+        document.getElementById('country').addEventListener('change', function() {
+            const countryId = this.value;
+            const provinceSelect = document.getElementById('province');
+            const provinceWrapper = provinceSelect.closest('.relative');
+
+            provinceSelect.innerHTML = '<option value="">Loading...</option>';
+            provinceSelect.disabled = true;
+            provinceSelect.classList.remove('bg-white', 'text-gray-800', 'hover:border-gray-400', 'cursor-pointer');
+            provinceSelect.classList.add('bg-gray-50', 'text-gray-500', 'cursor-not-allowed');
+
+            if (countryId) {
+                // Add loading animation
+                provinceWrapper.classList.add('animate-pulse');
+
+                fetch(`/get-provinces/${countryId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        let options = '<option value="">Select Province</option>';
+
+                        if (data.length > 0) {
+                            data.forEach(province => {
+                                // Include both ID and name in the option
+                                options += `<option 
+                                        value="${province.id}" 
+                                        data-name="${province.name}"
+                                      >${province.name}</option>`;
+                            });
+                            provinceSelect.disabled = false;
+                            provinceSelect.classList.remove('bg-gray-50', 'text-gray-500', 'cursor-not-allowed');
+                            provinceSelect.classList.add('bg-white', 'text-gray-800', 'hover:border-gray-400', 'cursor-pointer');
+                        } else {
+                            options = '<option value="">No provinces available</option>';
+                        }
+
+                        provinceSelect.innerHTML = options;
+                        provinceWrapper.classList.remove('animate-pulse');
+                    })
+                    .catch(error => {
+                        provinceSelect.innerHTML = '<option value="">Error loading provinces</option>';
+                        provinceWrapper.classList.remove('animate-pulse');
+                    });
+            } else {
+                provinceSelect.innerHTML = '<option value="">Select Country First</option>';
+            }
+        });
+
+        // Province change handler - move map to selected province
+        document.getElementById('province').addEventListener('change', function() {
+            const selectedOption = this.options[this.selectedIndex];
+            if (!selectedOption.value) return;
+
+            const provinceName = selectedOption.getAttribute('data-name');
+            const countryName = document.getElementById('country').options[document.getElementById('country').selectedIndex].text;
+
+            const query = `${provinceName}, ${countryName}`;
+
+            fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.length > 0) {
+                        const lat = parseFloat(data[0].lat);
+                        const lon = parseFloat(data[0].lon);
+                        map.setView([lat, lon], 12);
+                        marker.setLatLng([lat, lon]);
+                        document.getElementById('latitude').value = lat;
+                        document.getElementById('longitude').value = lon;
+                        document.getElementById('address').textContent = data[0].display_name;
+                    } else {
+                        document.getElementById('address').textContent = 'Location not found';
+                    }
+                });
+        });
+    });
+
+
+    //-------------------------------
     // Mobile Menu Toggle
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');

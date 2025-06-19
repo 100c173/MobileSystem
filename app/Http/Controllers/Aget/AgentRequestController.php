@@ -37,7 +37,7 @@ class AgentRequestController extends Controller
     public function store(AgentRequestRequest $request)
     {
         try {
-            $agentRequest = $this->agentRequestServiceCustom->store($request);
+            $this->agentRequestServiceCustom->store($request);
             return redirect()->route('home.page')->with('success', __('Your request has been submitted successfully and is under review. You will receive a notification soon with the result.'));
         } catch (AgentRequestNotFoundException $e) {
             return redirect()->route('home.page')->with('error' , __($e->getMessage()));

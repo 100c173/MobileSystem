@@ -12,10 +12,11 @@ class AgentRequest extends Model
         'user_id',
         'business_name',
         'commercial_number',
+        'country_id',
+        'city_id',
         'address',
         'latitude',
         'longitude',
-        'notes',
         'status'
     ];
 

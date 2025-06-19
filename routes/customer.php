@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Aget\AgentRequestController;
+use App\Http\Controllers\Country_City\CountryController;
 use App\Http\Controllers\Customer\CartController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Customer\HomeController;
@@ -16,6 +17,8 @@ Route::get('agent_devices/filter', [HomeController::class, 'filterAgentMobiles']
 
 Route::get('mobile_details/{id}', [HomeController::class, 'mobileDetails'])->name('mobil_details');
 Route::get('agent_stocks', [HomeController::class, 'agentStock'])->name('agent_stocks');
+
+Route::get('/get-provinces/{country}', [CountryController::class, 'getProvinces']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');

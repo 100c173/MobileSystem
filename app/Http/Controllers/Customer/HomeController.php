@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\CartItem;
+use App\Models\Country;
 use App\Models\Mobile;
 use App\Services\customer\HomeService;
 use Illuminate\Support\Facades\Log;
@@ -23,8 +24,9 @@ class HomeController extends Controller
     // Display the customer home page
     public function homePage()
     {
-        $number_of_product_in_cart = CartItem::count();
-        return view('customers.home',compact('number_of_product_in_cart'));
+        $number_of_product_in_cart = CartItem::count(); //cach
+        $countries = Country::all();//cach 
+        return view('customers.home',compact('number_of_product_in_cart','countries'));
     }
 
     // Display latest mobile devices
