@@ -16,8 +16,11 @@ return new class extends Migration
             $table->id();
 
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+
             $table->foreignId('country_id')->constrained('countries')->cascadeOnDelete();
             $table->foreignId('city_id')->constrained('cities')->cascadeOnDelete();
+
+            $table->string('address')->nullable();
 
             $table->string('business_name');
             $table->string('commercial_number');

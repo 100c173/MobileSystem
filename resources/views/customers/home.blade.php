@@ -107,7 +107,7 @@
     <section id="latest-devices" class="py-16 bg-white">
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center mb-10">
-                <h2 class="text-3xl font-bold text-gray-800">Latest Devices</h2>
+                <h2 class="text-3xl font-bold text-gray-800">Latest Devices & Shope Devices</h2>
                 <a href="/latest_devices" class="text-indigo-600 hover:text-indigo-800 font-medium flex items-center">
                     View All <i class="fas fa-arrow-right ml-2"></i>
                 </a>
@@ -216,13 +216,8 @@
     <section id="shop" class="py-16 bg-white">
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center mb-10">
-                <h2 class="text-3xl font-bold text-gray-800">Shop Devices</h2>
-                <div class="flex items-center space-x-2">
-                    <button id="view-agents-btn" class="px-4 py-2 bg-indigo-600 text-white rounded-lg font-medium">Agents' Devices</button>
-                    <button id="view-users-btn" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium">Users' Devices</button>
-                </div>
+                <h2 class="text-3xl font-bold text-gray-800">Customer's Devices</h2>
             </div>
-
 
             <!-- Agents' Devices (Visible by default) -->
             <div id="agents-devices" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -786,113 +781,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Nearest Agents Section -->
-    <section id="find-agents" class="py-16 bg-indigo-50">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-2">Find Nearest Agents</h2>
-            <p class="text-center text-gray-600 max-w-2xl mx-auto mb-12">Looking for a specific device? Find authorized agents near you who have it in stock.</p>
-
-            <div class="bg-white rounded-xl shadow-md p-6">
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    <div>
-                        <h3 class="text-xl font-bold mb-4">Search Filters</h3>
-                        <div class="space-y-4">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Device Model</label>
-                                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="E.g. iPhone 14 Pro Max">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Location</label>
-                                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Enter your location">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Distance</label>
-                                <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                                    <option>5 miles</option>
-                                    <option>10 miles</option>
-                                    <option>25 miles</option>
-                                    <option>50 miles</option>
-                                    <option>Any distance</option>
-                                </select>
-                            </div>
-                            <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-lg transition">
-                                Search Agents
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="lg:col-span-2">
-                        <div class="border rounded-lg p-4 h-96">
-                            <!-- Map placeholder -->
-                            <div class="bg-gray-200 h-full rounded-lg flex items-center justify-center text-gray-500">
-                                <div class="text-center">
-                                    <i class="fas fa-map-marked-alt text-4xl mb-2"></i>
-                                    <p>Map will display here with agent locations</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Results will appear here -->
-                <div class="mt-8">
-                    <h4 class="font-bold text-lg mb-4">Agents Near You</h4>
-                    <div class="space-y-4">
-                        <!-- Agent 1 -->
-                        <div class="p-4 border rounded-lg hover:bg-gray-50 cursor-pointer">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <h5 class="font-bold">MobileTech Solutions</h5>
-                                    <p class="text-gray-600">123 Tech Street, New York, NY</p>
-                                    <div class="mt-2 flex items-center">
-                                        <div class="flex text-yellow-400 text-sm">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star-half-alt"></i>
-                                        </div>
-                                        <span class="text-gray-500 text-sm ml-1">(342 reviews)</span>
-                                        <span class="ml-3 text-sm text-gray-500"><i class="fas fa-mobile-alt mr-1"></i> 3 devices available</span>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="text-gray-500">1.2 miles away</p>
-                                    <a href="#" class="text-indigo-600 hover:underline text-sm">View profile</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Agent 2 -->
-                        <div class="p-4 border rounded-lg hover:bg-gray-50 cursor-pointer">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <h5 class="font-bold">iHub Electronics</h5>
-                                    <p class="text-gray-600">45 Fifth Avenue, New York, NY</p>
-                                    <div class="mt-2 flex items-center">
-                                        <div class="flex text-yellow-400 text-sm">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                        <span class="text-gray-500 text-sm ml-1">(512 reviews)</span>
-                                        <span class="ml-3 text-sm text-gray-500"><i class="fas fa-mobile-alt mr-1"></i> 5 devices available</span>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="text-gray-500">2.7 miles away</p>
-                                    <a href="#" class="text-indigo-600 hover:underline text-sm">View profile</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Become an Agent Section -->
     <section id="agents" class="agent-section py-16">

@@ -18,6 +18,8 @@ Route::get('agent_devices/filter', [HomeController::class, 'filterAgentMobiles']
 Route::get('mobile_details/{id}', [HomeController::class, 'mobileDetails'])->name('mobil_details');
 Route::get('agent_stocks', [HomeController::class, 'agentStock'])->name('agent_stocks');
 
+Route::post('/search-agents',[HomeController::class,'searchAgents'])->name('search.agents');
+
 Route::get('/get-provinces/{country}', [CountryController::class, 'getProvinces']);
 
 Route::middleware('auth')->group(function () {
