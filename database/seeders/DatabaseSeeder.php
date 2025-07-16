@@ -37,13 +37,13 @@ class DatabaseSeeder extends Seeder
             AdminSeeder::class,
             AgentSeeder::class,
             CustomSeeder::class,
-            AgentRequestSeeder::class,
+            CountriesSeeder::class,
+            CitiesSeeder::class,
             BrandSeeder::class,
             OperatingSystemSeeder::class,
             MobileSeeder::class,
             MobileSpecificationSeeder::class,
             MobileDescriptionSeeder::class,
-       //     MobileImageSeeder::class,
         ]);
     }
 }

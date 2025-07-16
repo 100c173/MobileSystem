@@ -26,7 +26,9 @@ class AgentRequestRequest extends FormRequest
         return [
             'business_name'      => 'required|string|max:255',
             'commercial_number'  => 'required|string|max:50',
-            'address'            => 'required|string|max:255',
+    
+            'country_id'         => 'required|exists:countries,id',
+            'city_id'           => 'required|exists:cities,id',
             'latitude'           => 'required|numeric|between:-90,90',
             'longitude'          => 'required|numeric|between:-180,180',
         ];
@@ -37,13 +39,15 @@ class AgentRequestRequest extends FormRequest
         return [
             'business_name.required' => 'The business name is required.',
             'commercial_number.required' => 'The commercial number is required.',
-            'address.required' => 'The address is required.',
+            
+            'country_id.required' => 'The country selection is required.',
+            'country_id.exists' => 'The selected country is invalid.',
+            'city_id.required' => 'The city selection is required.',
+            'city_id.exists' => 'The selected city is invalid.',
             'latitude.required' => 'The latitude is required.',
             'latitude.between' => 'The latitude must be between -90 and 90.',
             'longitude.required' => 'The longitude is required.',
             'longitude.between' => 'The longitude must be between -180 and 180.',
         ];
     }
-
-    
 }

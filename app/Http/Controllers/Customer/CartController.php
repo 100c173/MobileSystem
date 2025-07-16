@@ -21,8 +21,6 @@ class CartController extends Controller
     }
 
     // Display cart items
-
-
     public function index()
     {
         $user = Auth::user();
@@ -48,11 +46,12 @@ class CartController extends Controller
 
             $clientSecret = $paymentIntent->client_secret;
         }
-
+        $number_of_product_in_cart = CartItem::count();
         return view('customers.devices.cart', [
             'cartItems' => $cartItems,
             'total' => $total,
             'clientSecret' => $clientSecret,
+            'number_of_product_in_cart'=>$number_of_product_in_cart,
         ]);
     }
 

@@ -61,7 +61,7 @@ class User extends Authenticatable
 
     public function isPrimary()
     {
-        return $this->morphOne(Image::class,'imageable')->where('is_primary',true);
+        return $this->morphOne(Image::class, 'imageable')->where('is_primary', true);
     }
 
     public function agentRequest()
@@ -98,7 +98,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(Mobile::class);
     }
-    
+
     public function cartItems()
     {
         return $this->hasMany(CartItem::class);
@@ -106,6 +106,11 @@ class User extends Authenticatable
 
     public function agentMobileStock()
     {
-        return $this->hasMany(AgentMobileStock::class,'user_id');
+        return $this->hasMany(AgentMobileStock::class, 'user_id');
+    }
+
+    public function agentProfile()
+    {
+        return $this->hasOne(AgentProfile::class, 'agent_id');
     }
 }

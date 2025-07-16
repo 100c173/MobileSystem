@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         
-        Schema::create('agents_profiles', function (Blueprint $table) {
+        Schema::create('agent_profiles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Foreign key to users table
-            $table->string('phone');
-            $table->string('address');
+            $table->foreignId('agent_id')->constrained('users')->onDelete('cascade'); // Foreign key to users table
+            $table->string('phone')->nullable();
+            $table->string('address')->nullable();
             $table->decimal('latitude', 10, 7)->nullable();  // Nullable latitude for location
             $table->decimal('longitude', 10, 7)->nullable(); // Nullable longitude for location
             $table->timestamps(); // created_at and updated_at

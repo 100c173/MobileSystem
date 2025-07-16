@@ -4,11 +4,15 @@ namespace App\Http\Controllers\Customer;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\AgentProfile;
 use App\Models\Brand;
 use App\Models\CartItem;
+use App\Models\Country;
 use App\Models\Mobile;
+use App\Models\User;
 use App\Services\customer\HomeService;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -23,16 +27,17 @@ class HomeController extends Controller
     // Display the customer home page
     public function homePage()
     {
-        $number_of_product_in_cart = CartItem::count();
-        return view('customers.home',compact('number_of_product_in_cart'));
+        $number_of_product_in_cart = CartItem::count(); //cach
+        $countries = Country::all(); //cach 
+        return view('customers.home', compact('number_of_product_in_cart', 'countries'));
     }
 
     // Display latest mobile devices
     public function latestDevices()
     {
         try {
-            [$newMobiles, $brands, $oses,$number_of_product_in_cart] = $this->homeService->getLatestDevices();
-            return view('customers.devices.latest_devices', compact('newMobiles', 'brands', 'oses','number_of_product_in_cart'));
+            [$newMobiles, $brands, $oses, $number_of_product_in_cart] = $this->homeService->getLatestDevices();
+            return view('customers.devices.latest_devices', compact('newMobiles', 'brands', 'oses', 'number_of_product_in_cart'));
         } catch (\Exception $e) {
             Log::error('Error fetching latest devices: ' . $e->getMessage());
             return back()->withErrors('Failed to load latest devices.');
@@ -50,7 +55,7 @@ class HomeController extends Controller
     public function filterAgentMobiles(Request $request)
     {
         $agentStock = $this->homeService->getFilterAgentMobiles($request);
-        return view('customers.partials.agent_mobile_card',compact('agentStock'));
+        return view('customers.partials.agent_mobile_card', compact('agentStock'));
     }
 
     // Display detailed view of a single mobile device
@@ -58,8 +63,9 @@ class HomeController extends Controller
     {
         try {
             $number_of_product_in_cart = CartItem::count();
+            $countries = Country::all(); //cach 
             $mobile = $this->homeService->getMobileDetails($id);
-            return view('customers.devices.more_details', compact('mobile','number_of_product_in_cart'));
+            return view('customers.devices.more_details', compact('mobile', 'number_of_product_in_cart', 'countries'));
         } catch (\Exception $e) {
             Log::error("Error fetching mobile details for ID $id: " . $e->getMessage());
             return back()->withErrors('Failed to load mobile details.');
@@ -71,11 +77,21 @@ class HomeController extends Controller
     {
         try {
             $number_of_product_in_cart = CartItem::count();
-            [$agentStock,$brands] = $this->homeService->getAgentStock();
-            return view('customers.devices.agent_stocks', compact('agentStock','number_of_product_in_cart','brands'));
+            [$agentStock, $brands] = $this->homeService->getAgentStock();
+            return view('customers.devices.agent_stocks', compact('agentStock', 'number_of_product_in_cart', 'brands'));
         } catch (\Exception $e) {
             Log::error('Error fetching agent stock: ' . $e->getMessage());
             return back()->withErrors('Failed to load agent stock.');
         }
     }
+    /**
+     * Search for agents based on criteria
+     */
+    public function searchAgents(Request $request)
+    {
+        $agent = $this->homeService->searchAgents($request);
+        return $agent ; 
+    }
+
+
 }

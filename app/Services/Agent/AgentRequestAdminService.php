@@ -2,7 +2,7 @@
 
 namespace App\Services\Agent;
 
-
+use App\Models\AgentProfile;
 use App\Models\AgentRequest;
 use App\Notifications\ApprovedRequestNotification;
 use App\Notifications\RejectedRequestNotification;
@@ -78,6 +78,12 @@ class AgentRequestAdminService
         $user->syncRoles(['agent']);
         $agentRequest->status = 'approved';
         $agentRequest->save();
+
+        AgentProfile::create([
+            'agent_id' => $user->id , 
+            'latitude' => $agentRequest->latitude,
+            'longitude'=> $agentRequest->longitude,
+        ]);
 
         $user->notify(new ApprovedRequestNotification());
     }
