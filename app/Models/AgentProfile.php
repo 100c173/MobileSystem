@@ -6,15 +6,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class AgentProfile extends Model
 {
-    protected $fillable = ['agent_id', 'latitude', 'longitude', 'phone', 'address'];
+    protected $fillable = ['agent_id', 'country_id' , 'city_id' , 'business_name' ,'description','latitude', 'longitude', 'phone', 'address'];
 
-    public function agent()
-    {
+    public function agent(){
         return $this->belongsTo(User::class, 'agent_id');
     }
 
-    public function stocks()
-    {
+    public function stocks(){
         return $this->hasMany(AgentMobileStock::class, 'user_id');
     }
+
+    public function city(){
+        return $this->belongsTo(City::class) ; 
+    }
+
+    public function country (){
+        return $this->belongsTo(Country::class) ; 
+    }
+
 }

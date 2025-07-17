@@ -80,9 +80,12 @@ class AgentRequestAdminService
         $agentRequest->save();
 
         AgentProfile::create([
-            'agent_id' => $user->id , 
-            'latitude' => $agentRequest->latitude,
-            'longitude'=> $agentRequest->longitude,
+            'agent_id'      => $user->id , 
+            'country_id'    => $agentRequest->country_id,
+            'city_id'       => $agentRequest->city_id,
+            'business_name' => $agentRequest->business_name,
+            'latitude'      => $agentRequest->latitude,
+            'longitude'     => $agentRequest->longitude,
         ]);
 
         $user->notify(new ApprovedRequestNotification());

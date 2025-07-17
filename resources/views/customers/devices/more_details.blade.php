@@ -715,7 +715,7 @@
                     View Profile
                 </a>
             </div>
-        `;
+            `;
         }
 
         // Address Handling

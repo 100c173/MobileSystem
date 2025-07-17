@@ -47,10 +47,9 @@ class Mobile extends Model
 
     public function getFastReviewAttribute()
     {
-        $description = $this->description;
         $specification = $this->specification;
-      
-        return   $specification?->ram . ' , '  . $description->performance_cpu ; 
+
+        return   $specification?->ram .  "<br>"   . $specification->cpu ; 
     }
 
     public function getDateFormattedAttribute()

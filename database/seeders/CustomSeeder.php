@@ -17,23 +17,12 @@ class CustomSeeder extends Seeder
         $userRole  = Role::where('name', 'custom')->first();
 
         $user1 = User::create([
-            'name'     => "zeina aziz1",
-            'email'    => "zeinaaziz1@gmail.com",
-            'password' => bcrypt('zeinaaziz'),
-        ]);
-        $user2 = User::create([
-            'name'     => "zeina aziz2",
-            'email'    => "zeinaaziz2@gmail.com",
-            'password' => bcrypt('zeinaaziz'),
-        ]);
-        $user3 = User::create([
-            'name'     => "zeina aziz3",
-            'email'    => "zeinaaziz3@gmail.com",
-            'password' => bcrypt('zeinaaziz'),
+            'name'     => "AmerOniza",
+            'email'    => "ameroniza@gmail.com",
+            'password' => bcrypt('12345678'),
         ]);
 
         $user1->assignRole($userRole);
-        $user2->assignRole($userRole);
-        $user3->assignRole($userRole);
+
     }
 }

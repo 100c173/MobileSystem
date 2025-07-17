@@ -3,6 +3,7 @@
 namespace App\Services\customer;
 
 use App\Models\AgentMobileStock;
+use App\Models\AgentProfile;
 use App\Models\Brand;
 use App\Models\CartItem;
 use App\Models\Mobile;
@@ -92,6 +93,7 @@ class HomeService
         return  $query->paginate(10);
     }
 
+    /*
     // Get all agent stocks with related agent and mobile data
     public function getAgentStock()
     {
@@ -102,8 +104,14 @@ class HomeService
             Log::error('Error in getAgentStock: ' . $e->getMessage());
             throw $e;
         }
+    }*/
+    
+    public function getAgentGallery(int $id){
+        $agent_profile = AgentProfile::where('agent_id',$id)->first();
+        $agentDevices = $agent_profile->agent->agentMobileStock()->paginate(10); 
+      
+        return [$agent_profile , $agentDevices ] ;
     }
-
     public function searchAgents(Request $request)
     {
         $request->validate([
