@@ -54,9 +54,9 @@ class User extends Authenticatable
         ];
     }
 
-    public function images()
+    public function profileImage()
     {
-        return $this->morphMany(Image::class, 'imageable');
+        return $this->morphOne(Image::class, 'imageable');
     }
 
     public function isPrimary()
