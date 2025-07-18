@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\HtmlString;
 
 class Mobile extends Model
 {
@@ -49,7 +50,7 @@ class Mobile extends Model
     {
         $specification = $this->specification;
 
-        return   $specification?->ram .  "<br>"   . $specification->cpu ; 
+        return new HtmlString ( "<strong>RAM:</strong><i> $specification?->ram </i>" .  "<br>"   . "<strong>CPU : </strong><i>$specification->cpu</i>" ); 
     }
 
     public function getDateFormattedAttribute()

@@ -103,338 +103,180 @@
         </div>
     </section>
 
-    <!-- Latest Devices Section -->
-    <section id="latest-devices" class="py-16 bg-white">
+    <!-- Devices Introduction Section -->
+    <section id="devices-intro" class="py-16 bg-white">
         <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center mb-10">
-                <h2 class="text-3xl font-bold text-gray-800">Latest Devices & Shope Devices</h2>
-                <a href="/latest_devices" class="text-indigo-600 hover:text-indigo-800 font-medium flex items-center">
-                    View All <i class="fas fa-arrow-right ml-2"></i>
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">Explore Our Comprehensive Device Collection</h2>
+                <p class="text-lg text-gray-600 mb-8">
+                    Our full devices catalog offers an unparalleled selection of smartphones and accessories from all major brands.
+                    When you click "View All", you'll gain access to:
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+                    <!-- Feature 1 -->
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <div class="bg-indigo-100 w-12 h-12 flex items-center justify-center rounded-full mx-auto mb-4">
+                            <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Advanced Search</h3>
+                        <p class="text-gray-600">
+                            Filter by brand, price range, specifications, and availability to find your perfect device
+                        </p>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <div class="bg-indigo-100 w-12 h-12 flex items-center justify-center rounded-full mx-auto mb-4">
+                            <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Local Availability</h3>
+                        <p class="text-gray-600">
+                            See which stores near you have the device in stock with real-time inventory updates
+                        </p>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <div class="bg-indigo-100 w-12 h-12 flex items-center justify-center rounded-full mx-auto mb-4">
+                            <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Detailed Comparisons</h3>
+                        <p class="text-gray-600">
+                            Compare multiple devices side-by-side with full specifications and expert analysis
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-indigo-50 rounded-xl p-8 text-left mb-10">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">What You'll Discover:</h3>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-start">
+                            <svg class="flex-shrink-0 h-5 w-5 text-indigo-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            <span>Complete technical specifications for every device</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="flex-shrink-0 h-5 w-5 text-indigo-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            <span>Professional reviews and user ratings</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="flex-shrink-0 h-5 w-5 text-indigo-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            <span>Price comparison across authorized sellers</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="flex-shrink-0 h-5 w-5 text-indigo-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            <span>Special deals and bundle offers</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <a href="/latest_devices" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 transition">
+                    Explore All Devices
+                    <svg class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
                 </a>
-            </div>
-
-            <!-- Devices Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-
-                <!-- Device Card 1 -->
-                <div class="device-card bg-white rounded-xl shadow-md overflow-hidden transition-all hover:shadow-lg">
-                    <div class="overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1611472173362-3f53dbd65d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80"
-                            alt="iPhone 14 Pro Max" class="w-full h-64 object-cover device-image transition-all">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="text-xl font-bold text-gray-800">iPhone 14 Pro Max</h3>
-                                <p class="text-gray-600">iOS 16</p>
-                            </div>
-                            <div class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded text-sm font-semibold">New</div>
-                        </div>
-                        <div class="mt-4">
-                            <p class="text-gray-700 line-clamp-2">Dynamic Island, Pro camera system, Always-On display, and all-day battery life on iPhone's brightest display yet...</p>
-                        </div>
-                        <div class="mt-6 flex justify-between items-center">
-                            <a href="MobileSpec.html" class="text-indigo-600 hover:text-indigo-800 font-medium flex items-center">
-                                See Details <i class="fas fa-chevron-right ml-1"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Device Card 2 -->
-                <div class="device-card bg-white rounded-xl shadow-md overflow-hidden transition-all hover:shadow-lg">
-                    <div class="overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1611472173362-3f53dbd65d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80"
-                            alt="iPhone 14 Pro Max" class="w-full h-64 object-cover device-image transition-all">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="text-xl font-bold text-gray-800">iPhone 14 Pro Max</h3>
-                                <p class="text-gray-600">iOS 16</p>
-                            </div>
-                            <div class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded text-sm font-semibold">New</div>
-                        </div>
-                        <div class="mt-4">
-                            <p class="text-gray-700 line-clamp-2">Dynamic Island, Pro camera system, Always-On display, and all-day battery life on iPhone's brightest display yet...</p>
-                        </div>
-                        <div class="mt-6 flex justify-between items-center">
-                            <a href="MobileSpec.html" class="text-indigo-600 hover:text-indigo-800 font-medium flex items-center">
-                                See Details <i class="fas fa-chevron-right ml-1"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Device Card 3 -->
-                <div class="device-card bg-white rounded-xl shadow-md overflow-hidden transition-all hover:shadow-lg">
-                    <div class="overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1611472173362-3f53dbd65d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80"
-                            alt="iPhone 14 Pro Max" class="w-full h-64 object-cover device-image transition-all">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="text-xl font-bold text-gray-800">iPhone 14 Pro Max</h3>
-                                <p class="text-gray-600">iOS 16</p>
-                            </div>
-                            <div class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded text-sm font-semibold">New</div>
-                        </div>
-                        <div class="mt-4">
-                            <p class="text-gray-700 line-clamp-2">Dynamic Island, Pro camera system, Always-On display, and all-day battery life on iPhone's brightest display yet...</p>
-                        </div>
-                        <div class="mt-6 flex justify-between items-center">
-                            <a href="MobileSpec.html" class="text-indigo-600 hover:text-indigo-800 font-medium flex items-center">
-                                See Details <i class="fas fa-chevron-right ml-1"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-
             </div>
         </div>
     </section>
 
-    <!-- Brands Section -->
-    <section class="py-12 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Our Trusted Brands</h2>
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3">
-                <div class="flex justify-center items-center h-24 hover:scale-105 transition">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg" alt="Samsung" class="h-12">
-                </div>
-                <div class="flex justify-center items-center h-24 hover:scale-105 transition">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple" class="h-12">
-                </div>
-                <div class="flex justify-center items-center h-24 hover:scale-105 transition">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google" class="h-10">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Shop Section -->
-    <section id="shop" class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center mb-10">
-                <h2 class="text-3xl font-bold text-gray-800">Customer's Devices</h2>
+    <!-- User Devices Marketplace Section - Descriptive Version -->
+    <section id="user-devices" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <!-- Section Header -->
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-gray-800 mb-3">Pre-Owned Devices Marketplace</h2>
+                <p class="text-lg text-gray-600">
+                    A trusted platform for buying and selling quality used devices within our community
+                </p>
             </div>
 
-            <!-- Agents' Devices (Visible by default) -->
-            <div id="agents-devices" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Agent Device 1 -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all hover:shadow-lg">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
-                            alt="Samsung Galaxy Z Flip4" class="w-full h-64 object-cover">
-                        <div class="absolute top-2 right-2 bg-white rounded-lg px-2 py-1 shadow-sm flex items-center">
-                            <div class="w-2 h-2 bg-green-500 rounded-full mr-1"></div>
-                            <span class="text-xs font-medium">Agent</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="text-xl font-bold text-gray-800">Samsung Galaxy Z Flip4</h3>
-                                <p class="text-gray-600">Android 13, One UI 5.1</p>
-                            </div>
-                            <div class="text-indigo-600 font-bold">$699.99</div>
-                        </div>
-                        <div class="mt-4 mb-6">
-                            <p class="text-gray-700 line-clamp-2">Compact foldable design with customizable cover screen, powerful performance, and flagship camera features.</p>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <a href="device-details.html" class="text-indigo-600 hover:text-indigo-800 font-medium flex items-center">
-                                Details <i class="fas fa-chevron-right ml-1"></i>
-                            </a>
-                            <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg transition">Buy Now</button>
-                        </div>
-                        <div class="mt-3 flex items-center text-sm">
-                            <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
-                            <span class="text-gray-500">2 available at MobileTech Solutions, NYC</span>
-                        </div>
-                    </div>
+            <!-- Main Content -->
+            <div class="bg-white rounded-xl shadow-sm p-8 mb-8">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Why Choose Our Marketplace?</h3>
+                <div class="space-y-4 text-gray-700">
+                    <p>
+                        Our pre-owned devices marketplace connects buyers with sellers in a secure environment.
+                        Every listing undergoes verification to ensure authenticity and accurate condition descriptions.
+                    </p>
+                    <p>
+                        For buyers, we offer:
+                    </p>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>Quality-checked devices from verified sellers</li>
+                        <li>Detailed condition reports with transparent pricing</li>
+                        <li>Secure payment options with buyer protection</li>
+                        <li>Local pickup options to inspect before purchase</li>
+                    </ul>
+                    <p class="pt-2">
+                        For sellers, we provide:
+                    </p>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>Access to thousands of potential buyers</li>
+                        <li>Simple listing process with professional presentation</li>
+                        <li>Competitive pricing tools based on market data</li>
+                        <li>Safe transaction handling</li>
+                    </ul>
                 </div>
+            </div>
 
-                <!-- Agent Device 2 -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all hover:shadow-lg">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
-                            alt="iPhone 13 Pro" class="w-full h-64 object-cover">
-                        <div class="absolute top-2 right-2 bg-white rounded-lg px-2 py-1 shadow-sm flex items-center">
-                            <div class="w-2 h-2 bg-green-500 rounded-full mr-1"></div>
-                            <span class="text-xs font-medium">Agent</span>
-                        </div>
+            <!-- Statistics Panel -->
+            <div class="bg-indigo-50 rounded-xl p-6 mb-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                    <div>
+                        <div class="text-2xl font-bold text-indigo-600">5,000+</div>
+                        <div class="text-sm text-gray-600">Devices Sold</div>
                     </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="text-xl font-bold text-gray-800">iPhone 13 Pro</h3>
-                                <p class="text-gray-600">iOS 15</p>
-                            </div>
-                            <div class="text-indigo-600 font-bold">$849.99</div>
-                        </div>
-                        <div class="mt-4 mb-6">
-                            <p class="text-gray-700 line-clamp-2">Pro camera system, Super Retina XDR display with ProMotion, A15 Bionic chip, and all-day battery life.</p>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <a href="device-details.html" class="text-indigo-600 hover:text-indigo-800 font-medium flex items-center">
-                                Details <i class="fas fa-chevron-right ml-1"></i>
-                            </a>
-                            <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg transition">Buy Now</button>
-                        </div>
-                        <div class="mt-3 flex items-center text-sm">
-                            <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
-                            <span class="text-gray-500">Available at iHub Electronics, LA</span>
-                        </div>
+                    <div>
+                        <div class="text-2xl font-bold text-indigo-600">98%</div>
+                        <div class="text-sm text-gray-600">Positive Feedback</div>
                     </div>
-                </div>
-
-                <!-- Agent Device 3 -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all hover:shadow-lg">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
-                            alt="OnePlus 10 Pro" class="w-full h-64 object-cover">
-                        <div class="absolute top-2 right-2 bg-white rounded-lg px-2 py-1 shadow-sm flex items-center">
-                            <div class="w-2 h-2 bg-green-500 rounded-full mr-1"></div>
-                            <span class="text-xs font-medium">Agent</span>
-                        </div>
+                    <div>
+                        <div class="text-2xl font-bold text-indigo-600">1,200+</div>
+                        <div class="text-sm text-gray-600">Active Sellers</div>
                     </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="text-xl font-bold text-gray-800">OnePlus 10 Pro</h3>
-                                <p class="text-gray-600">Android 12, OxygenOS</p>
-                            </div>
-                            <div class="text-indigo-600 font-bold">$699.99</div>
-                        </div>
-                        <div class="mt-4 mb-6">
-                            <p class="text-gray-700 line-clamp-2">Hasselblad camera for mobile, 120Hz Fluid AMOLED display, Snapdragon 8 Gen 1, and 80W fast charging.</p>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <a href="device-details.html" class="text-indigo-600 hover:text-indigo-800 font-medium flex items-center">
-                                Details <i class="fas fa-chevron-right ml-1"></i>
-                            </a>
-                            <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg transition">Buy Now</button>
-                        </div>
-                        <div class="mt-3 flex items-center text-sm">
-                            <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
-                            <span class="text-gray-500">5 available at A1 Mobile, Chicago</span>
-                        </div>
+                    <div>
+                        <div class="text-2xl font-bold text-indigo-600">24h</div>
+                        <div class="text-sm text-gray-600">Avg. Response Time</div>
                     </div>
                 </div>
             </div>
 
-            <!-- Users' Devices (Hidden by default) -->
-            <div id="users-devices" class="hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- User Device 1 -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all hover:shadow-lg">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
-                            alt="Samsung Galaxy S21 FE" class="w-full h-64 object-cover">
-                        <div class="absolute top-2 right-2 bg-white rounded-lg px-2 py-1 shadow-sm flex items-center">
-                            <div class="w-2 h-2 bg-yellow-500 rounded-full mr-1"></div>
-                            <span class="text-xs font-medium">User</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="text-xl font-bold text-gray-800">Samsung Galaxy S21 FE</h3>
-                                <p class="text-gray-600">Android 11</p>
-                            </div>
-                            <div class="text-indigo-600 font-bold">$450.00</div>
-                        </div>
-                        <div class="mt-4 mb-6">
-                            <p class="text-gray-700 line-clamp-2">Premium Galaxy experience with flagship performance and pro-grade camera at a fan-friendly price.</p>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <a href="device-details.html" class="text-indigo-600 hover:text-indigo-800 font-medium flex items-center">
-                                Details <i class="fas fa-chevron-right ml-1"></i>
-                            </a>
-                            <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg transition">Make Offer</button>
-                        </div>
-                        <div class="mt-3 flex items-center text-sm">
-                            <i class="fas fa-info-circle text-gray-400 mr-1"></i>
-                            <span class="text-gray-500">Used - Good condition</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- User Device 2 -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all hover:shadow-lg">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
-                            alt="Google Pixel 6" class="w-full h-64 object-cover">
-                        <div class="absolute top-2 right-2 bg-white rounded-lg px-2 py-1 shadow-sm flex items-center">
-                            <div class="w-2 h-2 bg-yellow-500 rounded-full mr-1"></div>
-                            <span class="text-xs font-medium">User</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="text-xl font-bold text-gray-800">Google Pixel 6</h3>
-                                <p class="text-gray-600">Android 12</p>
-                            </div>
-                            <div class="text-indigo-600 font-bold">$349.99</div>
-                        </div>
-                        <div class="mt-4 mb-6">
-                            <p class="text-gray-700 line-clamp-2">Google Tensor chip, pro-level computational photography, and the best of Google built in.</p>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <a href="device-details.html" class="text-indigo-600 hover:text-indigo-800 font-medium flex items-center">
-                                Details <i class="fas fa-chevron-right ml-1"></i>
-                            </a>
-                            <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg transition">Make Offer</button>
-                        </div>
-                        <div class="mt-3 flex items-center text-sm">
-                            <i class="fas fa-info-circle text-gray-400 mr-1"></i>
-                            <span class="text-gray-500">Used - Like new condition</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- User Device 3 -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all hover:shadow-lg">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1556656793-08538906a9f8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
-                            alt="iPhone 11 Pro" class="w-full h-64 object-cover">
-                        <div class="absolute top-2 right-2 bg-white rounded-lg px-2 py-1 shadow-sm flex items-center">
-                            <div class="w-2 h-2 bg-yellow-500 rounded-full mr-1"></div>
-                            <span class="text-xs font-medium">User</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="text-xl font-bold text-gray-800">iPhone 11 Pro</h3>
-                                <p class="text-gray-600">iOS 14</p>
-                            </div>
-                            <div class="text-indigo-600 font-bold">$499.99</div>
-                        </div>
-                        <div class="mt-4 mb-6">
-                            <p class="text-gray-700 line-clamp-2">Triple-camera system, Super Retina XDR display, A13 Bionic chip, and all-day battery life.</p>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <a href="device-details.html" class="text-indigo-600 hover:text-indigo-800 font-medium flex items-center">
-                                Details <i class="fas fa-chevron-right ml-1"></i>
-                            </a>
-                            <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg transition">Make Offer</button>
-                        </div>
-                        <div class="mt-3 flex items-center text-sm">
-                            <i class="fas fa-info-circle text-gray-400 mr-1"></i>
-                            <span class="text-gray-500">Used - Fair condition (scratches)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mt-10 text-center">
-                <a href="{{route('agent_stocks')}}">
-                    <button class="bg-white border border-indigo-600 text-indigo-600 hover:bg-indigo-50 px-6 py-3 rounded-lg font-medium">
-                        Load More Devices
-                    </button>
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="{{route('agent_stocks')}}" class="inline-flex justify-center items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 transition">
+                    Browse Available Devices
                 </a>
+                <a href="#sell-device" class="inline-flex justify-center items-center px-6 py-3 border border-indigo-600 text-base font-medium rounded-md shadow-sm text-indigo-600 bg-white hover:bg-indigo-50 transition">
+                    Sell Your Device
+                </a>
+            </div>
+
+            <!-- Testimonial -->
+            <div class="mt-12 text-center">
+                <blockquote class="max-w-2xl mx-auto">
+                    <p class="text-lg text-gray-600 italic mb-4">
+                        "Sold my old phone in just 2 days at a great price. The process was incredibly simple and secure!"
+                    </p>
+                    <footer class="text-gray-500">
+                        — Sarah Johnson, New York
+                    </footer>
+                </blockquote>
             </div>
         </div>
     </section>
@@ -883,7 +725,7 @@
 
                                         <p class="mt-4 text-sm text-gray-700">Address: <span id="address" class="font-medium">Loading...</span></p>
 
-                                    
+
                                         <input type="hidden" name="latitude" id="latitude">
                                         <input type="hidden" name="address" id="address">
                                         <input type="hidden" name="longitude" id="longitude">

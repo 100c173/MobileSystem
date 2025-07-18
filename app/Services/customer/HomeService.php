@@ -105,20 +105,27 @@ class HomeService
             throw $e;
         }
     }*/
-    
+
+    /**
+     * 
+     */
     public function getAgentGallery(int $id){
         $agent_profile = AgentProfile::where('agent_id',$id)->first();
         $agentDevices = $agent_profile->agent->agentMobileStock()->paginate(10); 
       
         return [$agent_profile , $agentDevices ] ;
     }
+
+    /**
+     * 
+     */
     public function searchAgents(Request $request)
     {
         $request->validate([
             'mobile_id' => 'required|exists:mobiles,id',
-            'latitude' => 'required|numeric',
+            'latitude'  => 'required|numeric',
             'longitude' => 'required|numeric',
-            'radius' => 'required|numeric|min:1', // بالكيلومتر
+            'radius'    => 'required|numeric|min:1', // بالكيلومتر
         ]);
 
         $agents = User::whereHas('agentProfile', function ($q) use ($request) {

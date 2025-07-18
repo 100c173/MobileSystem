@@ -93,7 +93,7 @@
                         <!-- Product Image -->
                         <div class="p-4 bg-gray-50 flex justify-center items-center h-48">
                             <img
-                                src="{{ $agentDevice->mobile->primaryImage }}"
+                                src="{{ $agentDevice->mobile->primaryImage?->url }}"
                                 alt="{{ $agentDevice->mobile->name }}"
                                 class="h-full w-auto object-contain max-h-full max-w-full">
                         </div>

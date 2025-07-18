@@ -12,10 +12,6 @@ class AgentProfile extends Model
         return $this->belongsTo(User::class, 'agent_id');
     }
 
-    public function stocks(){
-        return $this->hasMany(AgentMobileStock::class, 'user_id');
-    }
-
     public function city(){
         return $this->belongsTo(City::class) ; 
     }
