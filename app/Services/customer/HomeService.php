@@ -22,22 +22,39 @@ class HomeService
 {
     use ManageFiles;
 
-    // Get all latest mobile devices with their primary images
+    /**
+     * Get latest mobile devices with their primary images
+     * Also returns brands, operating systems, and cart item count for authenticated user
+     * 
+     * @return array [mobiles, brands, operatingSystems, cartCount]
+     * @throws \Exception
+     */
     public function getLatestDevices()
     {
         try {
-            $number_of_product_in_cart = CartItem::where('user_id', Auth::user()->id)->count();
+            $cartCount = 0;
+            if (Auth::user()) {
+                $cartCount = CartItem::where('user_id', Auth::user()->id)->count();
+            }
+            
             $mobiles = Mobile::with('primaryImage')->paginate(10);
             $brands = Brand::all();
             $operatingSystems = OperatingSystem::all();
-            return [$mobiles, $brands, $operatingSystems, $number_of_product_in_cart];
+            
+            return [$mobiles, $brands, $operatingSystems, $cartCount];
         } catch (\Exception $e) {
             Log::error('Error in getLatestDevices: ' . $e->getMessage());
             throw $e;
         }
     }
 
-    // Get details of a specific mobile device by ID
+    /**
+     * Get detailed information for a specific mobile device
+     * 
+     * @param int $id Mobile device ID
+     * @return Mobile
+     * @throws \Exception
+     */
     public function getMobileDetails(int $id)
     {
         try {
@@ -48,13 +65,19 @@ class HomeService
         }
     }
 
-    //Filter Mobiles by Os Or Brand 
+    /**
+     * Filter mobile devices by brand and/or operating system
+     * 
+     * @param Request $request
+     * @return \Illuminate\Pagination\LengthAwarePaginator
+     */
     public function getfilterMobile(Request $request)
     {
         $brand = $request->query('brand');
         $os = $request->query('os');
 
-        $query = Mobile::with(['brand', 'operatingSystem', 'primaryImage'])->latest();
+        $query = Mobile::with(['brand', 'operatingSystem', 'primaryImage'])
+                     ->latest();
 
         if (!empty($brand)) {
             $query->whereHas('brand', function ($q) use ($brand) {
@@ -68,15 +91,22 @@ class HomeService
             });
         }
 
-        return  $query->paginate(10);
+        return $query->paginate(10);
     }
 
+    /**
+     * Filter agent mobile stocks by brand and price range
+     * 
+     * @param Request $request
+     * @return \Illuminate\Pagination\LengthAwarePaginator
+     */
     public function getFilterAgentMobiles(Request $request)
     {
         $brand = $request->query('brand');
         $price = $request->query('price');
 
-        $query = AgentMobileStock::with(['mobile.primaryImage', 'agent'])->latest();
+        $query = AgentMobileStock::with(['mobile.primaryImage', 'agent'])
+                               ->latest();
 
         if (!empty($brand)) {
             $query->whereHas('mobile', function ($q) use ($brand) {
@@ -84,48 +114,45 @@ class HomeService
             });
         }
 
-
         if (!empty($price)) {
-            if ($request->price == '<200') {
-                $query->where('price', '<', 200);
-            } elseif ($request->price == '>=200<=500') {
-                $query->whereBetween('price', [200, 500]);
-            } elseif ($request->price == '>=500<=800') {
-                $query->whereBetween('price', [500, 800]);
-            } elseif ($request->price == '>800') {
-                $query->where('price', '>', 800);
+            switch ($price) {
+                case '<200':
+                    $query->where('price', '<', 200);
+                    break;
+                case '>=200<=500':
+                    $query->whereBetween('price', [200, 500]);
+                    break;
+                case '>=500<=800':
+                    $query->whereBetween('price', [500, 800]);
+                    break;
+                case '>800':
+                    $query->where('price', '>', 800);
+                    break;
             }
         }
 
-        return  $query->paginate(10);
+        return $query->paginate(10);
     }
 
-    /*
-    // Get all agent stocks with related agent and mobile data
-    public function getAgentStock()
-    {
-        try {
-            $brands = Brand::all();
-            return [AgentMobileStock::with(['agent', 'mobile'])->paginate(10), $brands];
-        } catch (\Exception $e) {
-            Log::error('Error in getAgentStock: ' . $e->getMessage());
-            throw $e;
-        }
-    }*/
-
     /**
+     * Get agent profile and their mobile stock
      * 
+     * @param int $id Agent ID
+     * @return array [agentProfile, agentDevices]
      */
     public function getAgentGallery(int $id)
     {
-        $agent_profile = AgentProfile::where('agent_id', $id)->first();
-        $agentDevices = $agent_profile->agent->agentMobileStock()->paginate(10);
+        $agentProfile = AgentProfile::where('agent_id', $id)->first();
+        $agentDevices = $agentProfile->agent->agentMobileStock()->paginate(10);
 
-        return [$agent_profile, $agentDevices];
+        return [$agentProfile, $agentDevices];
     }
 
     /**
+     * Store a new customer request with images
      * 
+     * @param CustomerCustomerRequest $request
+     * @return void
      */
     public function storeCustomerRequest(CustomerCustomerRequest $request)
     {
@@ -138,6 +165,7 @@ class HomeService
             'operating_system_id' => $request->operating_system_id,
             'condition' => $request->condition,
         ]);
+
         $filePath = $this->uploadFile($request->file('images'), 'uploads/customer_request');
 
         CustomerRequestImage::create([
@@ -148,7 +176,10 @@ class HomeService
     }
 
     /**
+     * Search for agents within a specific radius that have a particular mobile in stock
      * 
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function searchAgents(Request $request)
     {
@@ -156,15 +187,15 @@ class HomeService
             'mobile_id' => 'required|exists:mobiles,id',
             'latitude'  => 'required|numeric',
             'longitude' => 'required|numeric',
-            'radius'    => 'required|numeric|min:1', // بالكيلومتر
+            'radius'    => 'required|numeric|min:1', // in kilometers
         ]);
 
         $agents = User::whereHas('agentProfile', function ($q) use ($request) {
-            $q->whereExists(function ($query) use ($request) {
-                $query->select(DB::raw(1))
-                    ->from('agent_profiles')
-                    ->whereRaw('users.id = agent_profiles.agent_id')
-                    ->whereRaw("
+                $q->whereExists(function ($query) use ($request) {
+                    $query->select(DB::raw(1))
+                        ->from('agent_profiles')
+                        ->whereRaw('users.id = agent_profiles.agent_id')
+                        ->whereRaw("
                             6371 * acos(
                                 cos(radians(?)) *
                                 cos(radians(latitude)) *
@@ -173,20 +204,20 @@ class HomeService
                                 sin(radians(latitude))
                             ) <= ?
                         ", [
-                        $request->latitude,
-                        $request->longitude,
-                        $request->latitude,
-                        $request->radius
-                    ]);
-            });
-        })
+                            $request->latitude,
+                            $request->longitude,
+                            $request->latitude,
+                            $request->radius
+                        ]);
+                });
+            })
             ->whereHas('agentMobileStock', function ($q) use ($request) {
                 $q->where('mobile_id', $request->mobile_id)
-                    ->where('quantity', '>', 0);
+                  ->where('quantity', '>', 0);
             })
             ->with(['agentProfile', 'agentMobileStock' => function ($q) use ($request) {
                 $q->where('mobile_id', $request->mobile_id)
-                    ->select('user_id', 'mobile_id', 'quantity', 'price'); // تأكد من جلب حقل الكمية
+                  ->select('user_id', 'mobile_id', 'quantity', 'price');
             }])
             ->get()
             ->map(function ($user) use ($request) {
@@ -209,13 +240,22 @@ class HomeService
         ]);
     }
 
+    /**
+     * Calculate distance between two coordinates using Haversine formula
+     * 
+     * @param float $lat1 Latitude of point 1
+     * @param float $lon1 Longitude of point 1
+     * @param float $lat2 Latitude of point 2
+     * @param float $lon2 Longitude of point 2
+     * @return float Distance in kilometers
+     */
     private function calculateDistance($lat1, $lon1, $lat2, $lon2)
     {
         $theta = $lon1 - $lon2;
         $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +
-            cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
+                cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
         $dist = acos($dist);
         $dist = rad2deg($dist);
-        return $dist * 60 * 1.853159616; // النتيجة بالكيلومتر
+        return $dist * 60 * 1.853159616; // Result in kilometers
     }
 }
