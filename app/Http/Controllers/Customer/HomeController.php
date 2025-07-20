@@ -4,14 +4,17 @@ namespace App\Http\Controllers\Customer;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Customer\CustomerRequest;
 use App\Models\AgentProfile;
 use App\Models\Brand;
 use App\Models\CartItem;
 use App\Models\Country;
 use App\Models\Mobile;
+use App\Models\OperatingSystem;
 use App\Models\User;
 use App\Services\customer\HomeService;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 
@@ -28,9 +31,11 @@ class HomeController extends Controller
     // Display the customer home page
     public function homePage()
     {
-        $number_of_product_in_cart = CartItem::count(); //cach
+        $number_of_product_in_cart = CartItem::where('user_id',Auth::user()->id)->count(); //cach
+        $operating_systems = OperatingSystem::all();
+        $brands = Brand::all();
         $countries = Country::all(); //cach 
-        return view('customers.home', compact('number_of_product_in_cart', 'countries'));
+        return view('customers.home', compact('number_of_product_in_cart', 'countries', 'brands', 'operating_systems'));
     }
 
     // Display latest mobile devices
@@ -63,7 +68,7 @@ class HomeController extends Controller
     public function mobileDetails(string $id)
     {
         try {
-            $number_of_product_in_cart = CartItem::count();
+            $number_of_product_in_cart = CartItem::where('user_id',Auth::user()->id)->count();
             $countries = Country::all(); //cach 
             $mobile = $this->homeService->getMobileDetails($id);
             return view('customers.devices.more_details', compact('mobile', 'number_of_product_in_cart', 'countries'));
@@ -90,9 +95,9 @@ class HomeController extends Controller
     {
         try {
 
-            $number_of_product_in_cart = CartItem::count();
-            [$agent_profile , $agentDevices] = $this->homeService->getAgentGallery($id);
-            return view('customers.agent.agent_gallery', compact('number_of_product_in_cart','agent_profile','agentDevices'));
+            $number_of_product_in_cart = CartItem::where('user_id',Auth::user()->id)->count();
+            [$agent_profile, $agentDevices] = $this->homeService->getAgentGallery($id);
+            return view('customers.agent.agent_gallery', compact('number_of_product_in_cart', 'agent_profile', 'agentDevices'));
         } catch (Exception $e) {
             Log::error('Error fetching agent stock: ' . $e->getMessage());
             return back()->withErrors('Failed to load agent profile.');
@@ -105,5 +110,20 @@ class HomeController extends Controller
     {
         $agent = $this->homeService->searchAgents($request);
         return $agent;
+    }
+    
+    /**
+     * 
+     */
+    public function customerRequest(CustomerRequest $request)
+    {
+        try {
+            $this->homeService->storeCustomerRequest($request) ; 
+            return back()->with('success','Your request has been submitted successfully. Your device data will be verified and then we will inform you if it has been published in the market.');
+
+        } catch (Exception $e) {
+            Log::error('Error create customer request : ' . $e->getMessage());
+            return back()->withErrors('Failed to create customer request.');
+        }
     }
 }

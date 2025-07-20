@@ -52,12 +52,12 @@
                       <div class="collapse" id="subnav1">
                         <ul class="nav nav-collapse subnav">
                           <li>
-                            <a href="{{route('users.index')}}">
+                            <a  href="#" class="sidebar-link" data-route="{{route('users.index')}}">
                               <span class="sub-item">Users</span>
                             </a>
                           </li>
                           <li>
-                            <a href="{{route('users.trashed')}}">
+                            <a href="#" class="sidebar-link" data-route="{{route('users.trashed')}}">
                               <span class="sub-item">Trashed Users </span>
                             </a>
                           </li>
@@ -159,7 +159,7 @@
                   </ul>
                 </div>
               </li>
-
+                 <!--
               <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#orders">
                   <i class="icon-rocket"></i>
@@ -179,7 +179,8 @@
                   </ul>
                 </div>
               </li>
-
+              -->
+              <!--
               <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#stocks">
                   <i class="icon-folder-alt"></i>
@@ -196,7 +197,7 @@
                   </ul>
                 </div>
               </li>
-
+               -->
               <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#reviews">
                   <i class="icon-note"></i>
@@ -213,7 +214,7 @@
                   </ul>
                 </div>
               </li>
-
+              <!--
               <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#offers">
                   <i class="icon-handbag"></i>
@@ -230,7 +231,7 @@
                   </ul>
                 </div>
               </li>
-
+               -->
               <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#notifications">
                   <i class="icon-bell"></i>

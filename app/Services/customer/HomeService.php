@@ -2,24 +2,30 @@
 
 namespace App\Services\customer;
 
+use App\Http\Requests\Customer\CustomerRequest as CustomerCustomerRequest;
 use App\Models\AgentMobileStock;
 use App\Models\AgentProfile;
 use App\Models\Brand;
 use App\Models\CartItem;
+use App\Models\CustomerRequest;
 use App\Models\Mobile;
 use App\Models\OperatingSystem;
 use App\Models\User;
+use App\Traits\ManageFiles;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class HomeService
 {
+     use ManageFiles;
+
     // Get all latest mobile devices with their primary images
     public function getLatestDevices()
     {
         try {
-            $number_of_product_in_cart = CartItem::count();
+            $number_of_product_in_cart = CartItem::where('user_id',Auth::user()->id)->count();
             $mobiles = Mobile::with('primaryImage')->paginate(10);
             $brands = Brand::all();
             $operatingSystems = OperatingSystem::all();
@@ -109,11 +115,34 @@ class HomeService
     /**
      * 
      */
-    public function getAgentGallery(int $id){
-        $agent_profile = AgentProfile::where('agent_id',$id)->first();
-        $agentDevices = $agent_profile->agent->agentMobileStock()->paginate(10); 
-      
-        return [$agent_profile , $agentDevices ] ;
+    public function getAgentGallery(int $id)
+    {
+        $agent_profile = AgentProfile::where('agent_id', $id)->first();
+        $agentDevices = $agent_profile->agent->agentMobileStock()->paginate(10);
+
+        return [$agent_profile, $agentDevices];
+    }
+
+    /**
+     * 
+     */
+    public function storeCustomerRequest(CustomerCustomerRequest $request)
+    {
+        $customerRequest = CustomerRequest::create([
+            'user_id' => Auth::id(),
+            'brand_id' => $request->brand_id,
+            'model' => $request->model,
+            'ram' => $request->ram,
+            'storage' => $request->storage,
+            'operating_system_id' => $request->operating_system_id,
+            'condition' => $request->condition,
+        ]);
+        $filePath = $this->uploadFile($request->file('images'), 'uploads/customer_request');
+        
+        $customerRequest->images()->create([
+            'path' => $filePath,
+            'is_primary' => true,
+        ]);
     }
 
     /**

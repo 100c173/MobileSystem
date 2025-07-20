@@ -7,7 +7,7 @@
   <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
   <link rel="icon" href="{{ asset('assets/img/kaiadmin/favicon.ico') }}" type="image/x-icon" />
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <!-- Boxicons -->
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
@@ -29,7 +29,7 @@
         ],
         urls: ["{{ asset('assets/css/fonts.min.css') }}"],
       },
-      active: function () {
+      active: function() {
         sessionStorage.fonts = true;
       },
     });
@@ -46,7 +46,7 @@
 
 <body>
   <div class="wrapper">
-    @include('dashboard.partials.sidebar')
+
 
     <div class="main-panel">
       <div class="main-header">
@@ -185,7 +185,7 @@
                   aria-expanded="false">
                   <i class="fa fa-bell"></i>
                   @if (auth()->user()->unreadNotifications->count() > 0)
-                     <span class="notification"> {{auth()->user()->unreadNotifications->count()}}</span>
+                  <span class="notification"> {{auth()->user()->unreadNotifications->count()}}</span>
                   @endif
                 </a>
                 <ul
@@ -193,45 +193,45 @@
                   aria-labelledby="notifDropdown">
                   <li>
                     <div class="dropdown-title">
-                      You have  {{auth()->user()->unreadNotifications->count()}} new notification
+                      You have {{auth()->user()->unreadNotifications->count()}} new notification
                     </div>
                   </li>
                   <li>
                     <div class="notif-scroll scrollbar-outer">
                       <div class="notif-center">
                         @php
-                           $count=0;
+                        $count=0;
                         @endphp
 
-                          @foreach (auth()->user()->unreadNotifications as $notification)
-                            <a href="{{route('admin.markNotificationAsRead',$notification->id)}}">
+                        @foreach (auth()->user()->unreadNotifications as $notification)
+                        <a href="{{route('admin.markNotificationAsRead',$notification->id)}}">
 
-                                @if($notification->type == 'App\Notifications\NewUserRegisterNotification')
-                                   <div class="notif-icon notif-primary">
-                                     <i class="fa fa-user-plus"></i>
-                                   </div>
-                                @elseif(($notification->type == 'App\Notifications\AddNewMobileNotification'))
-                                    <div class="notif-icon notif-success">
-                                    <i class="fas fa-mobile-alt "></i>
-                                  </div>
-                                @else
-                                  <div class="notif-icon notif-danger">
-                                    <i class="fa fa-plus"></i>
-                                  </div>
-                                @endif
-                              <div class="notif-content">
-                                 <span class="block">  {{$notification->data['message']}} </span>
-                                 <span class="time">{{$notification->data['time']}}</span>
-                              </div>
-                            </a>
-                            @php
-                              $count++;
-                              if($count >=5)
-                                 break;
-                            @endphp
-                          @endforeach
+                          @if($notification->type == 'App\Notifications\NewUserRegisterNotification')
+                          <div class="notif-icon notif-primary">
+                            <i class="fa fa-user-plus"></i>
+                          </div>
+                          @elseif(($notification->type == 'App\Notifications\AddNewMobileNotification'))
+                          <div class="notif-icon notif-success">
+                            <i class="fas fa-mobile-alt "></i>
+                          </div>
+                          @else
+                          <div class="notif-icon notif-danger">
+                            <i class="fa fa-plus"></i>
+                          </div>
+                          @endif
+                          <div class="notif-content">
+                            <span class="block"> {{$notification->data['message']}} </span>
+                            <span class="time">{{$notification->data['time']}}</span>
+                          </div>
+                        </a>
+                        @php
+                        $count++;
+                        if($count >=5)
+                        break;
+                        @endphp
+                        @endforeach
 
-                          <!-- <a href="#">
+                        <!-- <a href="#">
                             <div class="notif-icon notif-success">
                               <i class="fa fa-comment"></i>
                             </div>
@@ -242,7 +242,7 @@
                               <span class="time">12 minutes ago</span>
                             </div>
                           </a> -->
-                          <!-- <a href="#">
+                        <!-- <a href="#">
                             <div class="notif-img">
                               <img
                                 src="assets/img/profile2.jpg"
@@ -255,7 +255,7 @@
                               <span class="time">12 minutes ago</span>
                             </div>
                           </a> -->
-                          <!-- <a href="#">
+                        <!-- <a href="#">
                             <div class="notif-icon notif-danger">
                               <i class="fa fa-plus"></i>
                             </div>
@@ -270,7 +270,7 @@
                   <li>
 
                   </li>
-                  <li><a class="see-all"  href="{{route('admin.notifications.index')}}">See all notifications<i class="fa fa-angle-right"></i>
+                  <li><a class="see-all" href="{{route('admin.notifications.index')}}">See all notifications<i class="fa fa-angle-right"></i>
                 </ul>
               </li>
               <li class="nav-item topbar-icon dropdown hidden-caret">
@@ -412,7 +412,11 @@
       </div>
 
       <div class="container">
-        @yield('content')
+        @include('dashboard.partials.sidebar')
+        <div class="main-content" id="main-content">
+
+          @yield('content')
+        </div>
 
       </div>
 
@@ -421,42 +425,72 @@
 
   </div>
 
-<!-- Core JS Files -->
-<script src="{{ asset('assets/js/core/jquery-3.7.1.min.js') }}"></script>
-<script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
-<script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
+  <!-- Core JS Files -->
+  <script src="{{ asset('assets/js/core/jquery-3.7.1.min.js') }}"></script>
+  <script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
+  <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
 
-<!-- jQuery Scrollbar -->
-<script src="{{ asset('assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
+  <!-- jQuery Scrollbar -->
+  <script src="{{ asset('assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
 
-<!-- Chart JS -->
-<script src="{{ asset('assets/js/plugin/chart.js/chart.min.js') }}"></script>
+  <!-- Chart JS -->
+  <script src="{{ asset('assets/js/plugin/chart.js/chart.min.js') }}"></script>
 
-<!-- jQuery Sparkline -->
-<script src="{{ asset('assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js') }}"></script>
+  <!-- jQuery Sparkline -->
+  <script src="{{ asset('assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js') }}"></script>
 
-<!-- Chart Circle -->
-<script src="{{ asset('assets/js/plugin/chart-circle/circles.min.js') }}"></script>
+  <!-- Chart Circle -->
+  <script src="{{ asset('assets/js/plugin/chart-circle/circles.min.js') }}"></script>
 
-<!-- Datatables -->
-<script src="{{ asset('assets/js/plugin/datatables/datatables.min.js') }}"></script>
+  <!-- Datatables -->
+  <script src="{{ asset('assets/js/plugin/datatables/datatables.min.js') }}"></script>
 
-<!-- Bootstrap Notify -->
-<script src="{{ asset('assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
+  <!-- Bootstrap Notify -->
+  <script src="{{ asset('assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
 
-<!-- jQuery Vector Maps -->
-<script src="{{ asset('assets/js/plugin/jsvectormap/jsvectormap.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugin/jsvectormap/world.js') }}"></script>
+  <!-- jQuery Vector Maps -->
+  <script src="{{ asset('assets/js/plugin/jsvectormap/jsvectormap.min.js') }}"></script>
+  <script src="{{ asset('assets/js/plugin/jsvectormap/world.js') }}"></script>
 
-<!-- Sweet Alert -->
-<script src="{{ asset('assets/js/plugin/sweetalert/sweetalert.min.js') }}"></script>
+  <!-- Sweet Alert -->
+  <script src="{{ asset('assets/js/plugin/sweetalert/sweetalert.min.js') }}"></script>
 
-<!-- Kaiadmin JS -->
-<script src="{{ asset('assets/js/kaiadmin.min.js') }}"></script>
+  <!-- Kaiadmin JS -->
+  <script src="{{ asset('assets/js/kaiadmin.min.js') }}"></script>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // معالجة النقر على عناصر الـ sidebar
+      document.querySelectorAll('.sidebar-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
 
-<!-- حقن السكربتات -->
-@stack('scripts')
+          const route = this.getAttribute('data-route');
+
+          // إظهار مؤشر تحميل
+          document.getElementById('main-content').innerHTML = 'جاري التحميل...';
+
+          // جلب المحتوى عبر Ajax
+          fetch(route, {
+              headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'Accept': 'text/html'
+              }
+            })
+            .then(response => response.text())
+            .then(html => {
+              document.getElementById('main-content').innerHTML = html;
+            })
+            .catch(error => {
+              console.error('Error:', error);
+              document.getElementById('main-content').innerHTML = 'حدث خطأ أثناء جلب البيانات';
+            });
+        });
+      });
+    });
+  </script>
+  <!-- حقن السكربتات -->
+  @stack('scripts')
 </body>
 
 </html>

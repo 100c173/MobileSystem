@@ -4,13 +4,9 @@ use App\Models\Brand;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Brand\BrandController;
-use App\Http\Controllers\Mobile\MobileController;
 use App\Http\Controllers\Aget\AgentRequestController;
-use App\Http\Controllers\Mobile\MobileImageController;
 use App\Http\Controllers\Os\OperatingSystemController;
-use App\Http\Controllers\Mobile\MobileDescriptionController;
-use App\Http\Controllers\Notification\NotificationController;
-use App\Http\Controllers\Mobile\MobileSpecificationController;
+
 
 
 

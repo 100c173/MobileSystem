@@ -788,27 +788,24 @@
 
                     <div class="md:w-1/2 bg-white p-8">
                         <h3 class="text-2xl font-bold text-gray-800 mb-6">Device Details</h3>
-                        <form class="space-y-4">
+                        <form action="{{route('customer.request')}}" class="space-y-4" method="post" enctype="multipart/form-data">
+                            @csrf
                             <div>
                                 <label for="device-brand" class="block text-sm font-medium text-gray-700 mb-1">Brand</label>
-                                <select id="device-brand" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                <select name="brand_id" id="device-brand" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
                                     <option>Select Brand</option>
-                                    <option>Samsung</option>
-                                    <option>Apple</option>
-                                    <option>Google</option>
-                                    <option>Xiaomi</option>
-                                    <option>OnePlus</option>
-                                    <option>Huawei</option>
-                                    <option>Other</option>
+                                    @foreach($brands as $brand)
+                                    <option value="{{$brand->id}}">{{$brand->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div>
-                                <label for="device-model" class="block text-sm font-medium text-gray-700 mb-1">Model</label>
-                                <input type="text" id="device-model" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="E.g. iPhone 13 Pro">
+                                <label  for="device-model" class="block text-sm font-medium text-gray-700 mb-1">Model</label>
+                                <input name="model" type="text" id="device-model" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="E.g. iPhone 13 Pro">
                             </div>
                             <div>
                                 <label for="device-ram" class="block text-sm font-medium text-gray-700 mb-1">RAM</label>
-                                <select id="device-ram" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                <select name="ram" id="device-ram" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
                                     <option>Select RAM</option>
                                     <option>2GB</option>
                                     <option>3GB</option>
@@ -821,7 +818,7 @@
                             </div>
                             <div>
                                 <label for="device-storage" class="block text-sm font-medium text-gray-700 mb-1">Storage</label>
-                                <select id="device-storage" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                <select name="storage" id="device-storage" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
                                     <option>Select Storage</option>
                                     <option>32GB</option>
                                     <option>64GB</option>
@@ -832,8 +829,17 @@
                                 </select>
                             </div>
                             <div>
+                                <label for="device-operating_system" class="block text-sm font-medium text-gray-700 mb-1">Opersting system</label>
+                                <select name="operating_system_id" id="device-operating_system" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                    <option>Select OS</option>
+                                    @foreach($operating_systems as $os)
+                                    <option value="{{$os->id}}">{{$os->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div>
                                 <label for="device-condition" class="block text-sm font-medium text-gray-700 mb-1">Condition</label>
-                                <select id="device-condition" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                <select name="condition" id="device-condition" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
                                     <option>Select Condition</option>
                                     <option>New (Sealed)</option>
                                     <option>New (Open Box)</option>
@@ -848,7 +854,7 @@
                                 <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
                                     <i class="fas fa-camera text-2xl text-gray-400 mb-2"></i>
                                     <p class="text-sm text-gray-500">Drag & drop photos here or click to browse</p>
-                                    <input type="file" id="device-images" class="hidden" multiple>
+                                    <input type="file" id="device-images" name="images" multiple>
                                 </div>
                             </div>
 
@@ -1153,5 +1159,7 @@
             }
         });
     });
+
+    
 </script>
 @endpush
