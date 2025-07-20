@@ -42,8 +42,6 @@ class DatabaseSeeder extends Seeder
             BrandSeeder::class,
             OperatingSystemSeeder::class,
             MobileSeeder::class,
-            MobileSpecificationSeeder::class,
-            MobileDescriptionSeeder::class,
         ]);
     }
 }

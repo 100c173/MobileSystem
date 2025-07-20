@@ -9,73 +9,228 @@
 <div class="page-inner">
 
     @if(empty($specification))
-            <a href="{{route('agent.create_specification',$mobile->id)}}">
-                <button class="fancy-btn btn-success" style="width: 180px;"><i class="fas fa-plus"></i> Add specification</button>
-            </a>
+    <div class="text-center py-5">
+        <img src="{{asset('assets/img/no-data.svg')}}" alt="No specifications" style="height: 200px;" class="my-4">
+        <h4 class="text-muted mb-4">No specifications available for this device</h4>
+        <a href="" class="btn btn-primary btn-lg rounded-pill">
+            <i class="fas fa-plus-circle"></i> Add Specifications
+        </a>
+    </div>
     @else
-        <div style="display:flex;gap:20px">
-            <!-- div 1 -->
-
-            <div class="card custom-card col-md-4" style="box-shadow: 10px 10px 20px rgba(0,0,0,0.6); border-radius:20px;height:480px;margin-top:90px">
-                <h4 class="card-title text-center font-weight-bold" style="font-size: 1.5rem; color: #4a00e0;padding: 8px 0">
-                    <i class="fas fa-mobile-alt me-2"></i>
-                    {{ $mobile->name }}
-                </h4>
-                @if($mobile->primaryImage)
-                    <img style="max-height: 350px; max-width:100%" class="card-img-top w-100" src="{{asset($mobile->primaryImage->image_url)}}"  >
-                @else
-                    <img style="max-height: 350px; max-width:100%" class="card-img-top w-100" src="{{asset('uploads/defaultImages/default_mobile.webp')}}"  >
-                @endif
-
-                <div class="card-body">
-                    <a href="{{route(auth()->user()->getRoleNames()->first() .'.images',$mobile->id)}}">
-                        <button class="fancy-btn btn-view" style="width: 100%;" ><i class="fa fa-eye me-1"></i>See More Pictures<i class="fe fe-arrow-right ml-1"></i></button>
+    <div class="row">
+        <!-- Mobile Image Card -->
+        <div class="col-lg-4">
+            <div class="card product-card shadow-lg">
+                <div class="card-header bg-primary text-white text-center py-3">
+                    <h4 class="mb-0 font-weight-bold">
+                        <i class="fas fa-mobile-alt me-2"></i>
+                        {{ $mobile->name }}
+                    </h4>
+                </div>
+                <div class="card-body text-center p-0">
+                    @if($mobile->primaryImage)
+                    <img class="product-image img-fluid p-4" src="{{asset($mobile->primaryImage->image_url)}}" alt="{{$mobile->name}}">
+                    @else
+                    <img class="product-image img-fluid p-4" src="{{asset('uploads/defaultImages/default_mobile.webp')}}" alt="Default Mobile">
+                    @endif
+                </div>
+                <div class="card-footer bg-white text-center">
+                    <a href="{{route('admin.images',$mobile->id)}}" class="btn btn-outline-primary btn-block">
+                        <i class="fa fa-images me-2"></i> View Gallery
                     </a>
                 </div>
             </div>
+        </div>
 
-            <!-- div 2 -->
-            <div class="col-xl-4">
-                <div class="card custom-card" style="width: 100%; min-width: 900px; margin: auto; box-shadow: 0 4px px rgba(0,0,0,0.15); border-radius: 15px;">
-                <h4 class="card-title text-center font-weight-bold" style="font-size: 1.5rem; color: #4a00e0;padding: 8px 0">
-                    Specification :
-                </h4>
+        <!-- Specifications Card -->
+        <div class="col-lg-8">
+            <div class="card specs-card shadow">
+                <div class="card-header bg-white border-bottom-0 pt-4">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h3 class="mb-0 text-primary font-weight-bold">
+                            <i class="fas fa-list-ul me-2"></i> Technical Specifications
+                        </h3>
+                        @can('update',$mobile)
+                        <a href="{{ route('admin.mobileSpcifications.edit',$specification->id) }}" class="btn btn-sm btn-outline-primary">
+                            <i class="fas fa-edit me-1"></i> Edit
+                        </a>
+                        @endcan
+                    </div>
+                </div>
 
-                <div class="card-body">
-                    <div style="padding-left: 20px;">
-                        <ul class="list-group">
-                            <li class="list-group-item pb-4 "><strong>BRAND :</strong>{{$mobile->brand->name}}</li>
-                            <li class="list-group-item pb-4"><strong>OS :</strong>{{$mobile->operatingSystem->name}}</li>
-                            <li class="list-group-item pb-4"><strong>CPU :</strong>{{$specification->cpu}}</li>
-                            <li class="list-group-item pb-4"><strong>RAM :</strong>{{$specification->ram}}</li>
-                            <li class="list-group-item pb-4"><strong>STORAGE :</strong>{{$specification->storage}}</li>
-                            <li class="list-group-item pb-4"><strong>C10AMERA :</strong>{{$specification->camera}}</li>
-                            <li class="list-group-item pb-4"><strong>SCREEN :</strong>{{$specification->screen}}</li>
-                            <li class="list-group-item pb-4"><strong>BATTERY :</strong>{{$specification->battery}}</li>
-                            <li class="list-group-item pb-4"><strong>CONNECTIVITY :</strong>{{$specification->connectivity}}</li>
-                            <li class="list-group-item pb-4"><strong>SECURITY FEATURES :</strong>{{$specification->security_features}}</li>
-                            <li class="list-group-item pb-4"><strong>ACTION :</strong>{{$specification->security_features}}</li>
-                        </ul>
-                        <div style="padding-left:700px;padding-top:10px">
-                          @can('update',$mobile)
-                                <a href="{{ route(auth()->user()->getRoleNames()->first() .'.mobileSpcifications.edit',$specification->id) }}">
-                                    <button type="button" class="fancy-btn btn-update" >
-                                        <i class="fa fa-pen me-1"></i> Update
-                                    </button>
-                                </a>
-                            @endcan
+                <div class="card-body pt-0">
+                    <div class="specs-container">
+                        <div class="specs-group">
+                            <div class="spec-item">
+                                <span class="spec-label">Brand:</span>
+                                <span class="spec-value">{{$mobile->brand->name}}</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Operating System:</span>
+                                <span class="spec-value">{{$mobile->operatingSystem->name}}</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Processor:</span>
+                                <span class="spec-value">{{$specification->cpu}}</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">RAM:</span>
+                                <span class="spec-value">{{$specification->ram}}</span>
+                            </div>
+                        </div>
+
+                        <div class="specs-group">
+                            <div class="spec-item">
+                                <span class="spec-label">Storage:</span>
+                                <span class="spec-value">
+                                    @php $storages = $specification->storage; @endphp
+                                    @if(isset($storages))
+                                    @foreach($storages as $y => $x )
+                                    <span class="storage-option">{{$y}} ({{$x}})</span>
+                                    @endforeach
+                                    @endif
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="specs-group">
+                            <div class="spec-item">
+                                <span class="spec-label">Display:</span>
+                                <span class="spec-value">{{$specification->screen}}</span>
+                            </div>
+                        </div>
+
+                        <div class="specs-group">
+                            <div class="spec-item">
+                                <span class="spec-label">Camera:</span>
+                                <span class="spec-value">
+                                    @php $camera = $specification->camera; @endphp
+                                    @if(isset($camera))
+                                    @foreach($camera as $y => $x )
+                                    <div class="camera-feature">{{$y}}: {{$x}}</div>
+                                    @endforeach
+                                    @endif
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="specs-group">
+                            <div class="spec-item">
+                                <span class="spec-label">Battery:</span>
+                                <span class="spec-value">
+                                    @php $battery = $specification->battery; @endphp
+                                    @if(isset($battery))
+                                    @foreach($battery as $y => $x )
+                                    <div class="battery-feature">{{$y}}: {{$x}}</div>
+                                    @endforeach
+                                    @endif
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="specs-group">
+                            <div class="spec-item">
+                                <span class="spec-label">Connectivity:</span>
+                                <span class="spec-value">
+                                    @php $connectivity = $specification->connectivity; @endphp
+                                    @if(isset($connectivity))
+                                    @foreach($connectivity as $y => $x )
+                                    <div class="connectivity-feature">{{$y}}: {{$x}}</div>
+                                    @endforeach
+                                    @endif
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="specs-group">
+                            <div class="spec-item">
+                                <span class="spec-label">Security Features:</span>
+                                <span class="spec-value">
+                                    @php $security_features = $specification->security_features; @endphp
+                                    @if(isset($security_features))
+                                    @foreach($security_features as $y => $x )
+                                    <div class="security-feature">{{$y}}: {{$x}}</div>
+                                    @endforeach
+                                    @endif
+                                </span>
+                            </div>
                         </div>
                     </div>
-
-
-
-                </div>
                 </div>
             </div>
-            <!-- end div2 -->
         </div>
+    </div>
     @endif
 
+</div>
 
-</div> <!-- /.page-inner -->
+<style>
+    .product-card {
+        border-radius: 12px;
+        overflow: hidden;
+        border: none;
+        margin-top: 30px;
+    }
+
+    .product-image {
+        max-height: 350px;
+        object-fit: contain;
+    }
+
+    .specs-card {
+        border-radius: 12px;
+        border: none;
+    }
+
+    .specs-container {
+        padding: 0 20px;
+    }
+
+    .specs-group {
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .spec-item {
+        display: flex;
+        margin-bottom: 10px;
+    }
+
+    .spec-label {
+        font-weight: 600;
+        color: #4a4a4a;
+        min-width: 180px;
+    }
+
+    .spec-value {
+        color: #333;
+    }
+
+    .storage-option {
+        display: inline-block;
+        background: #f5f5f5;
+        padding: 3px 8px;
+        border-radius: 4px;
+        margin-right: 5px;
+        margin-bottom: 5px;
+    }
+
+    .camera-feature,
+    .battery-feature,
+    .connectivity-feature,
+    .security-feature {
+        margin-bottom: 5px;
+    }
+
+    @media (max-width: 768px) {
+        .spec-item {
+            flex-direction: column;
+        }
+
+        .spec-label {
+            margin-bottom: 5px;
+        }
+    }
+</style>
 @endsection
