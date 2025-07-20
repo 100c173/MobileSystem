@@ -52,12 +52,12 @@
                       <div class="collapse" id="subnav1">
                         <ul class="nav nav-collapse subnav">
                           <li>
-                            <a  href="#" class="sidebar-link" data-route="{{route('users.index')}}">
+                            <a  href="{{route('users.index')}}">
                               <span class="sub-item">Users</span>
                             </a>
                           </li>
                           <li>
-                            <a href="#" class="sidebar-link" data-route="{{route('users.trashed')}}">
+                            <a href="{{route('users.trashed')}}">
                               <span class="sub-item">Trashed Users </span>
                             </a>
                           </li>
@@ -207,7 +207,7 @@
                 <div class="collapse" id="reviews">
                   <ul class="nav nav-collapse">
                     <li>
-                      <a href="#">
+                      <a href="{{route('customer.devices')}}">
                         <span class="sub-item">Device Reviews</span>
                       </a>
                     </li>

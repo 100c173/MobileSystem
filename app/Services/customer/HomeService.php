@@ -8,6 +8,7 @@ use App\Models\AgentProfile;
 use App\Models\Brand;
 use App\Models\CartItem;
 use App\Models\CustomerRequest;
+use App\Models\CustomerRequestImage;
 use App\Models\Mobile;
 use App\Models\OperatingSystem;
 use App\Models\User;
@@ -19,13 +20,13 @@ use Illuminate\Support\Facades\Log;
 
 class HomeService
 {
-     use ManageFiles;
+    use ManageFiles;
 
     // Get all latest mobile devices with their primary images
     public function getLatestDevices()
     {
         try {
-            $number_of_product_in_cart = CartItem::where('user_id',Auth::user()->id)->count();
+            $number_of_product_in_cart = CartItem::where('user_id', Auth::user()->id)->count();
             $mobiles = Mobile::with('primaryImage')->paginate(10);
             $brands = Brand::all();
             $operatingSystems = OperatingSystem::all();
@@ -138,8 +139,9 @@ class HomeService
             'condition' => $request->condition,
         ]);
         $filePath = $this->uploadFile($request->file('images'), 'uploads/customer_request');
-        
-        $customerRequest->images()->create([
+
+        CustomerRequestImage::create([
+            'customer_request_id' => $customerRequest->id,
             'path' => $filePath,
             'is_primary' => true,
         ]);

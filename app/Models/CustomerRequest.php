@@ -19,7 +19,7 @@ class CustomerRequest extends Model
 
     public function images()
     {
-        return $this->hasMany(CustomerRequestImage::class);
+        return $this->belongsTo(CustomerRequestImage::class);
     }
 
     public function user()

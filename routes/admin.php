@@ -5,12 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Brand\BrandController;
 use App\Http\Controllers\Aget\AgentRequestController;
+use App\Http\Controllers\Customer\CustomerDevices;
 use App\Http\Controllers\Os\OperatingSystemController;
-
-
-
-
-
+use Stripe\Customer;
 
 Route::get('/admin/dashboard', function () {
     return view('dashboard.index');
@@ -77,3 +74,11 @@ Route::controller(OperatingSystemController::class)->prefix('/admin/dashboard/')
 });
 
 
+// Review Devices
+Route::controller(CustomerDevices::class)->prefix('/admin/dashboard/')->group(function () {
+    Route::middleware('auth', 'role:admin')->group(function () {
+        Route::get('customer_devices','devicesForReview')->name('customer.devices');
+        Route::post('customer_devices/approve/{id}','approveRequest')->name('customer_devices.approve');
+        Route::post('customer_devices/reject/{id}','rejectRequest')->name('customer_devices.reject');
+    });
+});

@@ -13,6 +13,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
 
+
   <!-- Fonts and icons -->
   <script src="{{ asset('assets/js/plugin/webfont/webfont.min.js') }}"></script>
   <script>
@@ -40,6 +41,7 @@
   <link rel="stylesheet" href="{{ asset('assets/css/plugins.min.css') }}" />
   <link rel="stylesheet" href="{{ asset('assets/css/kaiadmin.min.css') }}" />
   <link rel="stylesheet" href="{{ asset('assets/css/buttons.css') }}" />
+  <link href="{{asset('assets/css/customer_device.css')}}" rel="stylesheet">
 
 </head>
 
@@ -458,37 +460,7 @@
   <!-- Kaiadmin JS -->
   <script src="{{ asset('assets/js/kaiadmin.min.js') }}"></script>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // معالجة النقر على عناصر الـ sidebar
-      document.querySelectorAll('.sidebar-link').forEach(link => {
-        link.addEventListener('click', function(e) {
-          e.preventDefault();
 
-          const route = this.getAttribute('data-route');
-
-          // إظهار مؤشر تحميل
-          document.getElementById('main-content').innerHTML = 'جاري التحميل...';
-
-          // جلب المحتوى عبر Ajax
-          fetch(route, {
-              headers: {
-                'X-Requested-With': 'XMLHttpRequest',
-                'Accept': 'text/html'
-              }
-            })
-            .then(response => response.text())
-            .then(html => {
-              document.getElementById('main-content').innerHTML = html;
-            })
-            .catch(error => {
-              console.error('Error:', error);
-              document.getElementById('main-content').innerHTML = 'حدث خطأ أثناء جلب البيانات';
-            });
-        });
-      });
-    });
-  </script>
   <!-- حقن السكربتات -->
   @stack('scripts')
 </body>
