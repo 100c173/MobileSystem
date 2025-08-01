@@ -15,11 +15,13 @@ class CustomerRequest extends Model
         'operating_system_id',
         'condition',
         'status',
+        'price',
+        'description',
     ];
 
     public function images()
     {
-        return $this->belongsTo(CustomerRequestImage::class);
+        return $this->hasMany(CustomerRequestImage::class);
     }
 
     public function user()

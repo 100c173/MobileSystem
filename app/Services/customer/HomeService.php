@@ -36,11 +36,11 @@ class HomeService
             if (Auth::user()) {
                 $cartCount = CartItem::where('user_id', Auth::user()->id)->count();
             }
-            
+
             $mobiles = Mobile::with('primaryImage')->paginate(10);
             $brands = Brand::all();
             $operatingSystems = OperatingSystem::all();
-            
+
             return [$mobiles, $brands, $operatingSystems, $cartCount];
         } catch (\Exception $e) {
             Log::error('Error in getLatestDevices: ' . $e->getMessage());
@@ -77,7 +77,7 @@ class HomeService
         $os = $request->query('os');
 
         $query = Mobile::with(['brand', 'operatingSystem', 'primaryImage'])
-                     ->latest();
+            ->latest();
 
         if (!empty($brand)) {
             $query->whereHas('brand', function ($q) use ($brand) {
@@ -106,7 +106,7 @@ class HomeService
         $price = $request->query('price');
 
         $query = AgentMobileStock::with(['mobile.primaryImage', 'agent'])
-                               ->latest();
+            ->latest();
 
         if (!empty($brand)) {
             $query->whereHas('mobile', function ($q) use ($brand) {
@@ -163,6 +163,7 @@ class HomeService
             'ram' => $request->ram,
             'storage' => $request->storage,
             'operating_system_id' => $request->operating_system_id,
+            'price' => $request->price,
             'condition' => $request->condition,
         ]);
 
@@ -191,11 +192,11 @@ class HomeService
         ]);
 
         $agents = User::whereHas('agentProfile', function ($q) use ($request) {
-                $q->whereExists(function ($query) use ($request) {
-                    $query->select(DB::raw(1))
-                        ->from('agent_profiles')
-                        ->whereRaw('users.id = agent_profiles.agent_id')
-                        ->whereRaw("
+            $q->whereExists(function ($query) use ($request) {
+                $query->select(DB::raw(1))
+                    ->from('agent_profiles')
+                    ->whereRaw('users.id = agent_profiles.agent_id')
+                    ->whereRaw("
                             6371 * acos(
                                 cos(radians(?)) *
                                 cos(radians(latitude)) *
@@ -204,20 +205,20 @@ class HomeService
                                 sin(radians(latitude))
                             ) <= ?
                         ", [
-                            $request->latitude,
-                            $request->longitude,
-                            $request->latitude,
-                            $request->radius
-                        ]);
-                });
-            })
+                        $request->latitude,
+                        $request->longitude,
+                        $request->latitude,
+                        $request->radius
+                    ]);
+            });
+        })
             ->whereHas('agentMobileStock', function ($q) use ($request) {
                 $q->where('mobile_id', $request->mobile_id)
-                  ->where('quantity', '>', 0);
+                    ->where('quantity', '>', 0);
             })
             ->with(['agentProfile', 'agentMobileStock' => function ($q) use ($request) {
                 $q->where('mobile_id', $request->mobile_id)
-                  ->select('user_id', 'mobile_id', 'quantity', 'price');
+                    ->select('user_id', 'mobile_id', 'quantity', 'price');
             }])
             ->get()
             ->map(function ($user) use ($request) {
@@ -240,6 +241,11 @@ class HomeService
         ]);
     }
 
+    public function getCustomerDevices(){
+        $devices = CustomerRequest::with(['images','user','brand','operatingSystem'])->get();
+        return $devices ; 
+    }
+
     /**
      * Calculate distance between two coordinates using Haversine formula
      * 
@@ -253,9 +259,11 @@ class HomeService
     {
         $theta = $lon1 - $lon2;
         $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +
-                cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
+            cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
         $dist = acos($dist);
         $dist = rad2deg($dist);
         return $dist * 60 * 1.853159616; // Result in kilometers
     }
+
+
 }

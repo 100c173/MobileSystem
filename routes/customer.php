@@ -15,8 +15,12 @@ use App\Http\Controllers\PaymentSystem\PaymentController;
 
 // Home page route
 Route::get('home', [HomeController::class, 'homePage'])->name('home.page');
+
 // Latest devices listing page
 Route::get('latest_devices', [HomeController::class, 'latestDevices'])->name('lastest.mobiles');
+
+// Customer devices shop 
+Route::get('customer_devices/shop',[HomeController::class,'customerDevices'])->name('customer.devices.shop');
 
 // Filtering routes for devices
 Route::get('latest_devices/filter', [HomeController::class, 'filterMobiles'])->name('mobiles.filter');

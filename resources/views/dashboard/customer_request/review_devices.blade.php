@@ -30,13 +30,13 @@ Customer Devices For Review
                         <td>
                             @if($device->status == 'pendind')
                             <span class="badge bg-warning text-dark"><strong>{{$device->status}}</strong></span>
-                            @endif 
+                            @endif
                             @if($device->status == 'reject')
                             <span class="badge bg-danger text-dark"><strong>{{$device->status}}</strong></span>
-                            @endif 
+                            @endif
                             @if($device->status == 'approve')
                             <span class="badge bg-success text-dark"><strong>{{$device->status}}</strong></span>
-                            @endif 
+                            @endif
                         </td>
                         <td>
                             <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#detailsModal">
@@ -48,22 +48,23 @@ Customer Devices For Review
                                 </button>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <form action="{{route('customer_devices.approve',$device->id)}}" method="post">
+                                        <form action="{{ route('customer_devices.approve', $device->id) }}" method="post">
                                             @csrf
-                                            <button type="submit">
-                                                Approve
+                                            <button type="submit" class="dropdown-item text-success">
+                                                <i class="bi bi-check-circle me-2"></i> Approve
                                             </button>
                                         </form>
                                     </li>
                                     <li>
-                                        <form action="{{route('customer_devices.reject',$device->id)}}" method="post">
+                                        <form action="{{ route('customer_devices.reject', $device->id) }}" method="post">
                                             @csrf
-                                            <button type="submit">
-                                                Reject
+                                            <button type="submit" class="dropdown-item text-danger">
+                                                <i class="bi bi-x-circle me-2"></i> Reject
                                             </button>
                                         </form>
                                     </li>
                                 </ul>
+
                             </div>
                         </td>
                     </tr>
@@ -94,6 +95,9 @@ Customer Devices For Review
 
                             <dt class="col-sm-4">Model:</dt>
                             <dd class="col-sm-8">{{$device->model}}</dd>
+
+                            <dt class="col-sm-4">Price:</dt>
+                            <dd class="col-sm-8"><strong>$ {{$device->price}}</strong></dd>
                         </dl>
                     </div>
                     <div class="col-md-6">
@@ -109,7 +113,9 @@ Customer Devices For Review
                     <div class="col-12 mt-3">
                         <label class="form-label">Device Image:</label>
                         <div class="text-center">
-                            <img src="{{$device->images?->path}}" class="img-fluid rounded" style="max-height: 300px;">
+                            @foreach($device->images as $image)
+                            <img src="{{asset($image->path)}}" class="img-fluid rounded" style="max-height: 300px;">
+                            @endforeach
                         </div>
                     </div>
                 </div>

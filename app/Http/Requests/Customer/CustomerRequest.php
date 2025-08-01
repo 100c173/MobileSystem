@@ -27,6 +27,7 @@ class CustomerRequest extends FormRequest
             'model' => 'required|string|max:255',
             'ram' => 'required|string|max:50',
             'storage' => 'required|string|max:50',
+            'price' => ['required', 'numeric', 'gt:0'],
             'operating_system_id' => 'required|exists:operating_systems,id',
             'condition' => [
                 'required',

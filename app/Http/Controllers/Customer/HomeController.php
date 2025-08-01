@@ -44,15 +44,15 @@ class HomeController extends Controller
         if (Auth::user()) {
             $number_of_product_in_cart = CartItem::where('user_id', Auth::user()->id)->count(); // cached
         }
-        
+
         $operating_systems = OperatingSystem::all();
         $brands = Brand::all();
         $countries = Country::all(); // cached
-        
+
         return view('customers.home', compact(
-            'number_of_product_in_cart', 
-            'countries', 
-            'brands', 
+            'number_of_product_in_cart',
+            'countries',
+            'brands',
             'operating_systems'
         ));
     }
@@ -67,9 +67,9 @@ class HomeController extends Controller
         try {
             [$newMobiles, $brands, $oses, $number_of_product_in_cart] = $this->homeService->getLatestDevices();
             return view('customers.devices.latest_devices', compact(
-                'newMobiles', 
-                'brands', 
-                'oses', 
+                'newMobiles',
+                'brands',
+                'oses',
                 'number_of_product_in_cart'
             ));
         } catch (\Exception $e) {
@@ -117,13 +117,13 @@ class HomeController extends Controller
             if (Auth::user()) {
                 $number_of_product_in_cart = CartItem::where('user_id', Auth::user()->id)->count();
             }
-            
+
             $countries = Country::all(); // cached
             $mobile = $this->homeService->getMobileDetails($id);
-            
+
             return view('customers.devices.more_details', compact(
-                'mobile', 
-                'number_of_product_in_cart', 
+                'mobile',
+                'number_of_product_in_cart',
                 'countries'
             ));
         } catch (\Exception $e) {
@@ -143,10 +143,10 @@ class HomeController extends Controller
         try {
             $number_of_product_in_cart = CartItem::where('user_id', Auth::user()->id)->count();
             [$agent_profile, $agentDevices] = $this->homeService->getAgentGallery($id);
-            
+
             return view('customers.agent.agent_gallery', compact(
-                'number_of_product_in_cart', 
-                'agent_profile', 
+                'number_of_product_in_cart',
+                'agent_profile',
                 'agentDevices'
             ));
         } catch (Exception $e) {
@@ -178,11 +178,27 @@ class HomeController extends Controller
         try {
             $this->homeService->storeCustomerRequest($request);
             return back()->with(
-                'success', 
+                'success',
                 'Your request has been submitted successfully. ' .
-                'Your device data will be verified and then we will inform you ' .
-                'if it has been published in the market.'
+                    'Your device data will be verified and then we will inform you ' .
+                    'if it has been published in the market.'
             );
+        } catch (Exception $e) {
+            Log::error('Error create customer request : ' . $e->getMessage());
+            return back()->withErrors($e->getMessage());
+        }
+    }
+
+    public function customerDevices()
+    {
+        try {
+            $devices = $this->homeService->getCustomerDevices();
+            $number_of_product_in_cart = 0;
+            if (Auth::user()) {
+                $number_of_product_in_cart = CartItem::where('user_id', Auth::user()->id)->count();
+            }
+
+            return view('customers.devices.customer_devices', compact('number_of_product_in_cart','devices'));
         } catch (Exception $e) {
             Log::error('Error create customer request : ' . $e->getMessage());
             return back()->withErrors($e->getMessage());

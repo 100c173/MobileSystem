@@ -47,9 +47,6 @@
             <div class="bg-white rounded-lg shadow-md overflow-hidden phone-card transition duration-300">
                 <div class="relative">
                     <img src="{{$mobile->primaryImage?->url}}" alt="{{$mobile->name}}" class="w-full h-48 object-contain">
-                    <button class="absolute top-3 right-3 text-red-500 favorite-btn transition duration-200">
-                        <i class="far fa-heart text-xl"></i>
-                    </button>
                 </div>
                 <div class="p-5">
                     <h3 class="text-lg font-semibold text-gray-800 mb-1">{{$mobile->name}}</h3>
