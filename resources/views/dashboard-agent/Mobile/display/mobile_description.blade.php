@@ -35,7 +35,7 @@
                     @endif
                 </div>
                 <div class="card-footer bg-white text-center">
-                    <a href="{{route('admin.images',$mobile->id)}}" class="btn btn-outline-primary btn-block">
+                    <a href="{{route('agent.images',$mobile->id)}}" class="btn btn-outline-primary btn-block">
                         <i class="fa fa-images me-2"></i> View Gallery
                     </a>
                 </div>
