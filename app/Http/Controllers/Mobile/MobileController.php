@@ -80,7 +80,10 @@ class MobileController extends Controller
     public function edit(int $id)
     {
         $mobile = Mobile::findOrFail($id);
-        return view('dashboard.mobile.update.updateMobile', compact('mobile'));
+        $brands = Brand::all();
+        $operatingsystems = OperatingSystem::all();
+        
+        return view('dashboard.mobile.update.updateMobile', compact('mobile','brands','operatingsystems'));
     }
 
     /**
@@ -89,7 +92,11 @@ class MobileController extends Controller
     public function update(MobileRequest $request, int $id)
     {
         $this->mobileService->update($request, $id);
-        return redirect()->route('mobiles.index')->with('success', 'Mobile updated');
+        if(Auth::user()->hasRole('admin'))
+            return redirect()->route('admin.mobiles.index')->with('success', 'Mobile updated');
+        else
+            return redirect()->route('agent.mobiles.index')->with('success', 'Mobile updated');
+
     }
 
     /**

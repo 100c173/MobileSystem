@@ -78,7 +78,7 @@ class HomeService
         $brand = $request->query('brand');
         $os = $request->query('os');
 
-        $query = Mobile::with(['brand', 'operatingSystem', 'primaryImage'])
+        $query = Mobile::with(['brand', 'operatingSystem', 'primaryImage'])->where('status','approved')
             ->latest();
 
         if (!empty($brand)) {

@@ -73,7 +73,7 @@ class MobileDescriptionController extends Controller
         $description = MobileDescription::findOrFail($id);
         $mobile = Mobile::findOrFail($description->mobile_id);
         $this->authorize('update', $mobile);
-        return view($this->resolveViewPath('update.updateDescription'), compact('description'));
+        return view($this->resolveViewPath('update.updateDescription'), compact('description','mobile'));
     }
 
     /**
