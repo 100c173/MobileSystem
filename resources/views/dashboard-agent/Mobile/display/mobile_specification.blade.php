@@ -29,7 +29,7 @@
                 </div>
                 <div class="card-body text-center p-0">
                     @if($mobile->primaryImage)
-                    <img class="product-image img-fluid p-4" src="{{asset($mobile->primaryImage->image_url)}}" alt="{{$mobile->name}}">
+                    <img class="product-image img-fluid p-4" src="{{asset($mobile->primaryImage->url)}}" alt="{{$mobile->name}}">
                     @else
                     <img class="product-image img-fluid p-4" src="{{asset('uploads/defaultImages/default_mobile.webp')}}" alt="Default Mobile">
                     @endif

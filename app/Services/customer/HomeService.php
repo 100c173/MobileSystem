@@ -37,7 +37,7 @@ class HomeService
                 $cartCount = CartItem::where('user_id', Auth::user()->id)->count();
             }
 
-            $mobiles = Mobile::with('primaryImage')->paginate(10);
+            $mobiles = Mobile::with('primaryImage')->where('status', 'approved')->paginate(10);
             $brands = Brand::all();
             $operatingSystems = OperatingSystem::all();
 
@@ -58,7 +58,9 @@ class HomeService
     public function getMobileDetails(int $id)
     {
         try {
-            return Mobile::findOrFail($id);
+            return Mobile::with('specification', 'description', 'images', 'primaryImage', 'brand', 'operatingSystem')
+                ->where('id', $id)
+                ->firstOrFail();
         } catch (\Exception $e) {
             Log::error("Error in getMobileDetails for ID $id: " . $e->getMessage());
             throw $e;
@@ -241,9 +243,10 @@ class HomeService
         ]);
     }
 
-    public function getCustomerDevices(){
-        $devices = CustomerRequest::with(['images','user','brand','operatingSystem'])->get();
-        return $devices ; 
+    public function getCustomerDevices()
+    {
+        $devices = CustomerRequest::with(['images', 'user', 'brand', 'operatingSystem'])->get();
+        return $devices;
     }
 
     /**
@@ -264,6 +267,4 @@ class HomeService
         $dist = rad2deg($dist);
         return $dist * 60 * 1.853159616; // Result in kilometers
     }
-
-
 }

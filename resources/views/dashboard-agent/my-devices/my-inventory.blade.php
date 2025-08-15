@@ -52,7 +52,7 @@
                             <tr>
                                 <td> {{$counter++}} </td>
                                 @if($mobile->primaryImage)
-                                <td> <img src="{{asset($mobile->primaryImage->image_url)}}" alt="{{ $mobile->primaryImage->image_url}}" style="width:100px;height:100px;object-fit:cover;border:1px solid #ccc;padding:4px;"> </td>
+                                <td> <img src="{{asset($mobile->primaryImage->url)}}" alt="{{ $mobile->name}}" style="width:100px;height:100px;object-fit:cover;border:1px solid #ccc;padding:4px;"> </td>
                                 @else
                                 <td><img style="max-height: 350px; max-width:100%" class="card-img-top w-100" src="{{asset('uploads/defaultImages/default_mobile.webp')}}"></td>
                                 @endif

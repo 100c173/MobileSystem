@@ -14,22 +14,17 @@
                 <div class="md:w-1/2">
                     <div class="bg-white rounded-xl shadow-lg overflow-hidden">
                         <div class="relative h-80 md:h-96 w-full">
-                            <img id="main-image" src="{{$mobile->primaryImage?->image_url}}"
+                            <img id="main-image" src="{{asset($mobile->primaryImage->url)}}"
                                 alt="{{$mobile->name}}" class="w-full h-full object-contain">
                         </div>
+                        
                         <div class="phone-gallery flex overflow-x-auto p-4 gap-2">
-                            <img src="{{$mobile->primaryImage?->image_url}}"
+                            @foreach($mobile->images as $image)
+                            <img src="{{asset($image->url)}}"
                                 onclick="changeImage(this)"
                                 class="h-20 w-20 object-cover rounded-lg cursor-pointer border-2 border-transparent hover:border-indigo-500 transition"
                                 alt="Samsung Galaxy S23 Ultra front">
-                            <img src="https://images.samsung.com/id/smartphones/galaxy-s23-ultra/images/galaxy-s23-ultra-highlights-back-s.jpg"
-                                onclick="changeImage(this)"
-                                class="h-20 w-20 object-cover rounded-lg cursor-pointer border-2 border-transparent hover:border-indigo-500 transition"
-                                alt="Samsung Galaxy S23 Ultra back">
-                            <img src="https://images.samsung.com/id/smartphones/galaxy-s23-ultra/images/galaxy-s23-ultra-highlights-color-s.jpg"
-                                onclick="changeImage(this)"
-                                class="h-20 w-20 object-cover rounded-lg cursor-pointer border-2 border-transparent hover:border-indigo-500 transition"
-                                alt="Samsung Galaxy S23 Ultra side">
+                             @endforeach
                         </div>
                     </div>
                 </div>

@@ -87,14 +87,14 @@
                     <p class="text-gray-700 mb-4"></p>
                     <a href="{{ route('mobil_details', $mobile->id) }}"
                         class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition flex items-center justify-center">
-                        <i class="fas fa-cart-plus mr-2"></i> More details
+                        <i class="fas fa-info-circle mr-2"></i> More Details
                     </a>
 
                 </div>
             </div>
             @endforeach
-            {{ $newMobiles->links('customers.vendor.pagination.custom') }}
     </main>
+    {{ $newMobiles->links('customers.vendor.pagination.custom') }}
     <br><br><br>
 </div>
 

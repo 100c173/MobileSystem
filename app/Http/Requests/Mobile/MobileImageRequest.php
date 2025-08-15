@@ -24,7 +24,7 @@ class MobileImageRequest extends FormRequest
     {
         return [
             'mobile_id' => 'required|exists:mobiles,id',
-            'url'       => 'required|image|mimes:png,jpg,jpeg,webp|max:2048',
+            'url'       => 'required|image|mimes:png,jpg,jpeg,webp',
             'is_primary' => 'boolean',
             'caption' => 'nullable|string|max:1000',
         ];
