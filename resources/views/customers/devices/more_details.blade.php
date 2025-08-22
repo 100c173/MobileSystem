@@ -17,14 +17,14 @@
                             <img id="main-image" src="{{asset($mobile->primaryImage->url)}}"
                                 alt="{{$mobile->name}}" class="w-full h-full object-contain">
                         </div>
-                        
+
                         <div class="phone-gallery flex overflow-x-auto p-4 gap-2">
                             @foreach($mobile->images as $image)
                             <img src="{{asset($image->url)}}"
                                 onclick="changeImage(this)"
                                 class="h-20 w-20 object-cover rounded-lg cursor-pointer border-2 border-transparent hover:border-indigo-500 transition"
                                 alt="Samsung Galaxy S23 Ultra front">
-                             @endforeach
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -691,26 +691,36 @@
         function createAgentPopupContent(agent, quantity, price) {
             return `
             <div class="min-w-[220px]">
-                <h4 class="font-bold text-lg mb-2">${agent.name}</h4>
-                <div class="flex items-center mb-2">
-                    ${agent.rating ? `
-                    <div class="flex text-yellow-400 text-sm mr-2">
-                        ${generateStarRating(agent.rating)}
-                        <span class="text-gray-600 ml-1">(${agent.reviews_count || 0})</span>
-                    </div>
-                    ` : ''}
-                </div>
-                <div class="text-sm mb-2"><i class="fas fa-map-marker-alt text-gray-500 mr-1"></i> ${agent.address || 'No address'}</div>
-                <div class="grid grid-cols-2 gap-2 mb-2">
-                    <div class="text-sm"><i class="fas fa-box-open text-gray-500 mr-1"></i> ${quantity} available</div>
-                    <div class="text-sm"><i class="fas fa-tag text-gray-500 mr-1"></i> $${price}</div>
-                    ${agent.distance ? `<div class="text-sm"><i class="fas fa-route text-gray-500 mr-1"></i> ${agent.distance.toFixed(2)} km</div>` : ''}
-                </div>
-                <a href="/agents/${agent.id}" class="block mt-2 text-center bg-indigo-600 text-white py-1 px-3 rounded text-sm hover:bg-indigo-700 transition">
-                    View Profile
-                </a>
+            <h4 class="font-bold text-lg mb-2">${agent.name}</h4>
+            <div class="flex items-center mb-2">
+            ${agent.rating ? `
+            <div class="flex text-yellow-400 text-sm mr-2">
+                ${generateStarRating(agent.rating)}
+                <span class="text-gray-600 ml-1">(${agent.reviews_count || 0})</span>
             </div>
-            `;
+            ` : ''}
+            </div>
+            <div class="text-sm mb-2"><i class="fas fa-map-marker-alt text-gray-500 mr-1"></i> ${agent.address || 'No address'}</div>
+            <div class="grid grid-cols-2 gap-2 mb-2">
+            <div class="text-sm"><i class="fas fa-box-open text-gray-500 mr-1"></i> ${quantity} available</div>
+            <div class="text-sm"><i class="fas fa-tag text-gray-500 mr-1"></i> $${price}</div>
+            ${agent.distance ? `<div class="text-sm"><i class="fas fa-route text-gray-500 mr-1"></i> ${agent.distance.toFixed(2)} km</div>` : ''}
+            </div>
+            <div class="flex space-x-2 mt-3">
+            <a href="/agents/${agent.id}" class="flex-1 text-center bg-indigo-600 text-white py-1 px-2 rounded text-sm hover:bg-indigo-700 transition">
+                View Profile
+            </a>
+            <form action="/cart/store/${agent.id}" method="POST" class="flex-1">
+                @csrf
+                <input type="hidden" name="mobile_id" value="{{ $mobile->id }}">
+                <input type="hidden" name="quantity" value="1">
+                <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white py-1 px-2 rounded text-sm transition">
+                    Add to Cart
+                </button>
+            </form>
+            </div>
+            </div>
+             `;
         }
 
         // Address Handling
@@ -847,30 +857,40 @@
             const element = document.createElement('div');
             element.className = 'p-4 border rounded-lg hover:bg-gray-50 cursor-pointer transition hover:border-indigo-300';
             element.innerHTML = `
-            <div class="flex items-center justify-between">
-                <div>
-                    <h5 class="font-bold">${agent.name}</h5>
-                    <p class="text-gray-600">${agent.email}</p>
-                    <div class="mt-2 flex items-center">
-                        ${agent.rating ? `
-                        <div class="flex text-yellow-400 text-sm">
-                            ${generateStarRating(agent.rating)}
-                        </div>
-                        <span class="text-gray-500 text-sm ml-1">(${agent.reviews_count || 0})</span>
-                        ` : ''}
-                        <span class="ml-3 text-sm text-gray-500">
-                            <i class="fas fa-box-open mr-1"></i> ${quantity}
-                        </span>
-                        <span class="ml-3 text-sm text-gray-500">
-                            <i class="fas fa-tag mr-1"></i> $${price}
-                        </span>
-                    </div>
+    <div class="flex items-center justify-between">
+        <div>
+            <h5 class="font-bold">${agent.name}</h5>
+            <p class="text-gray-600">${agent.email}</p>
+            <div class="mt-2 flex items-center">
+                ${agent.rating ? `
+                <div class="flex text-yellow-400 text-sm">
+                    ${generateStarRating(agent.rating)}
                 </div>
-                <div class="text-right">
-                    <p class="text-gray-500">${distance} km</p>
-                    <a href="/agents/${agent.id}" class="text-indigo-600 hover:underline text-sm">View profile</a>
-                </div>
+                <span class="text-gray-500 text-sm ml-1">(${agent.reviews_count || 0})</span>
+                ` : ''}
+                <span class="ml-3 text-sm text-gray-500">
+                    <i class="fas fa-box-open mr-1"></i> ${quantity}
+                </span>
+                <span class="ml-3 text-sm text-gray-500">
+                    <i class="fas fa-tag mr-1"></i> $${price}
+                </span>
             </div>
+        </div>
+        <div class="text-right">
+            <p class="text-gray-500">${distance} km</p>
+            <div class="flex space-x-2 mt-2">
+                <a href="/agents/${agent.id}" class="text-indigo-600 hover:underline text-sm">View profile</a>
+                <form action="/cart/store/${agent.id}" method="POST" class="inline">
+                    @csrf
+                    <input type="hidden" name="mobile_id" value="{{ $mobile->id }}">
+                    <input type="hidden" name="quantity" value="1">
+                    <button type="submit" class="text-green-600 hover:underline text-sm">
+                        Add to Cart
+                    </button>
+                </form>
+            </div>
+        </div>
+        </div>
         `;
 
             // Add hover effect to show marker on map

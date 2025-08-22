@@ -27,7 +27,7 @@
                 <div class="md:flex">
                     <div class="md:w-1/3 bg-indigo-100 flex items-center justify-center p-8">
                         <div class="w-40 h-40 rounded-full bg-white shadow-lg overflow-hidden border-4 border-white">
-                            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Agent Photo" class="w-full h-full object-cover">
+                            <img src="https://randomuser.me/api/portraits/man/65.jpg" alt="Agent Photo" class="w-full h-full object-cover">
                         </div>
                     </div>
                     <div class="md:w-2/3 p-8">
@@ -57,35 +57,13 @@
                                 <p class="font-medium">{{$agent_profile->phone}}</p>
                             </div>
                         </div>
-
-                        <div class="flex space-x-4">
-                            <a href="#devices" class="bg-white border border-indigo-600 text-indigo-600 px-6 py-3 rounded-lg font-medium hover:bg-indigo-50 transition flex items-center">
-                                <i class="fas fa-mobile-alt mr-2"></i> View Devices
-                            </a>
-                        </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- About Section -->
-            <div class="bg-white rounded-xl shadow-md p-8 mb-8">
-                <h3 class="text-2xl font-bold text-gray-800 mb-4">About {{$agent_profile->agent->name}}</h3>
-
-                <p class="text-gray-600 mb-4">
-                    {{$agent_profile?->description}}
-                </p>
             </div>
 
             <!-- Available Devices Section -->
             <div id="devices" class="bg-white rounded-xl shadow-md p-8">
-                <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-2xl font-bold text-gray-800">Available Devices</h3>
-                    <div class="flex space-x-2">
-                        <button class="bg-indigo-100 text-indigo-600 px-3 py-1 rounded-full text-sm font-medium">All</button>
-                        <button class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-sm font-medium hover:bg-gray-200">iOS</button>
-                        <button class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-sm font-medium hover:bg-gray-200">Android</button>
-                    </div>
-                </div>
+
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     @foreach($agentDevices as $agentDevice)
                     <!-- Product Card -->
@@ -93,7 +71,7 @@
                         <!-- Product Image -->
                         <div class="p-4 bg-gray-50 flex justify-center items-center h-48">
                             <img
-                                src="{{ $agentDevice->mobile->primaryImage?->url }}"
+                                src="{{ asset($agentDevice->mobile->primaryImage->url) }}" 
                                 alt="{{ $agentDevice->mobile->name }}"
                                 class="h-full w-auto object-contain max-h-full max-w-full">
                         </div>
