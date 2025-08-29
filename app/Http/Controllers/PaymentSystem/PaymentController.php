@@ -48,6 +48,6 @@ class PaymentController extends Controller
 
     public function success()
     {
-        return redirect()->route('home')->with('success', 'The payment process was successfully completed.');
+        return redirect()->back()->with('success', 'The payment process was successfully completed.');
     }
 }

@@ -34,7 +34,6 @@
             <p class="text-gray-500">Your shopping cart is empty.</p>
         @else
 
-        {{-- CART TABLE --}}
         <table class="w-full border-collapse">
             <thead>
                 <tr>
@@ -67,33 +66,29 @@
                         ${{ number_format($item->product->price * $item->quantity, 2) }}
                     </td>
                     <td class="p-2 text-center">
-                        <form action="{{ route('cart.removeItem', $item->id) }}" method="post">
+                        <form action="{{route('cart.removeItem',$item->id)}}" method="post">
                             @csrf
                             @method('delete')
-                            <button type='submit' class="remove-btn text-red-600 hover:underline">Remove</button>
+                          <button type='submit' class="remove-btn text-red-600 hover:underline">Remove</button>
                         </form>
                     </td>
                 </tr>
                 @endforeach
-            </tbody>
-        </table>
 
-        {{-- TOTAL --}}
-        <div class="mt-6 text-right font-bold text-xl">
-            Total: <span id="total-price"></span>
-        </div>
+            <div class="mt-6 text-right font-bold text-xl">
+                Total: <span id="total-price"></span>
+            </div>
 
-        {{-- STRIPE FORM --}}
-        <div class="mt-10 bg-white p-6 rounded shadow-md max-w-md mx-auto">
-            <h2 class="text-xl font-semibold mb-4">Enter the payment data :</h2>
-            <form id="payment-form">
-                @csrf
-                <div id="card-element" class="mb-4 border p-2 rounded"><!-- Stripe injects here --></div>
-                <button id="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Pay now</button>
-                <div id="error-message" class="text-red-500 mt-2"></div>
-            </form>
-        </div>
-
+            <!-- Stripe Payment Form -->
+            <div class="mt-10 bg-white p-6 rounded shadow-md max-w-md mx-auto">
+                <h2 class="text-xl font-semibold mb-4">  Enter the payment data :</h2>
+                <form id="payment-form">
+                    @csrf
+                    <div id="card-element" class="mb-4 border p-2 rounded"><!-- Stripe injects here --></div>
+                    <button id="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Pay now </button>
+                    <div id="error-message" class="text-red-500 mt-2"></div>
+                </form>
+            </div>
         @endif
     </div>
 </div>
@@ -102,11 +97,10 @@
 @push('scripts')
 <script src="https://js.stripe.com/v3/"></script>
 <script>
-    $(document).ready(function () {
-
+    $(document).ready(function() {
         function updateTotal() {
             let total = 0;
-            $('.cart-item').each(function () {
+            $('.cart-item').each(function() {
                 let quantity = parseInt($(this).find('.quantity').text());
                 let price = parseFloat($(this).find('.subtotal').data('price'));
                 total += quantity * price;
@@ -114,7 +108,7 @@
             $('#total-price').text(`$${total.toFixed(2)}`);
         }
 
-        $('.increase-btn, .decrease-btn').on('click', function () {
+        $('.increase-btn, .decrease-btn').on('click', function() {
             let row = $(this).closest('.cart-item');
             let quantitySpan = row.find('.quantity');
             let quantity = parseInt(quantitySpan.text());
@@ -140,10 +134,10 @@
                     product_id: productId,
                     quantity: quantity
                 },
-                success: function (response) {
+                success: function(response) {
                     console.log('Cart updated.');
                 },
-                error: function () {
+                error: function() {
                     alert('Error updating cart');
                 }
             });
@@ -180,7 +174,7 @@
                 const clientSecret = data.client_secret;
                 const orderId = data.order_id;
 
-                const { paymentIntent, error } = await stripe.confirmCardPayment(clientSecret, {
+                const {paymentIntent, error} = await stripe.confirmCardPayment(clientSecret, {
                     payment_method: {
                         card: card
                     }
@@ -216,7 +210,7 @@
                 document.getElementById('error-message').textContent = err.message;
             }
         });
-
     });
 </script>
 @endpush
+

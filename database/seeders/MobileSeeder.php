@@ -101,19 +101,29 @@ class MobileSeeder extends Seeder
                 ],
                 'images' => [
                     [
-                        'url' => 'https://images.samsung.com/id/smartphones/galaxy-s23-ultra/images/galaxy-s23-ultra-highlights-front-s.jpg',
+                        'url' => 'uploads/images/galaxy_s24_1755607451.webp',
                         'is_primary' => true,
+                        'caption' => 'Galaxy S23 Ultra view'
+                    ],
+                    [
+                        'url' => 'uploads/images/galaxy-s24-front_1755607600.webp',
+                        'is_primary' => false,
                         'caption' => 'Galaxy S23 Ultra front view'
                     ],
                     [
-                        'url' => 'https://images.samsung.com/id/smartphones/galaxy-s23-ultra/images/galaxy-s23-ultra-highlights-back-s.jpg',
+                        'url' => 'uploads/images/galaxy-s24-back_1755607685.webp',
                         'is_primary' => false,
                         'caption' => 'Galaxy S23 Ultra back view'
                     ],
                     [
-                        'url' => 'https://images.samsung.com/id/smartphones/galaxy-s23-ultra/images/galaxy-s23-ultra-highlights-color-s.jpg',
+                        'url' => 'uploads/images/galaxy-s24-side-1_1755608339.webp',
                         'is_primary' => false,
-                        'caption' => 'Galaxy S23 Ultra in Phantom Black'
+                        'caption' => 'Galaxy S23 Ultra side view'
+                    ],
+                    [
+                        'url' => 'uploads/images/galaxy-s24-side-2_1755608853.webp',
+                        'is_primary' => false,
+                        'caption' => 'Galaxy S23 Ultra side view'
                     ]
                 ]
             ],
@@ -197,21 +207,31 @@ class MobileSeeder extends Seeder
                         'Small battery compared to Android flagships'
                     ])
                 ],
-                'images' => [
+                 'images' => [
                     [
-                        'url' => 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-pro-finish-select-202309-6-1inch?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1693009279096',
+                        'url' => 'uploads/images/iphon-15_1755610168.jpg',
                         'is_primary' => true,
-                        'caption' => 'iPhone 15 Pro front view'
+                        'caption' => 'iphone 15 pro view'
                     ],
                     [
-                        'url' => 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-pro-finish-select-202309-6-1inch-blue-titanium?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1693009279096',
+                        'url' => 'uploads/images/galaxy-s24-front_1755607600.webp',
                         'is_primary' => false,
-                        'caption' => 'iPhone 15 Pro back view'
+                        'caption' => 'iphone 15 pro front view'
                     ],
                     [
-                        'url' => 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-pro-finish-select-202309-6-1inch-natural-titanium?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1693009279096',
+                        'url' => 'uploads/images/galaxy-s24-back_1755607685.webp',
                         'is_primary' => false,
-                        'caption' => 'iPhone 15 Pro in Natural Titanium'
+                        'caption' => 'iphone 15 pro back view'
+                    ],
+                    [
+                        'url' => 'uploads/images/galaxy-s24-side-1_1755608339.webp',
+                        'is_primary' => false,
+                        'caption' => 'iphone 15 pro side view'
+                    ],
+                    [
+                        'url' => 'uploads/images/galaxy-s24-side-2_1755608853.webp',
+                        'is_primary' => false,
+                        'caption' => 'iphone 15 pro side view'
                     ]
                 ]
             ]

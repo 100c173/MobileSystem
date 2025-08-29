@@ -45,9 +45,9 @@ class StripeConnectController extends Controller
         $chargesEnabled = $this->stripeService->getStripeAccountStatus($user);
 
         if ($chargesEnabled) {
-            return redirect()->route('dashboard')->with('success', '✅Your account has been successfully registered. You can now receive payments by Stripe');
+            return redirect()->route('agent.dashboard')->with('success', '✅Your account has been successfully registered. You can now receive payments by Stripe');
         } else {
-            return redirect()->route('dashboard')->with('error', '⚠️Please complete the registration in Stripe.');
+            return redirect()->route('agent.ashboard')->with('error', '⚠️Please complete the registration in Stripe.');
         }
     }
 
