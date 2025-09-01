@@ -16,7 +16,7 @@ class CustomerRequest extends Model
         'condition',
         'status',
         'price',
-        'description',
+        'descriptions',
     ];
 
     public function images()

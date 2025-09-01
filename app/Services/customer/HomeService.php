@@ -167,6 +167,7 @@ class HomeService
             'operating_system_id' => $request->operating_system_id,
             'price' => $request->price,
             'condition' => $request->condition,
+            'descriptions' => $request->description,
         ]);
 
         $filePath = $this->uploadFile($request->file('images'), 'uploads/customer_request');
@@ -245,7 +246,7 @@ class HomeService
 
     public function getCustomerDevices()
     {
-        $devices = CustomerRequest::with(['images', 'user', 'brand', 'operatingSystem'])->get();
+        $devices = CustomerRequest::with(['images', 'user', 'brand', 'operatingSystem'])->where('status','approve')->get();
         return $devices;
     }
 

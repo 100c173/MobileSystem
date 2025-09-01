@@ -789,6 +789,10 @@
                                 <input name="price" type="text" id="device-price" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="E.g. 40$">
                             </div>
                             <div>
+                                <label for="device-description" class="block text-sm font-medium text-gray-700 mb-1">Device Description</label>
+                                <input name="description" type="text" id="device-description" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="write description here ... ">
+                            </div>
+                            <div>
                                 <label for="device-images" class="block text-sm font-medium text-gray-700 mb-1">Upload Photos</label>
                                 <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
                                     <i class="fas fa-camera text-2xl text-gray-400 mb-2"></i>

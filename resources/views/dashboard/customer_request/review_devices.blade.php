@@ -28,7 +28,7 @@ Customer Devices For Review
                         <td>{{$device->user->email}}</td>
                         <td>{{$device->created_at}}</td>
                         <td>
-                            @if($device->status == 'pendind')
+                            @if($device->status == 'pending')
                             <span class="badge bg-warning text-dark"><strong>{{$device->status}}</strong></span>
                             @endif
                             @if($device->status == 'reject')

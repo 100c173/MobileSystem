@@ -29,6 +29,7 @@ class CustomerRequest extends FormRequest
             'storage' => 'required|string|max:50',
             'price' => ['required', 'numeric', 'gt:0'],
             'operating_system_id' => 'required|exists:operating_systems,id',
+            'description' => 'nullable|string|max:255' ,
             'condition' => [
                 'required',
                 Rule::in([
