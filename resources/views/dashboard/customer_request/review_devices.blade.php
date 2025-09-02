@@ -39,7 +39,7 @@ Customer Devices For Review
                             @endif
                         </td>
                         <td>
-                            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#detailsModal">
+                            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#detailsModal{{$device->id}}">
                                 <i class="fas fa-eye"></i> View
                             </button>
                             <div class="btn-group">
@@ -75,8 +75,9 @@ Customer Devices For Review
     </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="detailsModal" tabindex="-1" aria-hidden="true">
+<!-- Modals -->
+@foreach($customer_devices as $device)
+<div class="modal fade" id="detailsModal{{$device->id}}" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -126,6 +127,7 @@ Customer Devices For Review
         </div>
     </div>
 </div>
+@endforeach
 @endsection
 
 @push('scripts')

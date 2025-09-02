@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
             CitiesSeeder::class,
             BrandSeeder::class,
             OperatingSystemSeeder::class,
-            MobileSeeder::class,
+           // MobileSeeder::class,
         ]);
     }
 }

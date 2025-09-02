@@ -14,7 +14,7 @@
                     @csrf
                     <div class="form-group" style="display: none;">
                         <label for="exampleInputEmail" >Mobile Id </label>
-                        <input type="text" class="form-control" id="mobile_id" name="mobile_id" value="{{$mobile->id}}" name="book_name" >
+                        <input type="text" class="form-control" id="mobile_id" name="mobile_id" value="{{$mobile->id}}" >
                     </div>
 
                     <div class="form-group">
@@ -23,7 +23,7 @@
                         </div>
                         <div class="col-sm-12 col-md-12">
                             <div class="custom-file">
-                                <input class="form-control" id="image_url" name="image_url" type="file">
+                                <input class="form-control" id="image_url" name="url" type="file">
                             </div>
                         </div>
                     </div>

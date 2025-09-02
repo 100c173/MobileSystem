@@ -34,7 +34,7 @@
                 @foreach($device->images as $image)
                 <div class="relative h-48 bg-gray-200">
                     <img src="{{asset($image->path)}}" 
-                         alt="{{device->model}}" class="w-full h-full object-cover">
+                         alt="mobile photo" class="w-full h-full object-cover">
                 </div>
                 @endforeach
                 <div class="p-5">
